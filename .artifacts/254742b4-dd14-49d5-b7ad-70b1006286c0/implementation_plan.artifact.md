@@ -1,34 +1,42 @@
-# Implementation Plan - Fix Routing and UI Errors
+# Implementation Plan - Fix "Page Not Found" Routing Error
 
-Fix the critical errors in routing configuration and splash screen UI that are preventing the app from running correctly.
+The app is failing with `GoException: no routes for location: /splash` because the routes are registered using `Enum.name` (e.g., `"splash"`), but GoRouter expects absolute paths (e.g., `"/splash"`) for top-level routes.
+
+## User Review Required
+
+> [!IMPORTANT]
+> I will restore the `path` property to the `AppRoutes` enum. This is the best practice for ensuring type-safe, valid URI paths across the application.
 
 ## Proposed Changes
 
 ### Configuration & Routing
 
 #### [MODIFY] [routes_enums.dart](file:///F:/commerce_app/lib/config/routing/routes_enums.dart)
-- Restore the `path` property to the `AppRoutes` enum.
-- Ensure all paths start with `/` (e.g., `/splash`, `/home`, `/login`).
+- Restore the `path` property to the enum.
+- Define valid paths for all routes:
+  - `home`: `/`
+  - `login`: `/login`
+  - `splash`: `/splash`
 
 #### [MODIFY] [app_router.dart](file:///F:/commerce_app/lib/config/routing/app_router.dart)
-- Use `AppRoutes.splash.path` for the initial location and route path.
-- Add missing routes for `home` and `login`.
+- Update `initialLocation` to use `AppRoutes.splash.path`.
+- Update the `GoRoute` path to use `AppRoutes.splash.path`.
+- Restore the `home` and `login` routes so navigation targets exist.
+
+---
 
 ### Features: Splash
 
 #### [MODIFY] [screen_navigation.dart](file:///F:/commerce_app/lib/features/splash/views/navigation/screen_navigation.dart)
-- Fix the navigation logic to use `AppRoutes.home.path` and `AppRoutes.login.path` instead of invalid casts.
+- Update navigation methods to use `.path` instead of `.name`.
 
-#### [MODIFY] [splash_screen.dart](file:///F:/commerce_app/lib/features/splash/views/screens/splash_screen.dart)
-- Fix the `LoadingAnimation` widget call (it was being called as a function `loading()`).
-- Correct the import and usage of the `LoadingAnimation` widget.
+---
 
 ## Verification Plan
 
 ### Automated Tests
-- Verify code compiles without errors.
-- Check for any lint warnings in the modified files.
+- Verify the code compiles without errors.
 
 ### Manual Verification
-- Run the app and verify the splash screen shows correctly.
-- Verify navigation to the home screen occurs after 3 seconds.
+- Run the app and confirm the splash screen appears (no "Page Not Found" error).
+- Confirm that navigation to Home/Login works after the splash timer.

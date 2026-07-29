@@ -2,7 +2,6 @@ import '../../../../config/routing/app_router.dart';
 import '../../../../config/routing/routes_enums.dart';
 
 class ScreenNavigation {
-
   ScreenNavigation._();
 
   static void navigateToHome() {

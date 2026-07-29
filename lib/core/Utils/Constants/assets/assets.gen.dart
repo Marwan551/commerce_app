@@ -40,15 +40,15 @@ class $AssetsImagesAnimationsGen {
 class $AssetsImagesImgsGen {
   const $AssetsImagesImgsGen();
 
-  /// File path: assets/images/imgs/Group 21.svg
-  SvgGenImage get group21 =>
-      const SvgGenImage('assets/images/imgs/Group 21.svg');
+  /// File path: assets/images/imgs/AppLogo.svg
+  SvgGenImage get appLogo =>
+      const SvgGenImage('assets/images/imgs/AppLogo.svg');
 
-  /// File path: assets/images/imgs/Vector.svg
-  SvgGenImage get vector => const SvgGenImage('assets/images/imgs/Vector.svg');
+  /// File path: assets/images/imgs/Waves.svg
+  SvgGenImage get waves => const SvgGenImage('assets/images/imgs/Waves.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [group21, vector];
+  List<SvgGenImage> get values => [appLogo, waves];
 }
 
 abstract final class Assets {

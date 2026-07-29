@@ -1,7 +1,8 @@
-# Tasks - Fix Routing and UI Errors
+# Tasks - Fix "Page Not Found" Routing Error
 
-- [x] Fix `AppRoutes` enum in `routes_enums.dart`
-- [x] Restore missing routes in `AppRouter`
-- [x] Fix navigation logic in `ScreenNavigation`
-- [x] Fix `LoadingAnimation` usage in `SplashScreen`
-- [x] Verify implementation
+- [x] Restore `path` to `AppRoutes` in `routes_enums.dart`
+- [x] Update `AppRouter` configuration with valid paths
+- [x] Add missing `home` and `login` routes to `AppRouter`
+- [x] Update `ScreenNavigation` to use `.path`
+- [x] Verify `SplashScreen` logic
+- [x] Final verification

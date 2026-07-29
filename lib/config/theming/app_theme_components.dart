@@ -5,7 +5,7 @@ import '../../core/Utils/Constants/styles/app_text_styles.dart';
 class AppThemeComponents {
   static InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: Colors.white,
+    fillColor: AppColors.whiteFFFFFF,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(color: AppColors.greyB3B3B3),
@@ -19,7 +19,7 @@ class AppThemeComponents {
   static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.black1A1A1A,
-      foregroundColor: Colors.white,
+      foregroundColor: AppColors.whiteFFFFFF,
       textStyle: AppTextStyles.medium18,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),

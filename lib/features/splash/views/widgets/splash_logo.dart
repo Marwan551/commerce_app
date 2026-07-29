@@ -6,7 +6,7 @@ class SplashLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.imgs.vector.svg(
+    return Assets.images.imgs.appLogo.svg(
       width: 134,
       height: 133,
     );
