@@ -1,42 +1,46 @@
-# Implementation Plan - Fix "Page Not Found" Routing Error
+# Implementation Plan - Global Cairo Font Standardization
 
-The app is failing with `GoException: no routes for location: /splash` because the routes are registered using `Enum.name` (e.g., `"splash"`), but GoRouter expects absolute paths (e.g., `"/splash"`) for top-level routes.
-
-## User Review Required
-
-> [!IMPORTANT]
-> I will restore the `path` property to the `AppRoutes` enum. This is the best practice for ensuring type-safe, valid URI paths across the application.
+Ensure the Cairo font is applied consistently across the entire application by expanding the centralized text style system and mapping it to the full Material 3 `TextTheme`.
 
 ## Proposed Changes
 
-### Configuration & Routing
+### Core Layer (Constants)
 
-#### [MODIFY] [routes_enums.dart](file:///F:/commerce_app/lib/config/routing/routes_enums.dart)
-- Restore the `path` property to the enum.
-- Define valid paths for all routes:
-  - `home`: `/`
-  - `login`: `/login`
-  - `splash`: `/splash`
-
-#### [MODIFY] [app_router.dart](file:///F:/commerce_app/lib/config/routing/app_router.dart)
-- Update `initialLocation` to use `AppRoutes.splash.path`.
-- Update the `GoRoute` path to use `AppRoutes.splash.path`.
-- Restore the `home` and `login` routes so navigation targets exist.
+#### [MODIFY] [app_text_styles.dart](file:///F:/commerce_app/lib/core/utils/constants/styles/app_text_styles.dart)
+- Expand the `AppTextStyles` singleton to include a comprehensive set of styles following the naming convention (e.g., `regular12`, `medium14`, `bold24`).
+- Ensure every `TextStyle` explicitly uses `AppStrings.fontFamily`.
+- Add variants for:
+  - sizes: 12, 14, 16, 18, 20, 24, 32.
+  - weights: Regular (w400), Medium (w500), Bold (w700).
 
 ---
 
-### Features: Splash
+### Configuration (Theming)
 
-#### [MODIFY] [screen_navigation.dart](file:///F:/commerce_app/lib/features/splash/views/navigation/screen_navigation.dart)
-- Update navigation methods to use `.path` instead of `.name`.
+#### [MODIFY] [app_theme_components.dart](file:///F:/commerce_app/lib/config/theming/app_theme_components.dart)
+- Update the `textTheme` static variable to map all 15 Material 3 text categories to the new `AppTextStyles`.
+- Mapping categories:
+  - `display`: bold32, bold24, bold20
+  - `headline`: bold20, bold18, bold16
+  - `title`: medium18, medium16, medium14
+  - `body`: regular16, regular14, regular12
+  - `label`: medium14, medium12, regular12
+
+#### [MODIFY] [app_theme.dart](file:///F:/commerce_app/lib/config/theming/app_theme.dart)
+- Double-check that `fontFamily: AppStrings.fontFamily` is set at the root `ThemeData` level (it already is, but this is a verification step).
 
 ---
+
+### Feature Clean-up
+
+#### [VERIFY] Asset Usages
+- Scan for any inline `TextStyle` definitions in the `auth` and `splash` features and replace them with references to `AppTextStyles` or `Theme.of(context).textTheme` to ensure they inherit the Cairo font.
 
 ## Verification Plan
 
 ### Automated Tests
-- Verify the code compiles without errors.
+- Run `dart analyze` to ensure no breaking changes in style references.
 
 ### Manual Verification
-- Run the app and confirm the splash screen appears (no "Page Not Found" error).
-- Confirm that navigation to Home/Login works after the splash timer.
+- Visual inspection of the Splash, Login, and Register screens to confirm all text (labels, hints, buttons, headers) uses the Cairo font.
+- Verify that font weights (Bold, Medium, Regular) are distinct and correctly applied as per the Figma design.

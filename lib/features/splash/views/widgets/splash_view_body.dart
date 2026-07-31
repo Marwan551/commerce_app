@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../core/Utils/Constants/assets/assets.gen.dart';
-import '../../../../core/Utils/Constants/color/app_colors.dart';
-import '../../../../core/Utils/widgets/loading_animation.dart';
-import '../widgets/splash_logo.dart';
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
+import 'package:commerce_app/core/utils/widgets/loading_animation.dart';
+import 'package:commerce_app/features/splash/views/widgets/splash_logo.dart';
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});

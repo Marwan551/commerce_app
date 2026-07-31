@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../Constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
 class LoadingAnimation extends StatelessWidget {
   final double? width;
