@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/Utils/Constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
 class SplashLogo extends StatelessWidget {
   const SplashLogo({super.key});

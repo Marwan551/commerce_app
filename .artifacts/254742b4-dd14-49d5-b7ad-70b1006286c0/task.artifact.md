@@ -1,8 +1,8 @@
-# Tasks - Fix "Page Not Found" Routing Error
+# Tasks - Final Polishing for 100% Requirement Compliance
 
-- [x] Restore `path` to `AppRoutes` in `routes_enums.dart`
-- [x] Update `AppRouter` configuration with valid paths
-- [x] Add missing `home` and `login` routes to `AppRouter`
-- [x] Update `ScreenNavigation` to use `.path`
-- [x] Verify `SplashScreen` logic
-- [x] Final verification
+- [ ] Update `AppLoadingIndicator` for flexibility (size parameter)
+- [ ] Refactor `CustomButton` to use `AppLoadingIndicator` (SpinKit)
+- [ ] Add `forgetPassword` route to `AppRoutes` and `AppRouter`
+- [ ] Refine `LoginViewBody` UI (Social buttons, "Or" divider, navigation)
+- [ ] Ensure `ScreenNavigation` Singleton is consistent across features
+- [ ] Final verification of all Singleton patterns and imports

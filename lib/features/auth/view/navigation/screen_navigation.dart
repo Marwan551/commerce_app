@@ -17,4 +17,8 @@ class ScreenNavigation {
   static void navigateToRegister() {
     AppRouter.router.go(AppRoutes.register.path);
   }
+
+  static void navigateToForgetPassword() {
+    AppRouter.router.go(AppRoutes.forgetPassword.path);
+  }
 }

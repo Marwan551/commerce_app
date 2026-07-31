@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'config/routing/app_router.dart';
-import 'config/theming/app_theme.dart';
+import 'package:commerce_app/config/routing/app_router.dart';
+import 'package:commerce_app/config/theming/app_theme.dart';
+import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefHelper.init();
   runApp(const MyApp());
 }
 
