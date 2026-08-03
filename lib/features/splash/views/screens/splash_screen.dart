@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/splash/controllers/cubit/splash_cubit.dart';
-import 'package:commerce_app/features/splash/views/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/splash/views/widgets/splash_view_body.dart';
 
 class SplashScreen extends StatefulWidget {

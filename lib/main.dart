@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:commerce_app/config/routing/app_router.dart';
 import 'package:commerce_app/config/theming/app_theme.dart';
 import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
+import 'package:commerce_app/core/services/local_notifications/local_notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefHelper.init();
+  await LocalNotificationService().init();
   runApp(const MyApp());
 }
 

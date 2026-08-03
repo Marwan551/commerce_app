@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
-import 'package:commerce_app/features/auth/view/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/splash/views/screens/splash_screen.dart';
 import 'package:commerce_app/features/auth/view/screens/login/login_screen.dart';
 import 'package:commerce_app/features/auth/view/screens/register/register_screen.dart';
+import 'package:commerce_app/features/auth/view/screens/forgotPassword/forgot_password_screen.dart';
+import 'package:commerce_app/features/auth/view/screens/forgotPassword/verify_code_screen.dart';
+import 'package:commerce_app/features/auth/view/screens/forgotPassword/reset_password_screen.dart';
 import 'package:commerce_app/config/routing/routes_enums.dart';
 
 class AppRouter {
@@ -24,25 +27,16 @@ class AppRouter {
         builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
-        path: AppRoutes.forgetPassword.path,
-        builder: (context, state) => Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Forget Password Screen'),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButton(
-                    text: 'Back to Login',
-                    onPressed: () => ScreenNavigation.navigateToLogin(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        path: AppRoutes.forgotPassword.path,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.verifyCode.path,
+        builder: (context, state) => const VerifyCodeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.resetPassword.path,
+        builder: (context, state) => const ResetPasswordScreen(),
       ),
       GoRoute(
         path: AppRoutes.home.path,

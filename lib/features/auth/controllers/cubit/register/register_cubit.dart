@@ -5,6 +5,8 @@ import 'package:commerce_app/core/services/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/remote/endpoints.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_state.dart';
 
+import 'package:commerce_app/core/services/remote/api_error_handler.dart';
+
 class RegisterCubit extends Cubit<RegisterState> {
   final ApiService _apiService;
 
@@ -26,7 +28,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterError(registerResponse.message ?? 'Registration failed'));
       }
     } catch (e) {
-      emit(RegisterError(e.toString()));
+      emit(RegisterError(ApiErrorHandler.getMessage(e)));
     }
   }
 }

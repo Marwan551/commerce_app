@@ -6,6 +6,8 @@ import 'package:commerce_app/core/services/remote/endpoints.dart';
 import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
 
+import 'package:commerce_app/core/services/remote/api_error_handler.dart';
+
 class LoginCubit extends Cubit<LoginState> {
   final ApiService _apiService;
 
@@ -30,7 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginError(loginResponse.message ?? 'Login failed'));
       }
     } catch (e) {
-      emit(LoginError(e.toString()));
+      emit(LoginError(ApiErrorHandler.getMessage(e)));
     }
   }
 }

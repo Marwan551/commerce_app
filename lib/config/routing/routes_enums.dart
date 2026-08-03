@@ -2,7 +2,9 @@ enum AppRoutes {
   home('/'),
   login('/login'),
   register('/register'),
-  forgetPassword('/forget-password'),
+  forgotPassword('/forgot-password'),
+  verifyCode('/verify-code'),
+  resetPassword('/reset-password'),
   splash('/splash');
 
   final String path;

@@ -5,7 +5,7 @@ import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_state.dart';
 import 'package:commerce_app/features/auth/view/widgets/register/register_view_body.dart';
-import 'package:commerce_app/features/auth/view/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});

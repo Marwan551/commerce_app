@@ -5,7 +5,7 @@ import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
 import 'package:commerce_app/features/auth/view/widgets/login/login_view_body.dart';
-import 'package:commerce_app/features/auth/view/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

@@ -1,8 +1,7 @@
-# Tasks - Final Polishing for 100% Requirement Compliance
+# Tasks - Consolidated Navigation Fix
 
-- [ ] Update `AppLoadingIndicator` for flexibility (size parameter)
-- [ ] Refactor `CustomButton` to use `AppLoadingIndicator` (SpinKit)
-- [ ] Add `forgetPassword` route to `AppRoutes` and `AppRouter`
-- [ ] Refine `LoginViewBody` UI (Social buttons, "Or" divider, navigation)
-- [ ] Ensure `ScreenNavigation` Singleton is consistent across features
-- [ ] Final verification of all Singleton patterns and imports
+- [x] Create shared `ScreenNavigation` in `core/utils/navigation/`
+- [x] Update `AppRoutes` paths in `routes_enums.dart`
+- [x] Delete duplicate navigation files in features
+- [x] Update imports in all affected files
+- [x] Final verification (`dart analyze`)

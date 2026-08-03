@@ -8,7 +8,7 @@ import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_state.dart';
 import 'package:commerce_app/features/auth/models/request/register_request_model.dart';
-import 'package:commerce_app/features/auth/view/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -33,11 +33,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   }
 
   void _validateForm() {
+    final isNameValid = CustomTextField.validateFullName(_nameController.text) == null;
+    final isEmailValid = CustomTextField.validateEmail(_emailController.text) == null;
+    final isPasswordValid = CustomTextField.validatePassword(_passwordController.text) == null;
+
     setState(() {
-      _isButtonEnabled = _nameController.text.isNotEmpty &&
-          _emailController.text.isNotEmpty &&
-          _emailController.text.contains('@') &&
-          _passwordController.text.length >= 6;
+      _isButtonEnabled = isNameValid && isEmailValid && isPasswordValid;
     });
   }
 
@@ -95,7 +96,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                     email: _emailController.text,
                                     password: _passwordController.text,
                                     rePassword: _passwordController.text,
-                                    phone: '01234567890', // Default phone for API
+                                    phone: '01234567890',
                                   ),
                                 );
                           }
@@ -113,7 +114,6 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
             ),
             const SizedBox(height: 24),
-
             const SizedBox(height: 24),
             Center(
               child: Row(

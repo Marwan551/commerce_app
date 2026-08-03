@@ -8,7 +8,7 @@ import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
 import 'package:commerce_app/features/auth/models/request/login_request_model.dart';
-import 'package:commerce_app/features/auth/view/navigation/screen_navigation.dart';
+import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -31,10 +31,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   }
 
   void _validateForm() {
+    final isEmailValid = CustomTextField.validateEmail(_emailController.text) == null;
+    final isPasswordValid = CustomTextField.validatePassword(_passwordController.text) == null;
+
     setState(() {
-      _isButtonEnabled = _emailController.text.isNotEmpty &&
-          _emailController.text.contains('@') &&
-          _passwordController.text.length >= 6;
+      _isButtonEnabled = isEmailValid && isPasswordValid;
     });
   }
 
@@ -74,7 +75,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               alignment: Alignment.centerRight,
               child: CustomTextButton(
                 text: 'Forgot Password?',
-                onPressed: () => ScreenNavigation.navigateToForgetPassword(),
+                onPressed: () => ScreenNavigation.navigateToForgotPassword(),
                 textStyle: AppTextStyles.regular16.copyWith(color: AppColors.black1A1A1A),
               ),
             ),

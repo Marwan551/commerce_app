@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
+  final AutovalidateMode? autovalidateMode;
 
   const CustomTextField({
     super.key,
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.keyboardType,
     this.onChanged,
+    this.autovalidateMode,
   });
 
   @override
@@ -70,6 +72,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           obscureText: widget.isPassword ? obscureText : false,
           validator: widget.validator,
+          autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
@@ -89,6 +92,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   )
                 : null,
           ),
+          onTapOutside: (event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
         ),
       ],
     );

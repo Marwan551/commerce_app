@@ -17,4 +17,16 @@ class ScreenNavigation {
   static void navigateToRegister() {
     AppRouter.router.go(AppRoutes.register.path);
   }
+
+  static void navigateToForgotPassword() {
+    AppRouter.router.push(AppRoutes.forgotPassword.path);
+  }
+
+  static void navigateToVerifyCode() {
+    AppRouter.router.push(AppRoutes.verifyCode.path);
+  }
+
+  static void navigateToResetPassword() {
+    AppRouter.router.push(AppRoutes.resetPassword.path);
+  }
 }
