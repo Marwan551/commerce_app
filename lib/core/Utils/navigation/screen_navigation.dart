@@ -3,8 +3,6 @@ import 'package:commerce_app/config/routing/routes_enums.dart';
 
 class ScreenNavigation {
   ScreenNavigation._();
-  static final ScreenNavigation _instance = ScreenNavigation._();
-  factory ScreenNavigation() => _instance;
 
   static void navigateToHome() {
     AppRouter.router.go(AppRoutes.home.path);
