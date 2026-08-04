@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 
+import 'package:commerce_app/core/utils/validation/app_validator.dart';
+
 class CustomTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
@@ -26,33 +28,6 @@ class CustomTextField extends StatefulWidget {
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
-
-  static String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your email address';
-    }
-    if (!value.contains('@')) {
-      return 'Please enter a valid email address';
-    }
-    return null;
-  }
-
-  static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your password';
-    }
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters';
-    }
-    return null;
-  }
-
-  static String? validateFullName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your full name';
-    }
-    return null;
-  }
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {

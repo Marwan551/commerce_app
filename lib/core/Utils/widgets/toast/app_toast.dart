@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
 class AppToast {
-  static void showSuccess(BuildContext context, String message) {
-    toastification.show(
-      context: context,
-      title: Text(message),
-      autoCloseDuration: const Duration(seconds: 3),
-      type: ToastificationType.success,
-      style: ToastificationStyle.fillColored,
-    );
-  }
+  AppToast._();
 
-  static void showError(BuildContext context, String message) {
+  static void show(
+    BuildContext context, {
+    required String message,
+    required ToastificationType type,
+  }) {
     toastification.show(
       context: context,
       title: Text(message),
       autoCloseDuration: const Duration(seconds: 3),
-      type: ToastificationType.error,
+      type: type,
       style: ToastificationStyle.fillColored,
     );
   }

@@ -8,7 +8,7 @@ class ApiService {
   ApiService()
       : _dio = Dio(
           BaseOptions(
-            baseUrl: Endpoints.baseUrl,
+            baseUrl: Endpoints().baseUrl,
             receiveDataWhenStatusError: true,
             connectTimeout: const Duration(seconds: 30),
             receiveTimeout: const Duration(seconds: 30),
@@ -35,7 +35,7 @@ class ApiService {
     _dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'token': ?token,
+      'token': token,
     };
     return await _dio.get(endpoint, queryParameters: query);
   }
@@ -49,7 +49,7 @@ class ApiService {
     _dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'token': ?token,
+      'token': token,
     };
     return await _dio.post(endpoint, data: data, queryParameters: query);
   }
@@ -63,7 +63,7 @@ class ApiService {
     _dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'token': ?token,
+      'token': token,
     };
     return await _dio.put(endpoint, data: data, queryParameters: query);
   }
@@ -77,7 +77,7 @@ class ApiService {
     _dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'token': ?token,
+      'token': token,
     };
     return await _dio.delete(endpoint, data: data, queryParameters: query);
   }

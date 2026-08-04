@@ -1,8 +1,12 @@
 class Endpoints {
-  static const String baseUrl = 'https://ecommerce.routemisr.com/api/v1';
-  static const String login = '/auth/signin';
-  static const String register = '/auth/signup';
-  static const String forgotPassword = '/auth/forgotPasswords';
-  static const String verifyResetCode = '/auth/verifyResetCode';
-  static const String resetPassword = '/auth/resetPassword';
+  Endpoints._();
+  static final Endpoints _instance = Endpoints._();
+  factory Endpoints() => _instance;
+
+  final String baseUrl = 'https://ecommerce.routemisr.com/api/v1';
+  final String login = '/auth/signin';
+  final String register = '/auth/signup';
+  final String forgotPassword = '/auth/forgotPasswords';
+  final String verifyResetCode = '/auth/verifyResetCode';
+  final String resetPassword = '/auth/resetPassword';
 }

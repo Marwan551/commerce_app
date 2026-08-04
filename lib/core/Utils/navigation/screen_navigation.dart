@@ -22,11 +22,11 @@ class ScreenNavigation {
     AppRouter.router.push(AppRoutes.forgotPassword.path);
   }
 
-  static void navigateToVerifyCode() {
-    AppRouter.router.push(AppRoutes.verifyCode.path);
+  static void navigateToVerifyCode({required String email}) {
+    AppRouter.router.push(AppRoutes.verifyCode.path, extra: email);
   }
 
-  static void navigateToResetPassword() {
-    AppRouter.router.push(AppRoutes.resetPassword.path);
+  static void navigateToResetPassword({required String email}) {
+    AppRouter.router.push(AppRoutes.resetPassword.path, extra: email);
   }
 }

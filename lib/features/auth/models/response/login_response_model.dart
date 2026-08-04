@@ -16,6 +16,14 @@ class LoginResponseModel {
       token: json['token'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      'user': user?.toJson(),
+      'token': token,
+    };
+  }
 }
 
 class User {
@@ -31,5 +39,13 @@ class User {
       email: json['email'],
       role: json['role'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'role': role,
+    };
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/remote/endpoints.dart';
@@ -14,68 +15,94 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
 
   ForgotPasswordCubit(this._apiService) : super(ForgotPasswordInitial());
 
-  void forgotPassword(String email) async {
-    emit(ForgotPasswordLoading());
-    try {
-      final response = await _apiService.postData(
-        endpoint: Endpoints.forgotPassword,
-        data: ForgotPasswordRequestModel(email: email).toJson(),
-      );
+  final emailController = TextEditingController();
+  final otpController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-      final authResponse = AuthResponseModel.fromJson(response.data);
+  final forgotPasswordFormKey = GlobalKey<FormState>();
+  final resetPasswordFormKey = GlobalKey<FormState>();
 
-      if (authResponse.statusMsg == 'success' || authResponse.message != null) {
-        final message = authResponse.message ?? 'Success';
-        await LocalNotificationService().showNotification(
-          'Forgot Password',
-          message,
+  void forgotPassword() async {
+    if (forgotPasswordFormKey.currentState?.validate() ?? false) {
+      emit(ForgotPasswordLoading());
+      try {
+        final response = await _apiService.postData(
+          endpoint: Endpoints().forgotPassword,
+          data: ForgotPasswordRequestModel(email: emailController.text).toJson(),
         );
-        emit(ForgotPasswordSuccess(message));
-      } else {
-        emit(ForgotPasswordError(authResponse.message ?? 'Error occurred'));
+
+        final authResponse = AuthResponseModel.fromJson(response.data);
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final message = authResponse.message ?? 'Success';
+          await LocalNotificationService().showNotification(
+            'Forgot Password',
+            message,
+          );
+          emit(ForgotPasswordSuccess(message));
+        } else {
+          emit(ForgotPasswordError(authResponse.message ?? 'Error occurred'));
+        }
+      } catch (e) {
+        emit(ForgotPasswordError(ApiErrorHandler.getMessage(e)));
       }
-    } catch (e) {
-      emit(ForgotPasswordError(ApiErrorHandler.getMessage(e)));
     }
   }
 
-  void verifyResetCode(String code) async {
-    emit(VerifyCodeLoading());
-    try {
-      final response = await _apiService.postData(
-        endpoint: Endpoints.verifyResetCode,
-        data: VerifyCodeRequestModel(resetCode: code).toJson(),
-      );
+  void verifyResetCode() async {
+    if (otpController.text.length == 6) {
+      emit(VerifyCodeLoading());
+      try {
+        final response = await _apiService.postData(
+          endpoint: Endpoints().verifyResetCode,
+          data: VerifyCodeRequestModel(resetCode: otpController.text).toJson(),
+        );
 
-      final authResponse = AuthResponseModel.fromJson(response.data);
+        final authResponse = AuthResponseModel.fromJson(response.data);
 
-      if (authResponse.statusMsg == 'success' || response.statusCode == 200) {
-        emit(VerifyCodeSuccess(authResponse.message ?? 'Code verified'));
-      } else {
-        emit(VerifyCodeError(authResponse.message ?? 'Invalid code'));
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          emit(VerifyCodeSuccess(authResponse.message ?? 'Code verified'));
+        } else {
+          emit(VerifyCodeError(authResponse.message ?? 'Invalid code'));
+        }
+      } catch (e) {
+        emit(VerifyCodeError(ApiErrorHandler.getMessage(e)));
       }
-    } catch (e) {
-      emit(VerifyCodeError(ApiErrorHandler.getMessage(e)));
     }
   }
 
-  void resetPassword(String email, String newPassword) async {
-    emit(ResetPasswordLoading());
-    try {
-      final response = await _apiService.putData(
-        endpoint: Endpoints.resetPassword,
-        data: ResetPasswordRequestModel(email: email, newPassword: newPassword).toJson(),
-      );
+  void resetPassword() async {
+    if (resetPasswordFormKey.currentState?.validate() ?? false) {
+      emit(ResetPasswordLoading());
+      try {
+        final response = await _apiService.putData(
+          endpoint: Endpoints().resetPassword,
+          data: ResetPasswordRequestModel(
+            email: emailController.text,
+            newPassword: passwordController.text,
+          ).toJson(),
+        );
 
-      final authResponse = AuthResponseModel.fromJson(response.data);
+        final authResponse = AuthResponseModel.fromJson(response.data);
 
-      if (authResponse.statusMsg == 'success' || response.statusCode == 200) {
-        emit(ResetPasswordSuccess(authResponse.message ?? 'Password reset successful'));
-      } else {
-        emit(ResetPasswordError(authResponse.message ?? 'Reset failed'));
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          emit(ResetPasswordSuccess(authResponse.message ?? 'Password reset successful'));
+        } else {
+          emit(ResetPasswordError(authResponse.message ?? 'Reset failed'));
+        }
+      } catch (e) {
+        emit(ResetPasswordError(ApiErrorHandler.getMessage(e)));
       }
-    } catch (e) {
-      emit(ResetPasswordError(ApiErrorHandler.getMessage(e)));
     }
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    otpController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    return super.close();
   }
 }

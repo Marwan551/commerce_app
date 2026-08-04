@@ -8,7 +8,11 @@ class LocalNotificationService {
   final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  bool _isInitialized = false;
+
   Future<void> init() async {
+    if (_isInitialized) return;
+
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -17,11 +21,24 @@ class LocalNotificationService {
 
     await _notificationsPlugin.initialize(initializationSettings);
 
-    // Request permissions for Android 13+
-    await _notificationsPlugin
+    final androidPlugin = _notificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
+            AndroidFlutterLocalNotificationsPlugin>();
+
+    if (androidPlugin != null) {
+      await androidPlugin.requestNotificationsPermission();
+      
+
+      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'forgot_password_channel',
+        'Forgot Password',
+        description: 'Notifications for forgot password flow',
+        importance: Importance.max,
+      );
+      await androidPlugin.createNotificationChannel(channel);
+    }
+    
+    _isInitialized = true;
   }
 
   Future<void> showNotification(String title, String body) async {

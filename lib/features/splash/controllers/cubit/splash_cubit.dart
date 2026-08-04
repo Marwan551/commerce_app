@@ -7,29 +7,22 @@ part 'splash_state.dart';
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(SplashInitial());
 
-  Timer? _timer;
-
   void startTimer({
-    void Function()? onAuthenticated,
-    void Function()? onUnauthenticated,
-  }) {
-    _timer = Timer(const Duration(seconds: 3), () {
-      if (isClosed) return;
+    void Function(bool isAuthenticated)? onFinished,
+  }) async {
+    await Future.delayed(const Duration(seconds: 3));
+    
+    if (isClosed) return;
 
-      final token = SharedPrefHelper.getData('token');
-      if (token != null) {
-        onAuthenticated?.call();
-        emit(Authenticated());
-      } else {
-        onUnauthenticated?.call();
-        emit(Unauthenticated());
-      }
-    });
-  }
+    final token = SharedPrefHelper().getData(SharedPrefKeys.token);
+    final isAuthenticated = token != null;
 
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
+    onFinished?.call(isAuthenticated);
+
+    if (isAuthenticated) {
+      emit(Authenticated());
+    } else {
+      emit(Unauthenticated());
+    }
   }
 }

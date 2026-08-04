@@ -1,0 +1,8 @@
+- [ ] Refactor Core Singletons (Endpoints, SharedPrefHelper)
+- [ ] Implement AppValidator and consolidate AppToast
+- [ ] Update AppLoadingIndicator to use Lottie
+- [ ] Refactor SplashCubit (1 callback, model decode)
+- [ ] Implement AuthNavigation and update AppRouter (email param)
+- [ ] Refactor ForgotPasswordCubit (Controllers, Validation)
+- [ ] Update ForgotPassword screens (BlocConsumer, Pinput, Figma images)
+- [ ] Final Verification and Cleanup

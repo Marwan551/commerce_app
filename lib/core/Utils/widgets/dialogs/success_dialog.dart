@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
@@ -26,10 +27,10 @@ class SuccessDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.check_circle_outline,
-              color: Colors.green,
-              size: 80,
+            SvgPicture.asset(
+              'assets/images/imgs/check_duotone.svg',
+              width: 80,
+              height: 80,
             ),
             const SizedBox(height: 24),
             Text(

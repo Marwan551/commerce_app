@@ -40,12 +40,12 @@ class $AssetsImagesAnimationsGen {
 class $AssetsImagesImgsGen {
   const $AssetsImagesImgsGen();
 
-  /// File path: assets/images/imgs/AppLogo.svg
+  /// File path: assets/images/imgs/app_logo.svg
   SvgGenImage get appLogo =>
-      const SvgGenImage('assets/images/imgs/AppLogo.svg');
+      const SvgGenImage('assets/images/imgs/app_logo.svg');
 
-  /// File path: assets/images/imgs/Waves.svg
-  SvgGenImage get waves => const SvgGenImage('assets/images/imgs/Waves.svg');
+  /// File path: assets/images/imgs/waves.svg
+  SvgGenImage get waves => const SvgGenImage('assets/images/imgs/waves.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [appLogo, waves];

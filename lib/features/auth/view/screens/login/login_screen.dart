@@ -6,6 +6,7 @@ import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.d
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
 import 'package:commerce_app/features/auth/view/widgets/login/login_view_body.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -14,20 +15,30 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(ApiService()),
-      child: BlocListener<LoginCubit, LoginState>(
+      child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            AppToast.showSuccess(context, 'Login Successful');
+            AppToast.show(
+              context,
+              message: 'Login Successful',
+              type: ToastificationType.success,
+            );
             ScreenNavigation.navigateToHome();
           } else if (state is LoginError) {
-            AppToast.showError(context, state.message);
+            AppToast.show(
+              context,
+              message: state.message,
+              type: ToastificationType.error,
+            );
           }
         },
-        child: const Scaffold(
-          body: SafeArea(
-            child: LoginViewBody(),
-          ),
-        ),
+        builder: (context, state) {
+          return const Scaffold(
+            body: SafeArea(
+              child: LoginViewBody(),
+            ),
+          );
+        },
       ),
     );
   }

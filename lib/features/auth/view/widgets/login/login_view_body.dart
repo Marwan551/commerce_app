@@ -5,46 +5,21 @@ import 'package:commerce_app/core/utils/widgets/buttons/custom_text_button.dart'
 import 'package:commerce_app/core/utils/widgets/text_fields/custom_text_field.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
+import 'package:commerce_app/core/utils/validation/app_validator.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
-import 'package:commerce_app/features/auth/models/request/login_request_model.dart';
-import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
+import 'package:commerce_app/features/auth/auth_navigation.dart';
 
-class LoginViewBody extends StatefulWidget {
+class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
 
   @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
-}
-
-class _LoginViewBodyState extends State<LoginViewBody> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _isButtonEnabled = false;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  void _validateForm() {
-    final isEmailValid = CustomTextField.validateEmail(_emailController.text) == null;
-    final isPasswordValid = CustomTextField.validatePassword(_passwordController.text) == null;
-
-    setState(() {
-      _isButtonEnabled = isEmailValid && isPasswordValid;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
       child: Form(
-        key: _formKey,
+        key: cubit.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,26 +31,26 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             CustomTextField(
               labelText: 'Email',
               hintText: 'Enter your email address',
-              controller: _emailController,
+              controller: cubit.emailController,
               keyboardType: TextInputType.emailAddress,
-              validator: CustomTextField.validateEmail,
-              onChanged: (_) => _validateForm(),
+              validator: AppValidator.validateEmail,
+              onChanged: (_) => cubit.formKey.currentState?.validate(),
             ),
             const SizedBox(height: 16),
             CustomTextField(
               labelText: 'Password',
               hintText: 'Enter your password',
-              controller: _passwordController,
+              controller: cubit.passwordController,
               isPassword: true,
-              validator: CustomTextField.validatePassword,
-              onChanged: (_) => _validateForm(),
+              validator: AppValidator.validatePassword,
+              onChanged: (_) => cubit.formKey.currentState?.validate(),
             ),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
               child: CustomTextButton(
                 text: 'Forgot Password?',
-                onPressed: () => ScreenNavigation.navigateToForgotPassword(),
+                onPressed: () => AuthNavigation.navigateToForgotPassword(),
                 textStyle: AppTextStyles.regular16.copyWith(color: AppColors.black1A1A1A),
               ),
             ),
@@ -85,22 +60,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 return CustomButton(
                   text: 'Login',
                   isLoading: state is LoginLoading,
-                  onPressed: _isButtonEnabled
-                      ? () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<LoginCubit>().login(
-                                  LoginRequestModel(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  ),
-                                );
-                          }
-                        }
-                      : null,
+                  onPressed: () => cubit.login(),
                 );
               },
             ),
-            const SizedBox(height: 24),
             const SizedBox(height: 24),
             Center(
               child: Row(
@@ -109,7 +72,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   const Text('Don\'t have an account?', style: AppTextStyles.regular16),
                   CustomTextButton(
                     text: 'Join',
-                    onPressed: () => ScreenNavigation.navigateToRegister(),
+                    onPressed: () => AuthNavigation.navigateToRegister(),
                     textStyle: AppTextStyles.medium18.copyWith(
                       color: AppColors.black1A1A1A,
                       decoration: TextDecoration.underline,

@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
 class AppLoadingIndicator extends StatelessWidget {
   final double size;
-  final Color? color;
 
   const AppLoadingIndicator({
     super.key,
-    this.size = 50.0,
-    this.color,
+    this.size = 150.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SpinKitFadingCircle(
-        color: color ?? AppColors.black1A1A1A,
-        size: size,
+      child: Assets.images.animations.loading.lottie(
+        width: size,
+        height: size,
       ),
     );
   }
