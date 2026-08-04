@@ -54,7 +54,6 @@ class VerifyCodeBody extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
-                // Resend code logic
               },
               child: const Text(
                 'Resend code',

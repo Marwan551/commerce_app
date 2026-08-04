@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/remote/endpoints.dart';
-import 'package:commerce_app/core/services/local_notifications/local_notification_service.dart';
 import 'package:commerce_app/features/auth/models/request/forgot_password_request_model.dart';
 import 'package:commerce_app/features/auth/models/request/verify_code_request_model.dart';
 import 'package:commerce_app/features/auth/models/request/reset_password_request_model.dart';
@@ -36,10 +35,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           final message = authResponse.message ?? 'Success';
-          await LocalNotificationService().showNotification(
-            'Forgot Password',
-            message,
-          );
           emit(ForgotPasswordSuccess(message));
         } else {
           emit(ForgotPasswordError(authResponse.message ?? 'Error occurred'));
