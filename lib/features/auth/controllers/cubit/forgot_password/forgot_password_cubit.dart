@@ -27,7 +27,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       emit(ForgotPasswordLoading());
       try {
         final response = await _apiService.postData(
-          endpoint: Endpoints().forgotPassword,
+          endpoint: Endpoints.forgotPassword,
           data: ForgotPasswordRequestModel(email: emailController.text).toJson(),
         );
 
@@ -50,7 +50,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       emit(VerifyCodeLoading());
       try {
         final response = await _apiService.postData(
-          endpoint: Endpoints().verifyResetCode,
+          endpoint: Endpoints.verifyResetCode,
           data: VerifyCodeRequestModel(resetCode: otpController.text).toJson(),
         );
 
@@ -72,7 +72,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       emit(ResetPasswordLoading());
       try {
         final response = await _apiService.putData(
-          endpoint: Endpoints().resetPassword,
+          endpoint: Endpoints.resetPassword,
           data: ResetPasswordRequestModel(
             email: emailController.text,
             newPassword: passwordController.text,

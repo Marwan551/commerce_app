@@ -22,7 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       try {
         final response = await _apiService.postData(
-          endpoint: Endpoints().login,
+          endpoint: Endpoints.login,
           data: LoginRequestModel(
             email: emailController.text,
             password: passwordController.text,
@@ -33,9 +33,9 @@ class LoginCubit extends Cubit<LoginState> {
 
         if (response.statusCode == 200 || response.statusCode == 201) {
           if (loginResponse.token != null) {
-            await SharedPrefHelper().setData(SharedPrefKeys.token, loginResponse.token);
+            await SharedPrefHelper.setData(SharedPrefKeys.token, loginResponse.token);
             if (loginResponse.user != null) {
-              await SharedPrefHelper().setData(SharedPrefKeys.user, loginResponse.user!.toJson());
+              await SharedPrefHelper.setData(SharedPrefKeys.user, loginResponse.user!.toJson());
             }
           }
           emit(LoginSuccess(loginResponse));

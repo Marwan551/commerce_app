@@ -41,7 +41,7 @@ class SuccessDialog extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               message,
-              style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3),
+              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),

@@ -14,7 +14,7 @@ class SplashCubit extends Cubit<SplashState> {
     
     if (isClosed) return;
 
-    final token = SharedPrefHelper().getData(SharedPrefKeys.token);
+    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
     final isAuthenticated = token != null;
 
     onFinished?.call(isAuthenticated);

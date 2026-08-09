@@ -24,8 +24,8 @@ class ForgotPasswordBody extends StatelessWidget {
             const Text('Forgot password', style: AppTextStyles.bold24),
             const SizedBox(height: 8),
             Text(
-              'Enter your email for the verification process. We will send a digits code to your email.',
-              style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3),
+              'Enter your email for the verification process. We will send a 6-digit code to your email.',
+              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
             ),
             const SizedBox(height: 32),
             CustomTextField(

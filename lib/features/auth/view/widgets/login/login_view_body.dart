@@ -26,7 +26,7 @@ class LoginViewBody extends StatelessWidget {
             const Text('Login', style: AppTextStyles.bold24),
             const SizedBox(height: 8),
             Text('Welcome back! Please login to your account.',
-                style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3)),
+                style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070)),
             const SizedBox(height: 32),
             CustomTextField(
               labelText: 'Email',

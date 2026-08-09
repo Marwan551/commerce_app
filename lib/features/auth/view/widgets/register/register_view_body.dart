@@ -26,7 +26,7 @@ class RegisterViewBody extends StatelessWidget {
             const Text('Create an account', style: AppTextStyles.bold24),
             const SizedBox(height: 8),
             Text('Let\'s create your account.',
-                style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3)),
+                style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070)),
             const SizedBox(height: 32),
             CustomTextField(
               labelText: 'Full Name',
@@ -80,7 +80,11 @@ class RegisterViewBody extends StatelessWidget {
               child: Text(
                 'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.regular16,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.grey707070,
+                ),
               ),
             ),
             const SizedBox(height: 24),

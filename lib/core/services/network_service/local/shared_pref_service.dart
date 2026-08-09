@@ -8,8 +8,6 @@ class SharedPrefKeys {
 
 class SharedPrefHelper {
   SharedPrefHelper._();
-  static final SharedPrefHelper _instance = SharedPrefHelper._();
-  factory SharedPrefHelper() => _instance;
 
   static late SharedPreferences _sharedPreferences;
 
@@ -17,7 +15,7 @@ class SharedPrefHelper {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> setData(String key, dynamic value) async {
+  static Future<void> setData(String key, dynamic value) async {
     if (value is String) {
       await _sharedPreferences.setString(key, value);
     } else if (value is int) {
@@ -31,11 +29,11 @@ class SharedPrefHelper {
     }
   }
 
-  dynamic getData(String key) {
+  static dynamic getData(String key) {
     return _sharedPreferences.get(key);
   }
 
-  Map<String, dynamic>? getMap(String key) {
+  static Map<String, dynamic>? getMap(String key) {
     final data = _sharedPreferences.getString(key);
     if (data != null) {
       return jsonDecode(data) as Map<String, dynamic>;
@@ -43,11 +41,11 @@ class SharedPrefHelper {
     return null;
   }
 
-  Future<void> removeData(String key) async {
+  static Future<void> removeData(String key) async {
     await _sharedPreferences.remove(key);
   }
 
-  Future<void> clearAllData() async {
+  static Future<void> clearAllData() async {
     await _sharedPreferences.clear();
   }
 }

@@ -25,7 +25,7 @@ class ResetPasswordScreen extends StatelessWidget {
               barrierDismissible: false,
               builder: (context) => SuccessDialog(
                 title: 'Password Changed!',
-                message: 'Your can now use your new password to login to your account.',
+                message: 'You can now use your new password to login to your account.',
                 buttonText: 'Login',
                 onButtonPressed: () {
                   Navigator.pop(context);

@@ -25,7 +25,7 @@ class ResetPasswordViewBody extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Set the new password for your account so you can login and access all the features.',
-              style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3),
+              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
             ),
             const SizedBox(height: 16),
             CustomTextField(

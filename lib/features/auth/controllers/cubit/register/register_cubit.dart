@@ -24,7 +24,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(RegisterLoading());
       try {
         final response = await _apiService.postData(
-          endpoint: Endpoints().register,
+          endpoint: Endpoints.register,
           data: RegisterRequestModel(
             name: nameController.text,
             email: emailController.text,

@@ -33,7 +33,7 @@ class VerifyCodeBody extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Enter the 6 digit code that you received on your email.',
-            style: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3),
+            style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
           ),
           const SizedBox(height: 32),
           Center(

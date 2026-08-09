@@ -4,10 +4,7 @@ import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
 class AppTextStyles {
   AppTextStyles._();
-  static final AppTextStyles _instance = AppTextStyles._();
-  factory AppTextStyles() => _instance;
 
-  // Regular (w400)
   static const TextStyle regular12 = TextStyle(
     fontFamily: AppStrings.fontFamily,
     fontSize: 12,
@@ -36,7 +33,6 @@ class AppTextStyles {
     color: AppColors.black1A1A1A,
   );
 
-  // Medium (w500)
   static const TextStyle medium12 = TextStyle(
     fontFamily: AppStrings.fontFamily,
     fontSize: 12,
@@ -72,7 +68,6 @@ class AppTextStyles {
     color: AppColors.black1A1A1A,
   );
 
-  // Bold (w700)
   static const TextStyle bold14 = TextStyle(
     fontFamily: AppStrings.fontFamily,
     fontSize: 14,

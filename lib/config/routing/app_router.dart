@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
-import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/splash/view/screens/splash_screen.dart';
 import 'package:commerce_app/features/auth/view/screens/login/login_screen.dart';
 import 'package:commerce_app/features/auth/view/screens/register/register_screen.dart';
@@ -9,6 +6,7 @@ import 'package:commerce_app/features/auth/view/screens/forgot_password/forgot_p
 import 'package:commerce_app/features/auth/view/screens/forgot_password/verify_code_screen.dart';
 import 'package:commerce_app/features/auth/view/screens/forgot_password/reset_password_screen.dart';
 import 'package:commerce_app/config/routing/routes_enums.dart';
+import 'package:commerce_app/core/utils/widgets/navigation/main_layout.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -46,24 +44,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.home.path,
-        builder: (context, state) => Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Home Screen'),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButton(
-                    text: 'Logout & Return to Login',
-                    onPressed: () => ScreenNavigation.navigateToLogin(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        builder: (context, state) => const MainLayout(),
       ),
     ],
   );
