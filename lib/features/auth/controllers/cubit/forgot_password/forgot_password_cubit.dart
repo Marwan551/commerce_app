@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:commerce_app/core/services/remote/base_client_service.dart';
-import 'package:commerce_app/core/services/remote/endpoints.dart';
+import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
+import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
 import 'package:commerce_app/features/auth/models/request/forgot_password_request_model.dart';
 import 'package:commerce_app/features/auth/models/request/verify_code_request_model.dart';
 import 'package:commerce_app/features/auth/models/request/reset_password_request_model.dart';
 import 'package:commerce_app/features/auth/models/response/auth_response_model.dart';
-import 'package:commerce_app/core/services/remote/api_error_handler.dart';
+import 'package:commerce_app/core/services/network_service/remote/api_error_handler.dart';
 import 'forgot_password_state.dart';
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {

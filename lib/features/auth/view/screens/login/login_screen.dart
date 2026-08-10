@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:commerce_app/core/services/remote/base_client_service.dart';
+import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';

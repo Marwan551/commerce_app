@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:commerce_app/core/services/remote/base_client_service.dart';
-import 'package:commerce_app/core/services/remote/endpoints.dart';
-import 'package:commerce_app/core/services/remote/api_error_handler.dart';
+import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
+import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
+import 'package:commerce_app/core/services/network_service/remote/api_error_handler.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'home_state.dart';

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/auth/models/request/register_request_model.dart';
 import 'package:commerce_app/features/auth/models/response/register_response_model.dart';
-import 'package:commerce_app/core/services/remote/base_client_service.dart';
-import 'package:commerce_app/core/services/remote/endpoints.dart';
+import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
+import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_state.dart';
-import 'package:commerce_app/core/services/remote/api_error_handler.dart';
+import 'package:commerce_app/core/services/network_service/remote/api_error_handler.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final ApiService _apiService;

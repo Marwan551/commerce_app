@@ -127,11 +127,11 @@ class HomeViewBody extends StatelessWidget {
       ),
       itemCount: 6,
       itemBuilder: (_, __) => Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
+        baseColor: AppColors.greyB3B3B3,
+        highlightColor: AppColors.greyB3B3B3,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.whiteFFFFFF,
             borderRadius: BorderRadius.circular(12),
           ),
         ),
