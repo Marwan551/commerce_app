@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
@@ -17,62 +18,67 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit(ApiService())..getHomeData(),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.whiteFFFFFF,
         body: SafeArea(
-          child: BlocConsumer<HomeCubit, HomeState>(
-            listener: (context, state) {
-              if (state is HomeError) {
-                AppToast.show(
-                  context,
-                  message: state.message,
-                  type: ToastificationType.error,
-                );
-              }
+          child: GestureDetector(
+            onTap: () {
+              FocusManager.instance.primaryFocus?.unfocus();
             },
-            builder: (context, state) {
-              final cubit = context.read<HomeCubit>();
-              if (state is HomeLoading) {
-                return const HomeShimmerLoading();
-              } else if (state is HomeSuccess) {
-                return HomeViewBody(
-                  categories: state.categories,
-                  products: state.products,
-                  currentPage: state.currentPage,
-                  totalPageCount: state.totalPageCount,
-                  selectedCategoryId: state.selectedCategoryId,
-                  sortBy: state.sortBy,
-                  minPrice: state.minPrice,
-                  maxPrice: state.maxPrice,
-                  isFetching: state.isFetching,
-                  onSearchChanged: cubit.updateSearch,
-                  onCategorySelected: cubit.selectCategory,
-                  onPageChanged: cubit.changePage,
-                  onFiltersApplied: (sortBy, min, max) => cubit.applyFilters(
-                    sortBy: sortBy,
-                    minPrice: min,
-                    maxPrice: max,
-                  ),
-                );
-              } else if (state is HomeError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error_outline, size: 80, color: Colors.red),
-                      const SizedBox(height: 16),
-                      const Text(AppStrings.somethingWentWrong),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: () => cubit.getHomeData(),
-                        style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                        child: const Text(AppStrings.retry, style: TextStyle(color: Colors.white)),
-                      ),
-                    ],
-                  ),
-                );
-              }
-              return const SizedBox.shrink();
-            },
+            child: BlocConsumer<HomeCubit, HomeState>(
+              listener: (context, state) {
+                if (state is HomeError) {
+                  AppToast.show(
+                    context,
+                    message: state.message,
+                    type: ToastificationType.error,
+                  );
+                }
+              },
+              builder: (context, state) {
+                final cubit = context.read<HomeCubit>();
+                if (state is HomeLoading) {
+                  return const HomeShimmerLoading();
+                } else if (state is HomeSuccess) {
+                  return HomeViewBody(
+                    categories: state.categories,
+                    products: state.products,
+                    currentPage: state.currentPage,
+                    totalPageCount: state.totalPageCount,
+                    selectedCategoryId: state.selectedCategoryId,
+                    sortBy: state.sortBy,
+                    minPrice: state.minPrice,
+                    maxPrice: state.maxPrice,
+                    isFetching: state.isFetching,
+                    onSearchChanged: cubit.updateSearch,
+                    onCategorySelected: cubit.selectCategory,
+                    onPageChanged: cubit.changePage,
+                    onFiltersApplied: (sortBy, min, max) => cubit.applyFilters(
+                      sortBy: sortBy,
+                      minPrice: min,
+                      maxPrice: max,
+                    ),
+                  );
+                } else if (state is HomeError) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.error_outline, size: 80, color: Colors.red),
+                        const SizedBox(height: 16),
+                        const Text(AppStrings.somethingWentWrong),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: () => cubit.getHomeData(),
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                          child: const Text(AppStrings.retry, style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
           ),
         ),
       ),

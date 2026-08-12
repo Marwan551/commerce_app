@@ -70,7 +70,6 @@ class HomeViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(AppStrings.categories, style: AppTextStyles.bold18),
                 const SizedBox(height: 16),
                 CategoryListView(
                   categories: categories,
@@ -78,7 +77,6 @@ class HomeViewBody extends StatelessWidget {
                   onCategorySelected: onCategorySelected,
                 ),
                 const SizedBox(height: 24),
-                const Text(AppStrings.recentProducts, style: AppTextStyles.bold18),
                 const SizedBox(height: 16),
                 if (isFetching)
                   _buildGridShimmer()
@@ -99,11 +97,21 @@ class HomeViewBody extends StatelessWidget {
                       return ProductItem(product: products[index]);
                     },
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   NumberPaginator(
                     numberPages: totalPageCount,
                     initialPage: currentPage - 1,
                     onPageChange: (index) => onPageChanged(index + 1),
+                    child: const SizedBox(
+                      height: 48,
+                      child: Row(
+                        children: [
+                          PrevButton(),
+                          Flexible(child: ScrollableNumberContent()),
+                          NextButton(),
+                        ],
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -126,13 +134,13 @@ class HomeViewBody extends StatelessWidget {
         childAspectRatio: 0.7,
       ),
       itemCount: 6,
-      itemBuilder: (_, __) => Shimmer.fromColors(
+      itemBuilder: (_, index) => Shimmer.fromColors(
         baseColor: AppColors.greyB3B3B3,
         highlightColor: AppColors.greyB3B3B3,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.whiteFFFFFF,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(24),
           ),
         ),
       ),

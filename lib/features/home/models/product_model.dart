@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'category_model.dart';
 import 'brand_model.dart';
 
@@ -66,7 +67,7 @@ class ProductData {
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
     return ProductData(
-      id: json['_id'],
+      id: json['_id'] ?? json['id'],
       title: json['title'],
       slug: json['slug'],
       description: json['description'],
@@ -78,5 +79,33 @@ class ProductData {
       ratingsAverage: json['ratingsAverage'],
       images: json['images'] != null ? List<String>.from(json['images']) : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'slug': slug,
+      'description': description,
+      'quantity': quantity,
+      'price': price,
+      'imageCover': imageCover,
+      'category': category?.toJson(),
+      'brand': brand?.toJson(),
+      'ratingsAverage': ratingsAverage,
+      'images': images,
+    };
+  }
+
+  Map<String, dynamic> toDb() {
+    return {
+      'productId': id,
+      'productData': jsonEncode(toJson()),
+      'isFavorite': 1,
+    };
+  }
+
+  factory ProductData.fromDb(Map<String, dynamic> map) {
+    return ProductData.fromJson(jsonDecode(map['productData']));
   }
 }

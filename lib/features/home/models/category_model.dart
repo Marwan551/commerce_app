@@ -57,10 +57,19 @@ class CategoryData {
 
   factory CategoryData.fromJson(Map<String, dynamic> json) {
     return CategoryData(
-      id: json['_id'],
+      id: json['_id'] ?? json['id'],
       name: json['name'],
       slug: json['slug'],
       image: json['image'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'slug': slug,
+      'image': image,
+    };
   }
 }

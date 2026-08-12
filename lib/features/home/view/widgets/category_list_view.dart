@@ -22,7 +22,7 @@ class CategoryListView extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length + 1,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, index) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           if (index == 0) {
             return _chip(
@@ -49,12 +49,12 @@ class CategoryListView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.black1A1A1A : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(color: isSelected ? AppColors.black1A1A1A : AppColors.greyB3B3B3),
         ),
         child: Text(
           label,
-          style: AppTextStyles.medium14.copyWith(
+          style: AppTextStyles.bold16.copyWith(
             color: isSelected ? Colors.white : AppColors.black1A1A1A,
           ),
         ),

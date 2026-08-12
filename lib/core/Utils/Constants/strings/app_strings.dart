@@ -8,10 +8,10 @@ class AppStrings {
   static const String discover = 'Discover';
   static const String categories = 'Categories';
   static const String recentProducts = 'Recent Products';
-  static const String searchHint = 'what do you search for?';
+  static const String searchHint = 'Search for clothes...';
   static const String viewAll = 'view all';
   static const String noResults = 'No Results Found';
-  static const String noResultsMsg = 'We couldn\'t find any products matching your search or filters.';
+  static const String noResultsMsg = 'Try a similar word or something more general.';
   static const String somethingWentWrong = 'Something went wrong, please try again';
   static const String retry = 'Retry';
 
@@ -22,4 +22,7 @@ class AppStrings {
   static const String relevance = 'Relevance';
   static const String priceLowHigh = 'Price: Low → High';
   static const String priceHighLow = 'Price: High → Low';
+  static const String savedItems = 'Saved Items';
+  static const String noSavedItems = 'No Saved Items!';
+  static const String noSavedItemsMsg = 'You don\'t have any saved items.\nGo to home and add some.';
 }

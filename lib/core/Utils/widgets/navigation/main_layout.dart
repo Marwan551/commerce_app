@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/home/view/screens/home_screen.dart';
+
+import 'package:commerce_app/features/wishlist/view/screens/wishlist_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -15,7 +18,7 @@ class _MainLayoutState extends State<MainLayout> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const Center(child: Text('Search Screen Placeholder')),
-    const Center(child: Text('Saved Screen Placeholder')),
+    const WishlistScreen(),
     const Center(child: Text('Cart Screen Placeholder')),
     const Center(child: Text('Account Screen Placeholder')),
   ];
@@ -39,30 +42,60 @@ class _MainLayoutState extends State<MainLayout> {
         unselectedItemColor: AppColors.grey707070,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
+            icon: SvgPicture.asset(
+              'assets/images/imgs/home_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.grey707070, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/images/imgs/home_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            activeIcon: Icon(Icons.search),
+            icon: SvgPicture.asset(
+              'assets/images/imgs/search_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.grey707070, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/images/imgs/search_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+            ),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            activeIcon: Icon(Icons.favorite),
+            icon: SvgPicture.asset(
+              'assets/images/imgs/saved_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.grey707070, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/images/imgs/saved_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+            ),
             label: 'Saved',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            activeIcon: Icon(Icons.shopping_cart),
+            icon: SvgPicture.asset(
+              'assets/images/imgs/cart_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.grey707070, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/images/imgs/cart_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+            ),
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
+            icon: SvgPicture.asset(
+              'assets/images/imgs/account_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.grey707070, BlendMode.srcIn),
+            ),
+            activeIcon: SvgPicture.asset(
+              'assets/images/imgs/account_icon.svg',
+              colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+            ),
             label: 'Account',
           ),
         ],

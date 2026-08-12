@@ -1,0 +1,56 @@
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+class SqfliteHelper {
+  SqfliteHelper._();
+  static final SqfliteHelper _instance = SqfliteHelper._();
+  factory SqfliteHelper() => _instance;
+
+  static late Database _database;
+
+  static Future<void> init() async {
+    final String path = join(await getDatabasesPath(), 'ecommerce_wishlist.db');
+    _database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE wishlist (
+            productId TEXT PRIMARY KEY,
+            productData TEXT,
+            isFavorite INTEGER DEFAULT 1
+          )
+        ''');
+      },
+    );
+  }
+
+  Future<int> insert(String table, Map<String, dynamic> data) async {
+    return await _database.insert(
+      table,
+      data,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> query(String table) async {
+    return await _database.query(table);
+  }
+
+  Future<int> delete(String table, String productId) async {
+    return await _database.delete(
+      table,
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+  }
+
+  Future<bool> isExists(String table, String productId) async {
+    final List<Map<String, dynamic>> results = await _database.query(
+      table,
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+    return results.isNotEmpty;
+  }
+}

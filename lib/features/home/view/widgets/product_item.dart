@@ -4,6 +4,10 @@ import 'package:shimmer/shimmer.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
+import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_state.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductData product;
@@ -11,79 +15,78 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.greyB3B3B3.withOpacity(0.5)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Stack(
+    return BlocBuilder<WishlistCubit, WishlistState>(
+      builder: (context, state) {
+        final bool isFavorite = context.read<WishlistCubit>().isFavorite(product.id!);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: BorderRadius.circular(24),
                   child: CachedNetworkImage(
                     imageUrl: product.imageCover ?? '',
+                    height: 185,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(color: Colors.white),
+                      baseColor: AppColors.greyB3B3B3,
+                      highlightColor: AppColors.greyB3B3B3.withAlpha(100),
+                      child: Container(color: AppColors.whiteFFFFFF),
                     ),
-                    errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+                    errorWidget: (context, url, error) =>
+                        const Center(child: Icon(Icons.error)),
                   ),
                 ),
                 Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
+                  top: 12,
+                  right: 12,
+                  child: GestureDetector(
+                    onTap: () => context.read<WishlistCubit>().toggleFavorite(product),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withAlpha(20),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: SvgPicture.asset(
+                        isFavorite
+                            ? 'assets/images/imgs/red_heart.svg'
+                            : 'assets/images/imgs/Heart.svg',
+                        colorFilter: isFavorite
+                            ? null
+                            : const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
+                        width: 24,
+                        height: 24,
+                      ),
                     ),
-                    child: const Icon(Icons.favorite_border, size: 20, color: AppColors.black1A1A1A),
                   ),
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.title ?? '',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.bold14,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '\$${product.price}',
-                  style: AppTextStyles.medium14,
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(Icons.star, color: Colors.amber, size: 16),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${product.ratingsAverage ?? 0}',
-                      style: AppTextStyles.regular12,
-                    ),
-                  ],
-                ),
-              ],
+            const SizedBox(height: 12),
+            Text(
+              product.title ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.bold20,
             ),
-          ),
-        ],
-      ),
+            const SizedBox(height: 4),
+            Text(
+              '\$ ${product.price}',
+              style: AppTextStyles.regular18.copyWith(color: AppColors.grey707070),
+            ),
+          ],
+        );
+      },
     );
   }
 }
