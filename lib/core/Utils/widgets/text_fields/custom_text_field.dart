@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 
-import 'package:commerce_app/core/utils/validation/app_validator.dart';
 
 class CustomTextField extends StatefulWidget {
   final String labelText;
