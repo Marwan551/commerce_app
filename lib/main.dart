@@ -3,7 +3,6 @@ import 'package:commerce_app/config/routing/app_router.dart';
 import 'package:commerce_app/config/theming/app_theme.dart';
 import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 import 'package:commerce_app/core/services/database/sqflite_helper.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WishlistCubit(SqfliteHelper())..loadWishlistIds(),
+      create: (context) => WishlistCubit()..loadWishlistIds(),
       child: MaterialApp.router(
         title: 'E-commerce App',
         debugShowCheckedModeBanner: false,

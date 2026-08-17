@@ -3,8 +3,6 @@ import 'package:sqflite/sqflite.dart';
 
 class SqfliteHelper {
   SqfliteHelper._();
-  static final SqfliteHelper _instance = SqfliteHelper._();
-  factory SqfliteHelper() => _instance;
 
   static late Database _database;
 
@@ -25,7 +23,7 @@ class SqfliteHelper {
     );
   }
 
-  Future<int> insert(String table, Map<String, dynamic> data) async {
+  static Future<int> insert(String table, Map<String, dynamic> data) async {
     return await _database.insert(
       table,
       data,
@@ -33,11 +31,11 @@ class SqfliteHelper {
     );
   }
 
-  Future<List<Map<String, dynamic>>> query(String table) async {
+  static Future<List<Map<String, dynamic>>> query(String table) async {
     return await _database.query(table);
   }
 
-  Future<int> delete(String table, String productId) async {
+  static Future<int> delete(String table, String productId) async {
     return await _database.delete(
       table,
       where: 'productId = ?',
@@ -45,7 +43,7 @@ class SqfliteHelper {
     );
   }
 
-  Future<bool> isExists(String table, String productId) async {
+  static Future<bool> isExists(String table, String productId) async {
     final List<Map<String, dynamic>> results = await _database.query(
       table,
       where: 'productId = ?',
