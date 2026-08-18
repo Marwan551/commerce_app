@@ -6,7 +6,7 @@ import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/features/product_details/controllers/cubit/product_details_cubit.dart';
 import 'package:commerce_app/features/product_details/controllers/cubit/product_details_state.dart';
-import 'package:commerce_app/features/product_details/view/widgets/product_images_slider.dart';
+import 'package:commerce_app/features/product_details/view/widgets/product_images.dart';
 import 'package:commerce_app/features/product_details/view/widgets/product_info_section.dart';
 import 'package:commerce_app/features/product_details/view/widgets/product_attributes_section.dart';
 import 'package:commerce_app/features/product_details/view/widgets/sticky_bottom_action_bar.dart';
