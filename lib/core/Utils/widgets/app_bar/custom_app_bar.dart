@@ -1,8 +1,8 @@
+import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../navigation/screen_navigation.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -26,14 +26,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         AppBar(
           title: Text(title, style: AppTextStyles.bold20),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.whiteFFFFFF,
           elevation: 0,
           leading: showBackButton
               ? IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed:(){
-                    ScreenNavigation.navigateToHome();
-                  },
+                  onPressed: onBackTap ?? () => Navigator.maybePop(context),
                 )
               : null,
           actions: actions,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 
 class CategoryListView extends StatelessWidget {
   final List<CategoryData> categories;
@@ -26,6 +24,7 @@ class CategoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           if (index == 0) {
             return _chip(
+              context,
               label: 'All',
               isSelected: selectedCategoryId == null,
               onTap: () => onCategorySelected(null),
@@ -33,6 +32,7 @@ class CategoryListView extends StatelessWidget {
           }
           final category = categories[index - 1];
           return _chip(
+            context,
             label: category.name ?? '',
             isSelected: selectedCategoryId == category.id,
             onTap: () => onCategorySelected(category.id),
@@ -42,20 +42,25 @@ class CategoryListView extends StatelessWidget {
     );
   }
 
-  Widget _chip({required String label, required bool isSelected, required VoidCallback onTap}) {
+  Widget _chip(BuildContext context,
+      {required String label, required bool isSelected, required VoidCallback onTap}) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.black1A1A1A : Colors.transparent,
+          color: isSelected ? theme.colorScheme.primary : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: isSelected ? AppColors.black1A1A1A : AppColors.greyB3B3B3),
+          border: Border.all(
+              color: isSelected
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.secondary),
         ),
         child: Text(
           label,
-          style: AppTextStyles.bold16.copyWith(
-            color: isSelected ? Colors.white : AppColors.black1A1A1A,
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: isSelected ? theme.colorScheme.onPrimary : theme.colorScheme.primary,
           ),
         ),
       ),

@@ -49,6 +49,7 @@ class ProductData {
   final CategoryData? category;
   final BrandData? brand;
   final num? ratingsAverage;
+  final int? ratingsQuantity;
   final List<String>? images;
 
   ProductData({
@@ -62,6 +63,7 @@ class ProductData {
     this.category,
     this.brand,
     this.ratingsAverage,
+    this.ratingsQuantity,
     this.images,
   });
 
@@ -77,6 +79,7 @@ class ProductData {
       category: json['category'] != null ? CategoryData.fromJson(json['category']) : null,
       brand: json['brand'] != null ? BrandData.fromJson(json['brand']) : null,
       ratingsAverage: json['ratingsAverage'],
+      ratingsQuantity: json['ratingsQuantity'],
       images: json['images'] != null ? List<String>.from(json['images']) : null,
     );
   }
@@ -93,6 +96,7 @@ class ProductData {
       'category': category?.toJson(),
       'brand': brand?.toJson(),
       'ratingsAverage': ratingsAverage,
+      'ratingsQuantity': ratingsQuantity,
       'images': images,
     };
   }

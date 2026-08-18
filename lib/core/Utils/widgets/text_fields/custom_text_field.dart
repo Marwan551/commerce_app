@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-
 
 class CustomTextField extends StatefulWidget {
   final String labelText;
@@ -34,12 +31,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.labelText,
-          style: AppTextStyles.medium18,
+          style: theme.textTheme.titleLarge,
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -51,12 +49,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           onChanged: widget.onChanged,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: AppTextStyles.regular16.copyWith(color: AppColors.greyB3B3B3),
+            hintStyle: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.colorScheme.secondary,
+            ),
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
                       obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: AppColors.greyB3B3B3,
+                      color: theme.colorScheme.secondary,
                     ),
                     onPressed: () {
                       setState(() {

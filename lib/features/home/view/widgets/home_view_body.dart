@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
@@ -46,6 +44,7 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Padding(
@@ -53,7 +52,7 @@ class HomeViewBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(AppStrings.discover, style: AppTextStyles.bold32),
+              Text(AppStrings.discover, style: theme.textTheme.displayLarge),
             ],
           ),
         ),
@@ -71,15 +70,18 @@ class HomeViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
+                Text(AppStrings.categories, style: theme.textTheme.headlineMedium),
+                const SizedBox(height: 16),
                 CategoryListView(
                   categories: categories,
                   selectedCategoryId: selectedCategoryId,
                   onCategorySelected: onCategorySelected,
                 ),
                 const SizedBox(height: 24),
+                Text(AppStrings.recentProducts, style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
                 if (isFetching)
-                  _buildGridShimmer()
+                  _buildGridShimmer(context)
                 else if (products.isEmpty)
                   const NoResultsFound()
                 else ...[
@@ -123,7 +125,8 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 
-  Widget _buildGridShimmer() {
+  Widget _buildGridShimmer(BuildContext context) {
+    final theme = Theme.of(context);
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -135,11 +138,11 @@ class HomeViewBody extends StatelessWidget {
       ),
       itemCount: 6,
       itemBuilder: (_, index) => Shimmer.fromColors(
-        baseColor: AppColors.greyB3B3B3,
-        highlightColor: AppColors.greyB3B3B3,
+        baseColor: theme.colorScheme.secondary,
+        highlightColor: theme.colorScheme.secondary.withAlpha(100),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.whiteFFFFFF,
+            color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(24),
           ),
         ),

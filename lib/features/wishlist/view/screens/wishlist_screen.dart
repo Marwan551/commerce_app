@@ -27,7 +27,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         title: AppStrings.savedItems,
-        showBackButton: false,
+        showBackButton: true,
         onBackTap: () {
           ScreenNavigation.navigateToHome();
         },

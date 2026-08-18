@@ -1,6 +1,8 @@
 import 'package:commerce_app/config/routing/app_router.dart';
 import 'package:commerce_app/config/routing/routes_enums.dart';
 
+import 'package:commerce_app/features/home/models/product_model.dart';
+
 class ScreenNavigation {
   ScreenNavigation._();
 
@@ -26,5 +28,13 @@ class ScreenNavigation {
 
   static void navigateToResetPassword({required String email}) {
     AppRouter.router.push(AppRoutes.resetPassword.path, extra: email);
+  }
+
+  static void navigateToProductDetails(ProductData product) {
+    AppRouter.router.push(AppRoutes.productDetails.path, extra: product);
+  }
+
+  static void navigateToReviews(ProductData product) {
+    AppRouter.router.push(AppRoutes.reviews.path, extra: product);
   }
 }

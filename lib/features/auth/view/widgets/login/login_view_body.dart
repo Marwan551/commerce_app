@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_text_button.dart';
 import 'package:commerce_app/core/utils/widgets/text_fields/custom_text_field.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/validation/app_validator.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/login/login_state.dart';
@@ -16,6 +14,7 @@ class LoginViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
       child: Form(
@@ -23,10 +22,12 @@ class LoginViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Login', style: AppTextStyles.bold24),
+            Text('Login', style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
             Text('Welcome back! Please login to your account.',
-                style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070)),
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.secondary.withAlpha(200),
+                )),
             const SizedBox(height: 32),
             CustomTextField(
               labelText: 'Email',
@@ -51,7 +52,9 @@ class LoginViewBody extends StatelessWidget {
               child: CustomTextButton(
                 text: 'Forgot Password?',
                 onPressed: () => AuthNavigation.navigateToForgotPassword(),
-                textStyle: AppTextStyles.regular16.copyWith(color: AppColors.black1A1A1A),
+                textStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
             const SizedBox(height: 32),
@@ -69,12 +72,12 @@ class LoginViewBody extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Don\'t have an account?', style: AppTextStyles.regular16),
+                  Text('Don\'t have an account?', style: theme.textTheme.bodyLarge),
                   CustomTextButton(
                     text: 'Join',
                     onPressed: () => AuthNavigation.navigateToRegister(),
-                    textStyle: AppTextStyles.medium18.copyWith(
-                      color: AppColors.black1A1A1A,
+                    textStyle: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.primary,
                       decoration: TextDecoration.underline,
                     ),
                   ),

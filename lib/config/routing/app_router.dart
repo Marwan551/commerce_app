@@ -8,6 +8,10 @@ import 'package:commerce_app/features/auth/view/screens/forgot_password/reset_pa
 import 'package:commerce_app/config/routing/routes_enums.dart';
 import 'package:commerce_app/core/utils/widgets/navigation/main_layout.dart';
 
+import 'package:commerce_app/features/home/models/product_model.dart';
+import 'package:commerce_app/features/product_details/view/screens/product_details_screen.dart';
+import 'package:commerce_app/features/reviews/view/screens/reviews_screen.dart';
+
 class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.splash.path,
@@ -40,6 +44,20 @@ class AppRouter {
         builder: (context, state) {
           final email = state.extra as String;
           return ResetPasswordScreen(email: email);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.productDetails.path,
+        builder: (context, state) {
+          final product = state.extra as ProductData;
+          return ProductDetailsScreen(product: product);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.reviews.path,
+        builder: (context, state) {
+          final product = state.extra as ProductData;
+          return ReviewsScreen(product: product);
         },
       ),
       GoRoute(

@@ -5,6 +5,8 @@ enum AppRoutes {
   forgotPassword('/forgot-password'),
   verifyCode('/verify-code'),
   resetPassword('/reset-password'),
+  productDetails('/product-details'),
+  reviews('/reviews'),
   splash('/splash');
 
   final String path;

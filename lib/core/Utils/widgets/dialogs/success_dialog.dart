@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 
 class SuccessDialog extends StatelessWidget {
@@ -20,6 +18,7 @@ class SuccessDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
@@ -35,13 +34,15 @@ class SuccessDialog extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               title,
-              style: AppTextStyles.bold24,
+              style: theme.textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
               message,
-              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: theme.colorScheme.secondary.withAlpha(200),
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),

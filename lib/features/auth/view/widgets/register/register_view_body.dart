@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_text_button.dart';
 import 'package:commerce_app/core/utils/widgets/text_fields/custom_text_field.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/validation/app_validator.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/register/register_state.dart';
@@ -16,6 +14,7 @@ class RegisterViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<RegisterCubit>();
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
       child: Form(
@@ -23,10 +22,12 @@ class RegisterViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Create an account', style: AppTextStyles.bold24),
+            Text('Create an account', style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
             Text('Let\'s create your account.',
-                style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070)),
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.secondary.withAlpha(200),
+                )),
             const SizedBox(height: 32),
             CustomTextField(
               labelText: 'Full Name',
@@ -76,14 +77,12 @@ class RegisterViewBody extends StatelessWidget {
               },
             ),
             const SizedBox(height: 16),
-            const Center(
+            Center(
               child: Text(
                 'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.grey707070,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.secondary.withAlpha(200),
                 ),
               ),
             ),
@@ -92,12 +91,12 @@ class RegisterViewBody extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Already have an account?', style: AppTextStyles.regular16),
+                  Text('Already have an account?', style: theme.textTheme.bodyLarge),
                   CustomTextButton(
                     text: 'Log In',
                     onPressed: () => AuthNavigation.navigateToLogin(),
-                    textStyle: AppTextStyles.medium18.copyWith(
-                      color: AppColors.black1A1A1A,
+                    textStyle: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.primary,
                       decoration: TextDecoration.underline,
                     ),
                   ),

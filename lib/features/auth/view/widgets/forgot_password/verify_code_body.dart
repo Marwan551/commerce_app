@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/forgot_password/forgot_password_cubit.dart';
 import 'package:commerce_app/features/auth/controllers/cubit/forgot_password/forgot_password_state.dart';
 
@@ -13,13 +11,14 @@ class VerifyCodeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ForgotPasswordCubit>();
+    final theme = Theme.of(context);
     
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: AppTextStyles.bold24,
+      textStyle: theme.textTheme.displayMedium,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.greyB3B3B3),
+        border: Border.all(color: theme.colorScheme.secondary),
         borderRadius: BorderRadius.circular(8),
       ),
     );
@@ -29,11 +28,13 @@ class VerifyCodeBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Enter 6 Digit Code', style: AppTextStyles.bold24),
+          Text('Enter 6 Digit Code', style: theme.textTheme.displayMedium),
           const SizedBox(height: 8),
           Text(
             'Enter the 6 digit code that you received on your email.',
-            style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: theme.colorScheme.secondary.withAlpha(200),
+            ),
           ),
           const SizedBox(height: 32),
           Center(
@@ -42,7 +43,7 @@ class VerifyCodeBody extends StatelessWidget {
               controller: cubit.otpController,
               defaultPinTheme: defaultPinTheme,
               focusedPinTheme: defaultPinTheme.copyDecorationWith(
-                border: Border.all(color: AppColors.black1A1A1A),
+                border: Border.all(color: theme.colorScheme.primary),
                 borderRadius: BorderRadius.circular(8),
               ),
               onCompleted: (pin) {
@@ -55,11 +56,11 @@ class VerifyCodeBody extends StatelessWidget {
             child: TextButton(
               onPressed: () {
               },
-              child: const Text(
+              child: Text(
                 'Resend code',
-                style: TextStyle(
+                style: theme.textTheme.bodyLarge?.copyWith(
                   decoration: TextDecoration.underline,
-                  color: AppColors.black1A1A1A,
+                  color: theme.colorScheme.primary,
                 ),
               ),
             ),

@@ -23,6 +23,7 @@ class AppStrings {
   static const String priceLowHigh = 'Price: Low → High';
   static const String priceHighLow = 'Price: High → Low';
   static const String savedItems = 'Saved Items';
+  static const String reviews = 'Reviews';
   static const String noSavedItems = 'No Saved Items!';
   static const String noSavedItemsMsg = 'You don\'t have any saved items.\nGo to home and add some.';
 }
