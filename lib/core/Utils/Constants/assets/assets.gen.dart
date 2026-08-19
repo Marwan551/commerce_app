@@ -40,15 +40,106 @@ class $AssetsImagesAnimationsGen {
 class $AssetsImagesImgsGen {
   const $AssetsImagesImgsGen();
 
+  /// File path: assets/images/imgs/Filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/images/imgs/Filter.svg');
+
+  /// File path: assets/images/imgs/Heart.svg
+  SvgGenImage get heart => const SvgGenImage('assets/images/imgs/Heart.svg');
+
+  /// File path: assets/images/imgs/account_icon.svg
+  SvgGenImage get accountIcon =>
+      const SvgGenImage('assets/images/imgs/account_icon.svg');
+
   /// File path: assets/images/imgs/app_logo.svg
   SvgGenImage get appLogo =>
       const SvgGenImage('assets/images/imgs/app_logo.svg');
+
+  /// File path: assets/images/imgs/arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/images/imgs/arrow.svg');
+
+  /// File path: assets/images/imgs/bag.svg
+  SvgGenImage get bag => const SvgGenImage('assets/images/imgs/bag.svg');
+
+  /// File path: assets/images/imgs/cart_empty.svg
+  SvgGenImage get cartEmpty =>
+      const SvgGenImage('assets/images/imgs/cart_empty.svg');
+
+  /// File path: assets/images/imgs/cart_icon.svg
+  SvgGenImage get cartIcon =>
+      const SvgGenImage('assets/images/imgs/cart_icon.svg');
+
+  /// File path: assets/images/imgs/check_duotone.svg
+  SvgGenImage get checkDuotone =>
+      const SvgGenImage('assets/images/imgs/check_duotone.svg');
+
+  /// File path: assets/images/imgs/empty_wishlist.svg
+  SvgGenImage get emptyWishlist =>
+      const SvgGenImage('assets/images/imgs/empty_wishlist.svg');
+
+  /// File path: assets/images/imgs/home_icon.svg
+  SvgGenImage get homeIcon =>
+      const SvgGenImage('assets/images/imgs/home_icon.svg');
+
+  /// File path: assets/images/imgs/line_saved.svg
+  SvgGenImage get lineSaved =>
+      const SvgGenImage('assets/images/imgs/line_saved.svg');
+
+  /// File path: assets/images/imgs/minus.svg
+  SvgGenImage get minus => const SvgGenImage('assets/images/imgs/minus.svg');
+
+  /// File path: assets/images/imgs/plus.svg
+  SvgGenImage get plus => const SvgGenImage('assets/images/imgs/plus.svg');
+
+  /// File path: assets/images/imgs/red_heart.svg
+  SvgGenImage get redHeart =>
+      const SvgGenImage('assets/images/imgs/red_heart.svg');
+
+  /// File path: assets/images/imgs/saved_icon.svg
+  SvgGenImage get savedIcon =>
+      const SvgGenImage('assets/images/imgs/saved_icon.svg');
+
+  /// File path: assets/images/imgs/search_icon.svg
+  SvgGenImage get searchIcon =>
+      const SvgGenImage('assets/images/imgs/search_icon.svg');
+
+  /// File path: assets/images/imgs/star_gold.svg
+  SvgGenImage get starGold =>
+      const SvgGenImage('assets/images/imgs/star_gold.svg');
+
+  /// File path: assets/images/imgs/star_grey.svg
+  SvgGenImage get starGrey =>
+      const SvgGenImage('assets/images/imgs/star_grey.svg');
+
+  /// File path: assets/images/imgs/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/images/imgs/trash.svg');
 
   /// File path: assets/images/imgs/waves.svg
   SvgGenImage get waves => const SvgGenImage('assets/images/imgs/waves.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [appLogo, waves];
+  List<SvgGenImage> get values => [
+    filter,
+    heart,
+    accountIcon,
+    appLogo,
+    arrow,
+    bag,
+    cartEmpty,
+    cartIcon,
+    checkDuotone,
+    emptyWishlist,
+    homeIcon,
+    lineSaved,
+    minus,
+    plus,
+    redHeart,
+    savedIcon,
+    searchIcon,
+    starGold,
+    starGrey,
+    trash,
+    waves,
+  ];
 }
 
 abstract final class Assets {

@@ -7,6 +7,7 @@ import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_state.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/wishlist/view/widgets/wishlist_view_body.dart';
+import 'package:commerce_app/features/wishlist/view/widgets/wishlist_shimmer.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
@@ -35,7 +36,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       body: BlocBuilder<WishlistCubit, WishlistState>(
         builder: (context, state) {
           if (state is WishlistLoading) {
-            return const AppLoadingIndicator();
+            return const  WishListShimmer();
           } else if (state is WishlistSuccess) {
             return WishlistViewBody(wishlistItems: state.wishlistItems);
           } else if (state is WishlistError) {

@@ -8,6 +8,7 @@ import 'package:commerce_app/features/auth/view/screens/forgot_password/reset_pa
 import 'package:commerce_app/config/routing/routes_enums.dart';
 import 'package:commerce_app/core/utils/widgets/navigation/main_layout.dart';
 
+import 'package:commerce_app/features/cart/view/screens/cart_screen.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/features/product_details/view/screens/product_details_screen.dart';
 import 'package:commerce_app/features/reviews/view/screens/reviews_screen.dart';
@@ -59,6 +60,11 @@ class AppRouter {
           final product = state.extra as ProductData;
           return ReviewsScreen(product: product);
         },
+      ),
+
+      GoRoute(
+        path: AppRoutes.cart.path,
+        builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
         path: AppRoutes.home.path,

@@ -11,6 +11,7 @@ import 'package:commerce_app/features/product_details/view/widgets/product_info_
 import 'package:commerce_app/features/product_details/view/widgets/product_attributes_section.dart';
 import 'package:commerce_app/features/product_details/view/widgets/sticky_bottom_action_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
+import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:toastification/toastification.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -24,6 +25,7 @@ class ProductDetailsScreen extends StatelessWidget {
       child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
         listener: (context, state) {
           if (state is AddToCartSuccess) {
+            context.read<CartCubit>().getCart();
             AppToast.show(context, message: state.message, type: ToastificationType.success);
           } else if (state is AddToCartError) {
             AppToast.show(context, message: state.message, type: ToastificationType.error);
@@ -77,6 +79,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
+
           );
         },
       ),

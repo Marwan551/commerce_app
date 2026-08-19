@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
@@ -21,7 +22,7 @@ class ProductInfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            product.title ?? '',
+            product.title ?? 'N/A',
             style: theme.textTheme.displayMedium,
           ),
           const SizedBox(height: 12),
@@ -42,11 +43,11 @@ class ProductInfoSection extends StatelessWidget {
                   ),
 
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 8),
                 Text(
                   '(${product.ratingsQuantity ?? 0} reviews)',
                   style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.secondary,
+                    color: AppColors.grey707070,
                   ),
                 ),
               ],

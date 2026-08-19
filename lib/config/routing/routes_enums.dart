@@ -7,6 +7,7 @@ enum AppRoutes {
   resetPassword('/reset-password'),
   productDetails('/product-details'),
   reviews('/reviews'),
+  cart('/cart'),
   splash('/splash');
 
   final String path;

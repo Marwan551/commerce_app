@@ -6,13 +6,14 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final Widget? leadingIcon;
-
+  final Widget? trailingIcon;
   const CustomButton({
     super.key,
     required this.text,
     this.onPressed,
     this.isLoading = false,
     this.leadingIcon,
+    this.trailingIcon,
   });
 
   @override
@@ -42,6 +43,10 @@ class CustomButton extends StatelessWidget {
                     const SizedBox(width: 8),
                   ],
                   Text(text),
+                  if (trailingIcon != null) ...[
+                    const SizedBox(width: 8),
+                    trailingIcon!,
+                  ],
                 ],
               ),
       ),

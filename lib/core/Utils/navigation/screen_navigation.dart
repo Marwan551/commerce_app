@@ -37,4 +37,8 @@ class ScreenNavigation {
   static void navigateToReviews(ProductData product) {
     AppRouter.router.push(AppRoutes.reviews.path, extra: product);
   }
+
+  static void navigateToCart() {
+    AppRouter.router.push(AppRoutes.cart.path);
+  }
 }

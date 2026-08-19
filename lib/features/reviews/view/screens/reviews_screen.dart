@@ -13,6 +13,7 @@ import 'package:commerce_app/features/reviews/controllers/cubit/reviews_state.da
 import 'package:commerce_app/features/reviews/view/widgets/overall_rating_section.dart';
 import 'package:commerce_app/features/reviews/view/widgets/ratings_breakdown_list.dart';
 import 'package:commerce_app/features/reviews/view/widgets/review_item_widget.dart';
+import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:toastification/toastification.dart';
 
 class ReviewsScreen extends StatelessWidget {
@@ -41,6 +42,7 @@ class ReviewsScreen extends StatelessWidget {
         body: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
           listener: (context, state) {
             if (state is AddToCartSuccess) {
+              context.read<CartCubit>().getCart();
               AppToast.show(context,
                   message: state.message, type: ToastificationType.success);
             } else if (state is AddToCartError) {

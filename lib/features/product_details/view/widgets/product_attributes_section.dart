@@ -14,13 +14,17 @@ class ProductAttributesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 12),
-          Text('Category', style: theme.textTheme.headlineMedium),
-          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Text('Category', style: theme.textTheme.headlineMedium),
+          ),
           _attributeChip(context, product.category?.name ?? 'N/A'),
-          const SizedBox(height: 24),
-          Text('Brand', style: theme.textTheme.headlineMedium),
-          const SizedBox(height: 12),
+
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 24,bottom: 12),
+            child: Text('Brand', style: theme.textTheme.headlineMedium),
+          ),
+
           _attributeChip(context, product.brand?.name ?? 'N/A'),
         ],
       ),

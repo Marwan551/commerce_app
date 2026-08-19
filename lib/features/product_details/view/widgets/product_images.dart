@@ -16,6 +16,7 @@ class ProductImagesSlider extends StatefulWidget {
 }
 
 class _ProductImagesSliderState extends State<ProductImagesSlider> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
     final bool isFavorite = context.watch<WishlistCubit>().isFavorite(widget.product.id!);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
       child: Stack(
         children: [
           ClipRRect(
@@ -33,6 +34,11 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
               height: 400,
               child: PageView.builder(
                 itemCount: images.length,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
                 itemBuilder: (context, index) {
                   return CachedNetworkImage(
                     imageUrl: images[index],
@@ -69,15 +75,34 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
                   isFavorite
                       ? 'assets/images/imgs/red_heart.svg'
                       : 'assets/images/imgs/Heart.svg',
-                  colorFilter: isFavorite
-                      ? null
-                      : ColorFilter.mode(theme.colorScheme.primary, BlendMode.srcIn),
                   width: 22,
                   height: 22,
                 ),
               ),
             ),
           ),
+          if (images.length > 1)
+            Positioned(
+              bottom: 24,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: images.asMap().entries.map((entry) {
+                  return Container(
+                    width: 8.0,
+                    height: 8.0,
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: theme.colorScheme.primary.withAlpha(
+                        _currentIndex == entry.key ? 255 : 50,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
         ],
       ),
     );
