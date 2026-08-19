@@ -9,22 +9,26 @@ import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 
 Widget buildCheckoutSection(BuildContext context) {
   return Container(
-    padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+    padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
     color: AppColors.whiteFFFFFF,
     child: Row(
       children: [
         GestureDetector(
           onTap: () => context.read<CartCubit>().clearCart(),
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.redFFED1010.withAlpha(25),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Assets.images.imgs.trash.svg(
-              width: 25,
-              height: 25,
-            ),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Assets.images.imgs.trash.svg(
+                  width: 25,
+                  height: 22,
+                ),
+              ),
+            Text('Clear Cart',style: TextStyle(color: AppColors.redFFED1010),)
+            ],
           ),
         ),
         const SizedBox(width: 16),

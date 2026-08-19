@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
+// ignore: unused_import
 import 'package:commerce_app/core/utils/widgets/loading/app_loading_indicator.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_state.dart';

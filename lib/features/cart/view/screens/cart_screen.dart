@@ -1,5 +1,3 @@
-import 'package:commerce_app/config/routing/app_router.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_view_body.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_shimmer_loading.dart';
 import 'package:toastification/toastification.dart';
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
 
 class CartScreen extends StatefulWidget {
