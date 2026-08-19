@@ -7,7 +7,6 @@ import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:commerce_app/features/cart/view/screens/cart_screen.dart';
 import 'package:commerce_app/features/wishlist/view/screens/wishlist_screen.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
