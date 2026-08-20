@@ -37,7 +37,6 @@ class ProductAttributesSection extends StatelessWidget {
       margin: const EdgeInsets.only(right: 12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: isSelected ? theme.colorScheme.primary : theme.colorScheme.surface,
         border: Border.all(color: theme.colorScheme.secondary),
         borderRadius: BorderRadius.circular(8),
       ),
