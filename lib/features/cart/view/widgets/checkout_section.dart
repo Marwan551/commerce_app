@@ -9,7 +9,7 @@ import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 
 Widget buildCheckoutSection(BuildContext context) {
   return Container(
-    padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 12),
     color: AppColors.whiteFFFFFF,
     child: Row(
       children: [

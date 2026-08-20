@@ -99,8 +99,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                const SizedBox(height: 12),
+                Padding(padding: EdgeInsetsDirectional.only(top: 16)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -118,7 +117,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       svg: Assets.images.imgs.minus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) - 1),
                     ),
-                    const SizedBox(width: 10),
+                    Padding(padding: EdgeInsetsDirectional.only(start: 10)),
                     SizedBox(
                       width: 35,
                       child: TextField(
@@ -142,7 +141,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    Padding(padding: EdgeInsetsDirectional.only(start: 10)),
                     _quantityButton(
                       svg: Assets.images.imgs.plus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) + 1),
