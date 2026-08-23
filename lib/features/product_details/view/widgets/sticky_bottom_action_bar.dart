@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 
 class StickyBottomActionBar extends StatelessWidget {
@@ -22,7 +22,7 @@ class StickyBottomActionBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       decoration: BoxDecoration(
         color: AppColors.whiteFFFFFF,
-        border: Border(top: BorderSide(color:AppColors.greyFFE6E6E6)),
+        border: Border(top: BorderSide(color: AppColors.greyFFE6E6E6)),
       ),
       child: Row(
         children: [
@@ -32,7 +32,7 @@ class StickyBottomActionBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Price', 
+                  'price'.tr(), 
                   style: theme.textTheme.bodyLarge?.copyWith(color: AppColors.grey707070),
                 ),
                 Text(
@@ -45,20 +45,10 @@ class StickyBottomActionBar extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CustomButton(
-              text: 'Add to Cart',
+              text: 'add_to_cart'.tr(),
               isLoading: isAddingToCart,
               onPressed: onAddToCart,
-              leadingIcon: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: SvgPicture.asset(
-                  'assets/images/imgs/bag.svg',
-                  width: 20,
-                  height: 20,
-                ),
-              ),
+              leadingIcon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 20),
             ),
           ),
         ],

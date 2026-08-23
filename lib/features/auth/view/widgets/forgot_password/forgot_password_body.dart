@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
@@ -20,18 +21,18 @@ class ForgotPasswordBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Forgot password', style: theme.textTheme.displayMedium),
+            Text('forgot_password'.tr(), style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
             Text(
-              'Enter your email for the verification process. We will send a 6-digit code to your email.',
+              'forgot_password_msg'.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.secondary.withAlpha(200),
               ),
             ),
             const SizedBox(height: 32),
             CustomTextField(
-              labelText: 'Email',
-              hintText: 'Enter your email',
+              labelText: 'email'.tr(),
+              hintText: 'email_hint'.tr(),
               controller: cubit.emailController,
               keyboardType: TextInputType.emailAddress,
               validator: AppValidator.validateEmail,
@@ -43,7 +44,7 @@ class ForgotPasswordBody extends StatelessWidget {
             BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
               builder: (context, state) {
                 return CustomButton(
-                  text: 'Send Code',
+                  text: 'send_code'.tr(),
                   isLoading: state is ForgotPasswordLoading,
                   onPressed: () {
                     cubit.forgotPassword();

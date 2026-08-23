@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'custom_search_bar.dart';
@@ -52,7 +52,7 @@ class HomeViewBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(AppStrings.discover, style: theme.textTheme.displayLarge),
+              Text('discover'.tr(), style: theme.textTheme.displayLarge),
             ],
           ),
         ),
@@ -70,7 +70,7 @@ class HomeViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
-                Text(AppStrings.categories, style: theme.textTheme.headlineMedium),
+                Text('categories'.tr(), style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
                 CategoryListView(
                   categories: categories,
@@ -78,7 +78,7 @@ class HomeViewBody extends StatelessWidget {
                   onCategorySelected: onCategorySelected,
                 ),
                 const SizedBox(height: 24),
-                Text(AppStrings.recentProducts, style: theme.textTheme.headlineMedium),
+                Text('recent_products'.tr(), style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
                 if (isFetching)
                   _buildGridShimmer(context)

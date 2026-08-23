@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 
@@ -16,13 +17,13 @@ class ProductAttributesSection extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Text('Category', style: theme.textTheme.headlineMedium),
+            child: Text('category'.tr(), style: theme.textTheme.headlineMedium),
           ),
           _attributeChip(context, product.category?.name ?? 'N/A'),
 
           Padding(
-            padding: const EdgeInsetsDirectional.only(top: 24,bottom: 12),
-            child: Text('Brand', style: theme.textTheme.headlineMedium),
+            padding: const EdgeInsetsDirectional.only(top: 24, bottom: 12),
+            child: Text('brand'.tr(), style: theme.textTheme.headlineMedium),
           ),
 
           _attributeChip(context, product.brand?.name ?? 'N/A'),

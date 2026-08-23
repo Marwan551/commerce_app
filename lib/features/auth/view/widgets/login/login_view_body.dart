@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
@@ -22,16 +23,16 @@ class LoginViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Login', style: theme.textTheme.displayMedium),
+            Text('login'.tr(), style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
-            Text('Welcome back! Please login to your account.',
+            Text('welcome_back'.tr(),
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.secondary.withAlpha(200),
                 )),
             const SizedBox(height: 32),
             CustomTextField(
-              labelText: 'Email',
-              hintText: 'Enter your email address',
+              labelText: 'email'.tr(),
+              hintText: 'email_hint'.tr(),
               controller: cubit.emailController,
               keyboardType: TextInputType.emailAddress,
               validator: AppValidator.validateEmail,
@@ -39,8 +40,8 @@ class LoginViewBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              labelText: 'Password',
-              hintText: 'Enter your password',
+              labelText: 'password'.tr(),
+              hintText: 'password_hint'.tr(),
               controller: cubit.passwordController,
               isPassword: true,
               validator: AppValidator.validatePassword,
@@ -50,7 +51,7 @@ class LoginViewBody extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: CustomTextButton(
-                text: 'Forgot Password?',
+                text: 'forgot_password_q'.tr(),
                 onPressed: () => AuthNavigation.navigateToForgotPassword(),
                 textStyle: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.primary,
@@ -61,7 +62,7 @@ class LoginViewBody extends StatelessWidget {
             BlocBuilder<LoginCubit, LoginState>(
               builder: (context, state) {
                 return CustomButton(
-                  text: 'Login',
+                  text: 'login'.tr(),
                   isLoading: state is LoginLoading,
                   onPressed: () => cubit.login(),
                 );
@@ -72,9 +73,9 @@ class LoginViewBody extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don\'t have an account?', style: theme.textTheme.bodyLarge),
+                  Text('dont_have_account'.tr(), style: theme.textTheme.bodyLarge),
                   CustomTextButton(
-                    text: 'Join',
+                    text: 'join'.tr(),
                     onPressed: () => AuthNavigation.navigateToRegister(),
                     textStyle: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.primary,

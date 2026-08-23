@@ -1,7 +1,7 @@
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
+import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
 class ProductInfoSection extends StatelessWidget {
   final ProductData product;
@@ -30,22 +30,18 @@ class ProductInfoSection extends StatelessWidget {
             onTap: onReviewsTap,
             child: Row(
               children: [
-                SvgPicture.asset(
-                  'assets/images/imgs/star_gold.svg',
-                  width: 24,
-                  height: 24,
-                ),
+                const Icon(Icons.star, color: Colors.amber, size: 24),
                 const SizedBox(width: 8),
                 Text(
                   '${product.ratingsAverage?.toStringAsFixed(1) ?? "0.0"}/5',
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline,
                   ),
-
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '(${product.ratingsQuantity ?? 0} reviews)',
+                  '(${product.ratingsQuantity ?? 0} ${"reviews".tr()})',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: AppColors.grey707070,
                   ),

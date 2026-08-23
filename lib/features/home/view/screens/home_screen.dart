@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
-import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/features/home/controllers/cubit/home_cubit.dart';
 import 'package:commerce_app/features/home/controllers/cubit/home_state.dart';
 import 'package:commerce_app/features/home/view/widgets/home_view_body.dart';
@@ -65,12 +65,12 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.error_outline, size: 80, color: Colors.red),
                         const SizedBox(height: 16),
-                        const Text(AppStrings.somethingWentWrong),
+                        Text('somethingWentWrong'.tr()),
                         const SizedBox(height: 24),
                         ElevatedButton(
                           onPressed: () => cubit.getHomeData(),
                           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                          child: const Text(AppStrings.retry, style: TextStyle(color: Colors.white)),
+                          child: Text('retry'.tr(), style: const TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),

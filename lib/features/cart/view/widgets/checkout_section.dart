@@ -1,11 +1,11 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
-
 
 Widget buildCheckoutSection(BuildContext context) {
   return Container(
@@ -16,30 +16,25 @@ Widget buildCheckoutSection(BuildContext context) {
         GestureDetector(
           onTap: () => context.read<CartCubit>().clearCart(),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Assets.images.imgs.trash.svg(
-                  width: 25,
-                  height: 22,
-                ),
-              ),
-            Text('Clear Cart',style: TextStyle(color: AppColors.redFFED1010),)
+          Assets.images.imgs.trash.svg(
+            width: 22,
+            height: 22,
+          ),
+              const SizedBox(height: 4),
+              Text(
+                'clear_cart'.tr(),
+                style: const TextStyle(color: AppColors.redFFED1010, fontSize: 12),
+              )
             ],
           ),
         ),
         const SizedBox(width: 16),
         Expanded(
           child: CustomButton(
-            text: 'Go To Checkout',
-            trailingIcon: const Icon(
-              Icons.arrow_forward,
-              color: AppColors.whiteFFFFFF,
-              size: 20,
-            ),
+            text: 'go_to_checkout'.tr(),
+            trailingIcon: Assets.images.imgs.arrowRight.svg(),
             onPressed: () {
               ScreenNavigation.navigateToHome();
             },

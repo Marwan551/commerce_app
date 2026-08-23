@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
@@ -20,7 +21,7 @@ class LoginScreen extends StatelessWidget {
           if (state is LoginSuccess) {
             AppToast.show(
               context,
-              message: 'Login Successful',
+              message: 'login_success'.tr(),
               type: ToastificationType.success,
             );
             ScreenNavigation.navigateToHome();

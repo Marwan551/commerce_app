@@ -8,6 +8,8 @@ import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_view_body.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_shimmer_loading.dart';
 import 'package:toastification/toastification.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 
 class CartScreen extends StatefulWidget {
@@ -28,7 +30,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'My Cart',
+        title: context.tr('my_cart'),
         showBackButton: true,
         onBackTap: () {
           ScreenNavigation.navigateToHome();

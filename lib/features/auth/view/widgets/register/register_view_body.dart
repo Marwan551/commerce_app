@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
@@ -22,24 +23,24 @@ class RegisterViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Create an account', style: theme.textTheme.displayMedium),
+            Text('create_account'.tr(), style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
-            Text('Let\'s create your account.',
+            Text('lets_create'.tr(),
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.secondary.withAlpha(200),
                 )),
             const SizedBox(height: 32),
             CustomTextField(
-              labelText: 'Full Name',
-              hintText: 'Enter your full name',
+              labelText: 'full_name'.tr(),
+              hintText: 'full_name_hint'.tr(),
               controller: cubit.nameController,
               validator: AppValidator.validateFullName,
               onChanged: (_) => cubit.formKey.currentState?.validate(),
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              labelText: 'Email',
-              hintText: 'Enter your email address',
+              labelText: 'email'.tr(),
+              hintText: 'email_hint'.tr(),
               controller: cubit.emailController,
               keyboardType: TextInputType.emailAddress,
               validator: AppValidator.validateEmail,
@@ -47,8 +48,8 @@ class RegisterViewBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              labelText: 'Password',
-              hintText: 'Enter your password',
+              labelText: 'password'.tr(),
+              hintText: 'password_hint'.tr(),
               controller: cubit.passwordController,
               isPassword: true,
               validator: AppValidator.validatePassword,
@@ -56,8 +57,8 @@ class RegisterViewBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              labelText: 'Confirm Password',
-              hintText: 'Re-enter your password',
+              labelText: 'confirm_password'.tr(),
+              hintText: 'confirm_password_hint'.tr(),
               controller: cubit.rePasswordController,
               isPassword: true,
               validator: (value) => AppValidator.validateConfirmPassword(
@@ -70,7 +71,7 @@ class RegisterViewBody extends StatelessWidget {
             BlocBuilder<RegisterCubit, RegisterState>(
               builder: (context, state) {
                 return CustomButton(
-                  text: 'Create an Account',
+                  text: 'create_account'.tr(),
                   isLoading: state is RegisterLoading,
                   onPressed: () => cubit.register(),
                 );
@@ -79,7 +80,7 @@ class RegisterViewBody extends StatelessWidget {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                'By signing up you agree to our Terms, Privacy Policy, and Cookie Use',
+                'by_signing_up'.tr(),
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.secondary.withAlpha(200),
@@ -91,9 +92,9 @@ class RegisterViewBody extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Already have an account?', style: theme.textTheme.bodyLarge),
+                  Text('already_have_account'.tr(), style: theme.textTheme.bodyLarge),
                   CustomTextButton(
-                    text: 'Log In',
+                    text: 'log_in'.tr(),
                     onPressed: () => AuthNavigation.navigateToLogin(),
                     textStyle: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.primary,

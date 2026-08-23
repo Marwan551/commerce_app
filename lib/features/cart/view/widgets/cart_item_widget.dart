@@ -94,7 +94,6 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       child: Assets.images.imgs.trash.svg(
                         width: 22,
                         height: 22,
-                        colorFilter: const ColorFilter.mode(AppColors.redFFED1010, BlendMode.srcIn),
                       ),
                     ),
                   ],

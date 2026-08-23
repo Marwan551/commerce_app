@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
@@ -16,7 +17,6 @@ class OverallRatingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Row(
-
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -35,7 +35,6 @@ class OverallRatingSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                spacing: 5,
                 children: List.generate(5, (index) {
                   final isFilled = index < averageRating.round();
                   return Padding(
@@ -52,7 +51,7 @@ class OverallRatingSection extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                '$totalReviews Ratings',
+                '$totalReviews ${"ratings".tr()}',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: AppColors.grey707070,
                   fontSize: 20,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
@@ -20,18 +21,18 @@ class ResetPasswordViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Reset Password', style: theme.textTheme.displayMedium),
+            Text('reset_password'.tr(), style: theme.textTheme.displayMedium),
             const SizedBox(height: 8),
             Text(
-              'Set the new password for your account so you can login and access all the features.',
+              'reset_password_msg'.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.secondary.withAlpha(200),
               ),
             ),
             const SizedBox(height: 16),
             CustomTextField(
-              labelText: 'Password',
-              hintText: 'Enter new password',
+              labelText: 'password'.tr(),
+              hintText: 'new_password_hint'.tr(),
               controller: cubit.passwordController,
               isPassword: true,
               validator: AppValidator.validatePassword,
@@ -41,8 +42,8 @@ class ResetPasswordViewBody extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             CustomTextField(
-              labelText: 'Confirm Password',
-              hintText: 'Re-enter new password',
+              labelText: 'confirm_password'.tr(),
+              hintText: 'confirm_password_hint'.tr(),
               controller: cubit.confirmPasswordController,
               isPassword: true,
               validator: (value) => AppValidator.validateConfirmPassword(
@@ -57,7 +58,7 @@ class ResetPasswordViewBody extends StatelessWidget {
             BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
               builder: (context, state) {
                 return CustomButton(
-                  text: 'Continue',
+                  text: 'continue_btn'.tr(),
                   isLoading: state is ResetPasswordLoading,
                   onPressed: () {
                     cubit.resetPassword();

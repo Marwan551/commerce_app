@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
@@ -24,9 +25,9 @@ class ResetPasswordScreen extends StatelessWidget {
               context: context,
               barrierDismissible: false,
               builder: (context) => SuccessDialog(
-                title: 'Password Changed!',
-                message: 'You can now use your new password to login to your account.',
-                buttonText: 'Login',
+                title: 'password_changed'.tr(),
+                message: 'password_changed_msg'.tr(),
+                buttonText: 'login'.tr(),
                 onButtonPressed: () {
                   Navigator.pop(context);
                   AuthNavigation.navigateToLogin();

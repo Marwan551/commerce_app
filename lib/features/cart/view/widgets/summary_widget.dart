@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
@@ -13,18 +14,18 @@ Widget buildSummarySection(BuildContext context, num totalCartPrice) {
     ),
     child: Column(
       children: [
-        _summaryRow('Sub-total', '\$ $totalCartPrice', theme),
+        _summaryRow('subtotal'.tr(), '\$ $totalCartPrice', theme),
         const SizedBox(height: 8),
-        _summaryRow('VAT (%)', '\$ $vat', theme),
+        _summaryRow('vat'.tr(), '\$ $vat', theme),
         const SizedBox(height: 8),
-        _summaryRow('Shipping fee', '\$ $shipping', theme),
+        _summaryRow('shipping'.tr(), '\$ $shipping', theme),
         const SizedBox(height: 16),
-        const Divider(thickness: 1,color: AppColors.greyFFE6E6E6,),
+        const Divider(thickness: 1, color: AppColors.greyFFE6E6E6),
         const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Total', style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            Text('total'.tr(), style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
             Text('\$ ${totalCartPrice + vat + shipping}',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,

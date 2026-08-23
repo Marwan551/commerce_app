@@ -1,9 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
-
-import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final String initialSortBy;
@@ -36,11 +33,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(24),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      decoration: BoxDecoration(
+        color: theme.scaffoldBackgroundColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,7 +47,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(AppStrings.filter, style: AppTextStyles.bold20),
+              Text('filter'.tr(), style: theme.textTheme.headlineLarge),
               IconButton(
                 icon: const Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
@@ -57,21 +55,21 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             ],
           ),
           const SizedBox(height: 24),
-          const Text(AppStrings.sortBy, style: AppTextStyles.bold16),
+          Text('sortBy'.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
-          _sortOption(AppStrings.relevance),
-          _sortOption(AppStrings.priceLowHigh),
-          _sortOption(AppStrings.priceHighLow),
+          _sortOption('relevance'.tr()),
+          _sortOption('priceLowHigh'.tr()),
+          _sortOption('priceHighLow'.tr()),
           const SizedBox(height: 24),
-          const Text(AppStrings.priceRange, style: AppTextStyles.bold16),
+          Text('priceRange'.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
           RangeSlider(
             values: _currentRangeValues,
             min: 0,
             max: 10000,
             divisions: 100,
-            activeColor: AppColors.black1A1A1A,
-            inactiveColor: AppColors.greyB3B3B3,
+            activeColor: theme.colorScheme.primary,
+            inactiveColor: theme.colorScheme.secondary,
             labels: RangeLabels(
               '\$${_currentRangeValues.start.round()}',
               '\$${_currentRangeValues.end.round()}',
@@ -84,7 +82,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           ),
           const SizedBox(height: 32),
           CustomButton(
-            text: AppStrings.applyFilter,
+            text: 'applyFilter'.tr(),
             onPressed: () {
               widget.onApply(
                 _selectedSortBy,
@@ -101,10 +99,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 
   Widget _sortOption(String title) {
     return RadioListTile<String>(
-      title: Text(title, style: AppTextStyles.regular16),
+      title: Text(title, style: Theme.of(context).textTheme.bodyLarge),
       value: title,
       groupValue: _selectedSortBy,
-      activeColor: AppColors.black1A1A1A,
+      activeColor: Theme.of(context).colorScheme.primary,
       contentPadding: EdgeInsets.zero,
       onChanged: (value) {
         setState(() {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
@@ -28,10 +29,10 @@ class VerifyCodeBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Enter 6 Digit Code', style: theme.textTheme.displayMedium),
+          Text('enter_code'.tr(), style: theme.textTheme.displayMedium),
           const SizedBox(height: 8),
           Text(
-            'Enter the 6 digit code that you received on your email.',
+            'enter_code_msg'.tr(),
             style: theme.textTheme.bodyLarge?.copyWith(
               color: theme.colorScheme.secondary.withAlpha(200),
             ),
@@ -57,7 +58,7 @@ class VerifyCodeBody extends StatelessWidget {
               onPressed: () {
               },
               child: Text(
-                'Resend code',
+                'resend_code'.tr(),
                 style: theme.textTheme.bodyLarge?.copyWith(
                   decoration: TextDecoration.underline,
                   color: theme.colorScheme.primary,
@@ -69,7 +70,7 @@ class VerifyCodeBody extends StatelessWidget {
           BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
             builder: (context, state) {
               return CustomButton(
-                text: 'Continue',
+                text: 'continue_btn'.tr(),
                 isLoading: state is VerifyCodeLoading,
                 onPressed: () {
                   cubit.verifyResetCode();

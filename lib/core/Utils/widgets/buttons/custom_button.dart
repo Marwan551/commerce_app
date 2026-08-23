@@ -7,6 +7,8 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
   final Widget? leadingIcon;
   final Widget? trailingIcon;
+  final Color? backgroundColor;
+
   const CustomButton({
     super.key,
     required this.text,
@@ -14,6 +16,7 @@ class CustomButton extends StatelessWidget {
     this.isLoading = false,
     this.leadingIcon,
     this.trailingIcon,
+    this.backgroundColor,
   });
 
   @override
@@ -28,7 +31,7 @@ class CustomButton extends StatelessWidget {
                 if (states.contains(WidgetState.disabled)) {
                   return Theme.of(context).colorScheme.secondary;
                 }
-                return Theme.of(context).colorScheme.primary;
+                return backgroundColor ?? Theme.of(context).colorScheme.primary;
               }),
             ),
         child: isLoading

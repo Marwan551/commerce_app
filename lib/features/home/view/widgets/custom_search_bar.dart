@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final void Function(String) onSearchChanged;
@@ -22,7 +21,7 @@ class CustomSearchBar extends StatelessWidget {
           child: TextField(
             onChanged: onSearchChanged,
             decoration: InputDecoration(
-              hintText: AppStrings.searchHint,
+              hintText: 'search_hint'.tr(),
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.bodyMedium?.color?.withAlpha(150),
               ),

@@ -1,8 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
-import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 
 class WishlistEmptyState extends StatelessWidget {
   const WishlistEmptyState({super.key});
@@ -21,15 +20,15 @@ class WishlistEmptyState extends StatelessWidget {
               height: 64,
             ),
             const SizedBox(height: 24),
-            const Text(
-              AppStrings.noSavedItems,
-              style: AppTextStyles.bold24,
+            Text(
+              'empty_wishlist_msg'.tr(),
+              style: Theme.of(context).textTheme.displaySmall,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
-              AppStrings.noSavedItemsMsg,
-              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
+              'empty_wishlist_desc'.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.grey707070),
               textAlign: TextAlign.center,
             ),
           ],

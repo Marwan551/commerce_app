@@ -45,4 +45,9 @@ class WishlistCubit extends Cubit<WishlistState> {
      final List<Map<String, dynamic>> results = await SqfliteHelper.query('wishlist');
      _wishlistIds = results.map((e) => e['productId'] as String).toList();
   }
+
+  void resetState() {
+    _wishlistIds = [];
+    emit(WishlistInitial());
+  }
 }

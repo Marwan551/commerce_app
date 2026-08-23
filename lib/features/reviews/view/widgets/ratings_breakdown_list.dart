@@ -9,6 +9,7 @@ class RatingsBreakdownList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [5, 4, 3, 2, 1].map((stars) {
         return Padding(
@@ -16,9 +17,8 @@ class RatingsBreakdownList extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                width: 120,
+                width: 100,
                 child: Row(
-                  spacing: 5,
                   mainAxisSize: MainAxisSize.min,
                   children: List.generate(5, (index) {
                     final isFilled = index < stars;
@@ -42,8 +42,8 @@ class RatingsBreakdownList extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: percentages[stars] ?? 0.0,
                     backgroundColor: AppColors.greyFFE6E6E6,
-                    color: AppColors.black1A1A1A,
-                    minHeight: 5,
+                    color: theme.colorScheme.primary,
+                    minHeight: 8,
                   ),
                 ),
               ),

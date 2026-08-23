@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
@@ -20,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
           if (state is RegisterSuccess) {
             AppToast.show(
               context,
-              message: 'Registration Successful',
+              message: 'registration_success'.tr(),
               type: ToastificationType.success,
             );
             AuthNavigation.navigateToLogin();

@@ -26,6 +26,19 @@ class $AssetsImagesGen {
   $AssetsImagesImgsGen get imgs => const $AssetsImagesImgsGen();
 }
 
+class $AssetsTranslationsGen {
+  const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/ar.json
+  String get ar => 'assets/translations/ar.json';
+
+  /// File path: assets/translations/en.json
+  String get en => 'assets/translations/en.json';
+
+  /// List of all assets
+  List<String> get values => [ar, en];
+}
+
 class $AssetsImagesAnimationsGen {
   const $AssetsImagesAnimationsGen();
 
@@ -57,6 +70,10 @@ class $AssetsImagesImgsGen {
   /// File path: assets/images/imgs/arrow.svg
   SvgGenImage get arrow => const SvgGenImage('assets/images/imgs/arrow.svg');
 
+  /// File path: assets/images/imgs/arrow_right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/images/imgs/arrow_right.svg');
+
   /// File path: assets/images/imgs/bag.svg
   SvgGenImage get bag => const SvgGenImage('assets/images/imgs/bag.svg');
 
@@ -80,9 +97,16 @@ class $AssetsImagesImgsGen {
   SvgGenImage get homeIcon =>
       const SvgGenImage('assets/images/imgs/home_icon.svg');
 
+  /// File path: assets/images/imgs/language.svg
+  SvgGenImage get language =>
+      const SvgGenImage('assets/images/imgs/language.svg');
+
   /// File path: assets/images/imgs/line_saved.svg
   SvgGenImage get lineSaved =>
       const SvgGenImage('assets/images/imgs/line_saved.svg');
+
+  /// File path: assets/images/imgs/logout.svg
+  SvgGenImage get logout => const SvgGenImage('assets/images/imgs/logout.svg');
 
   /// File path: assets/images/imgs/minus.svg
   SvgGenImage get minus => const SvgGenImage('assets/images/imgs/minus.svg');
@@ -113,6 +137,10 @@ class $AssetsImagesImgsGen {
   /// File path: assets/images/imgs/trash.svg
   SvgGenImage get trash => const SvgGenImage('assets/images/imgs/trash.svg');
 
+  /// File path: assets/images/imgs/warning.svg
+  SvgGenImage get warning =>
+      const SvgGenImage('assets/images/imgs/warning.svg');
+
   /// File path: assets/images/imgs/waves.svg
   SvgGenImage get waves => const SvgGenImage('assets/images/imgs/waves.svg');
 
@@ -123,13 +151,16 @@ class $AssetsImagesImgsGen {
     accountIcon,
     appLogo,
     arrow,
+    arrowRight,
     bag,
     cartEmpty,
     cartIcon,
     checkDuotone,
     emptyWishlist,
     homeIcon,
+    language,
     lineSaved,
+    logout,
     minus,
     plus,
     redHeart,
@@ -138,12 +169,14 @@ class $AssetsImagesImgsGen {
     starGold,
     starGrey,
     trash,
+    warning,
     waves,
   ];
 }
 
 abstract final class Assets {
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 
 class SvgGenImage {

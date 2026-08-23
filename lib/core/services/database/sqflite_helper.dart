@@ -51,4 +51,8 @@ class SqfliteHelper {
     );
     return results.isNotEmpty;
   }
+
+  static Future<void> clear(String table) async {
+    await _database.delete(table);
+  }
 }

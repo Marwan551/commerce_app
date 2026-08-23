@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/app_date_formatter.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/reviews/models/review_model.dart';
@@ -17,18 +16,12 @@ class ReviewItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            spacing: 3,
             children: List.generate(5, (index) {
               final isFilled = index < (review.ratings ?? 0).round();
-              return Padding(
-                padding: const EdgeInsets.only(right: 4.0),
-                child: SvgPicture.asset(
-                  isFilled
-                      ? 'assets/images/imgs/star_gold.svg'
-                      : 'assets/images/imgs/star_grey.svg',
-                  width: 18,
-                  height: 18,
-                ),
+              return Icon(
+                isFilled ? Icons.star : Icons.star_border,
+                color: Colors.amber,
+                size: 20,
               );
             }),
           ),

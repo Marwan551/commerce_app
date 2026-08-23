@@ -86,4 +86,8 @@ class CartCubit extends Cubit<CartState> {
       emit(CartError(ApiErrorHandler.getMessage(e)));
     }
   }
+
+  void resetState() {
+    emit(CartInitial());
+  }
 }
