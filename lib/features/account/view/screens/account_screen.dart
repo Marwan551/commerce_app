@@ -1,13 +1,10 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
-import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:commerce_app/core/services/database/sqflite_helper.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/account/view/widgets/logout_dialog.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/account/view/widgets/build_option.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -19,8 +16,6 @@ class AccountScreen extends StatelessWidget {
       builder: (context) =>
           LogoutDialog(
             onLogout: () async {
-              await context.read<CartCubit>().clearCart();
-              await SqfliteHelper.clear('wishlist');
               if (context.mounted) {
                 Navigator.pop(context);
                 ScreenNavigation.navigateToLogin();

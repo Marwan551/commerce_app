@@ -92,15 +92,15 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     GestureDetector(
                       onTap: widget.onRemove,
                       child: Assets.images.imgs.trash.svg(
-                        width: 22,
-                        height: 22,
+                        width: 12.5,
+                        height: 13.75,
                       ),
                     ),
                   ],
                 ),
-                Padding(padding: EdgeInsetsDirectional.only(top: 16)),
+                Padding(padding: EdgeInsetsDirectional.only(top: 20)),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 60),
@@ -112,6 +112,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         ),
                       ),
                     ),
+                    Spacer(),
                     _quantityButton(
                       svg: Assets.images.imgs.minus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) - 1),
@@ -145,7 +146,6 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       svg: Assets.images.imgs.plus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) + 1),
                     ),
-
                   ],
                 ),
               ],

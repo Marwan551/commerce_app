@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
 Widget buildOption(
-    BuildContext context, {
-      required SvgGenImage svg,
-      required String title,
-      Widget? trailing,
-      Color? titleColor,
-      required VoidCallback onTap,
-    }) {
+  BuildContext context, {
+  required SvgGenImage svg,
+  required String title,
+  Widget? trailing,
+  EdgeInsetsGeometry? contentPadding,
+  Color? titleColor,
+  required VoidCallback onTap,
+}) {
   return ListTile(
     leading: svg.svg(width: 24, height: 24),
     title: Text(
@@ -19,6 +20,7 @@ Widget buildOption(
         fontWeight: FontWeight.w600,
       ),
     ),
+    contentPadding: contentPadding,
     trailing: trailing,
     onTap: onTap,
   );

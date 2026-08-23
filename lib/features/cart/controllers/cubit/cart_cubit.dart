@@ -75,10 +75,14 @@ class CartCubit extends Cubit<CartState> {
         token: token,
       );
       if (response.data['status'] == 'success') {
-        emit(CartSuccess(CartModel(
-          numOfCartItems: 0,
-          data: CartData(products: [], totalCartPrice: 0),
-        )));
+        emit(
+          CartSuccess(
+            CartModel(
+              numOfCartItems: 0,
+              data: CartData(products: [], totalCartPrice: 0),
+            ),
+          ),
+        );
       } else {
         getCart();
       }
