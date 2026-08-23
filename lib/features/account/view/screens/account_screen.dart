@@ -8,6 +8,7 @@ import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/account/view/widgets/logout_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:commerce_app/features/account/view/widgets/build_option.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -15,16 +16,17 @@ class AccountScreen extends StatelessWidget {
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => LogoutDialog(
-        onLogout: () async {
-          await context.read<CartCubit>().clearCart();
-          await SqfliteHelper.clear('wishlist');
-          if (context.mounted) {
-            Navigator.pop(context);
-            ScreenNavigation.navigateToLogin();
-          }
-        },
-      ),
+      builder: (context) =>
+          LogoutDialog(
+            onLogout: () async {
+              await context.read<CartCubit>().clearCart();
+              await SqfliteHelper.clear('wishlist');
+              if (context.mounted) {
+                Navigator.pop(context);
+                ScreenNavigation.navigateToLogin();
+              }
+            },
+          ),
     );
   }
 
@@ -42,7 +44,7 @@ class AccountScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 24),
-            _buildOption(
+            buildOption(
               context,
               svg: Assets.images.imgs.language,
               title: 'language'.tr(),
@@ -60,8 +62,11 @@ class AccountScreen extends StatelessWidget {
                 }
               },
             ),
-            const Divider(height: 0, color: AppColors.greyFFE6E6E6,indent: 30,endIndent: 30,),
-            _buildOption(
+            const Divider(height: 0,
+              color: AppColors.greyFFE6E6E6,
+              indent: 30,
+              endIndent: 30,),
+            buildOption(
               context,
               svg: Assets.images.imgs.logout,
               title: 'logout'.tr(),
@@ -71,28 +76,6 @@ class AccountScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildOption(
-    BuildContext context, {
-    required SvgGenImage svg,
-    required String title,
-    Widget? trailing,
-    Color? titleColor,
-    required VoidCallback onTap,
-  }) {
-    return ListTile(
-      leading: svg.svg(width: 24, height: 24),
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: titleColor ?? AppColors.black1A1A1A,
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-      trailing: trailing,
-      onTap: onTap,
     );
   }
 }
