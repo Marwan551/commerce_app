@@ -15,6 +15,8 @@ import 'package:commerce_app/features/reviews/view/widgets/ratings_breakdown_lis
 import 'package:commerce_app/features/reviews/view/widgets/review_item_widget.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:toastification/toastification.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class ReviewsScreen extends StatelessWidget {
   final ProductData product;
@@ -44,10 +46,10 @@ class ReviewsScreen extends StatelessWidget {
             if (state is AddToCartSuccess) {
               context.read<CartCubit>().getCart();
               AppToast.show(context,
-                  message: state.message, type: ToastificationType.success);
+                  message: state.message.tr(), type: ToastificationType.success);
             } else if (state is AddToCartError) {
               AppToast.show(context,
-                  message: state.message, type: ToastificationType.error);
+                  message: state.message.tr(), type: ToastificationType.error);
             }
           },
           builder: (context, detailsState) {

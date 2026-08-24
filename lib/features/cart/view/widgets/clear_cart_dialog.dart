@@ -4,17 +4,10 @@ import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 
-class LogoutDialog extends StatefulWidget {
-  final Future<void> Function() onLogout;
+class ClearCartDialog extends StatelessWidget {
+  final VoidCallback onClear;
 
-  const LogoutDialog({super.key, required this.onLogout});
-
-  @override
-  State<LogoutDialog> createState() => _LogoutDialogState();
-}
-
-class _LogoutDialogState extends State<LogoutDialog> {
-  bool _isLoading = false;
+  const ClearCartDialog({super.key, required this.onClear});
 
   @override
   Widget build(BuildContext context) {
@@ -29,37 +22,26 @@ class _LogoutDialogState extends State<LogoutDialog> {
             Assets.images.imgs.warning.svg(width: 80, height: 80),
             const SizedBox(height: 24),
             Text(
-              'logout_question'.tr(),
+              'clear_cart_question'.tr(),
               style: theme.textTheme.displayMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
-              'logout_confirm_msg'.tr(),
+              'clear_cart_confirm_msg'.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
-                color: AppColors.grey707070,
-                fontSize: 18,
-              ),
+                    color: AppColors.grey707070,
+                    fontSize: 18,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             CustomButton(
-              text: 'yes_logout'.tr(),
-              isLoading: _isLoading,
-              onPressed: () async {
-                setState(() {
-                  _isLoading = true;
-                });
-                await widget.onLogout();
-                if (mounted) {
-                  setState(() {
-                    _isLoading = false;
-                  });
-                }
-              },
+              text: 'yes_clear'.tr(),
+              onPressed: onClear,
               backgroundColor: AppColors.redFFED1010,
             ),
             const SizedBox(height: 12),
@@ -67,7 +49,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
               width: double.infinity,
               height: 50,
               child: OutlinedButton(
-                onPressed: _isLoading ? null : () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context),
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: AppColors.greyB3B3B3),
                   shape: RoundedRectangleBorder(

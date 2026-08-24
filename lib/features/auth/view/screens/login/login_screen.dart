@@ -24,11 +24,11 @@ class LoginScreen extends StatelessWidget {
               message: 'login_success'.tr(),
               type: ToastificationType.success,
             );
-            ScreenNavigation.navigateToHome();
+            ScreenNavigation.navigateToHome(context);
           } else if (state is LoginError) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.error,
             );
           }

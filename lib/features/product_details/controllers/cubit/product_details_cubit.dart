@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
@@ -36,7 +37,6 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       final response = await _apiService.postData(
         endpoint: Endpoints.cart,
         data: {'productId': productId},
-        token: token,
       );
       
       if (response.statusCode == 200 || response.statusCode == 201) {

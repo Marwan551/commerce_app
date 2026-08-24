@@ -1,12 +1,13 @@
+import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 
 class FilterBottomSheet extends StatefulWidget {
-  final String initialSortBy;
+  final ProductSortType initialSortBy;
   final double initialMinPrice;
   final double initialMaxPrice;
-  final void Function(String sortBy, double minPrice, double maxPrice) onApply;
+  final void Function(ProductSortType sortBy, double minPrice, double maxPrice) onApply;
 
   const FilterBottomSheet({
     super.key,
@@ -21,7 +22,7 @@ class FilterBottomSheet extends StatefulWidget {
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  late String _selectedSortBy;
+  late ProductSortType _selectedSortBy;
   late RangeValues _currentRangeValues;
 
   @override
@@ -57,9 +58,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           const SizedBox(height: 24),
           Text('sortBy'.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
-          _sortOption('relevance'.tr()),
-          _sortOption('priceLowHigh'.tr()),
-          _sortOption('priceHighLow'.tr()),
+          _sortOption('relevance'.tr(), ProductSortType.relevance),
+          _sortOption('priceLowHigh'.tr(), ProductSortType.priceLowToHigh),
+          _sortOption('priceHighLow'.tr(), ProductSortType.priceHighToLow),
           const SizedBox(height: 24),
           Text('priceRange'.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
@@ -97,10 +98,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     );
   }
 
-  Widget _sortOption(String title) {
-    return RadioListTile<String>(
+  Widget _sortOption(String title, ProductSortType value) {
+    return RadioListTile<ProductSortType>(
       title: Text(title, style: Theme.of(context).textTheme.bodyLarge),
-      value: title,
+      value: value,
       groupValue: _selectedSortBy,
       activeColor: Theme.of(context).colorScheme.primary,
       contentPadding: EdgeInsets.zero,

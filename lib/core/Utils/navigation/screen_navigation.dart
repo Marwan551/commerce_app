@@ -1,12 +1,15 @@
 import 'package:commerce_app/config/routing/app_router.dart';
 import 'package:commerce_app/config/routing/routes_enums.dart';
-
+import 'package:commerce_app/core/controllers/navigation_cubit/navigation_cubit.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenNavigation {
   ScreenNavigation._();
 
-  static void navigateToHome() {
+  static void navigateToHome(BuildContext context) {
+    context.read<NavigationCubit>().navigateToHome();
     AppRouter.router.go(AppRoutes.home.path);
   }
 
@@ -38,7 +41,13 @@ class ScreenNavigation {
     AppRouter.router.push(AppRoutes.reviews.path, extra: product);
   }
 
-  static void navigateToCart() {
-    AppRouter.router.push(AppRoutes.cart.path);
+  static void navigateToCart(BuildContext context) {
+    context.read<NavigationCubit>().navigateToCart();
+    AppRouter.router.go(AppRoutes.home.path);
+  }
+  
+  static void navigateToSaved(BuildContext context) {
+    context.read<NavigationCubit>().navigateToSaved();
+    AppRouter.router.go(AppRoutes.home.path);
   }
 }

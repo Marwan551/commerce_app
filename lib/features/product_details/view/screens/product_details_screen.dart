@@ -27,9 +27,9 @@ class ProductDetailsScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is AddToCartSuccess) {
             context.read<CartCubit>().getCart();
-            AppToast.show(context, message: state.message, type: ToastificationType.success);
+            AppToast.show(context, message: state.message.tr(), type: ToastificationType.success);
           } else if (state is AddToCartError) {
-            AppToast.show(context, message: state.message, type: ToastificationType.error);
+            AppToast.show(context, message: state.message.tr(), type: ToastificationType.error);
           }
         },
         builder: (context, state) {
@@ -59,6 +59,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           product: currentProduct,
                           onReviewsTap: () {
                             ScreenNavigation.navigateToReviews(currentProduct);
+
                           },
                         ),
                         const SizedBox(height: 24),

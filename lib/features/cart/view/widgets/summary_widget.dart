@@ -8,20 +8,20 @@ Widget buildSummarySection(BuildContext context, num totalCartPrice) {
   const double shipping = 0;
 
   return Container(
-    padding: const EdgeInsets.all(24),
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
     decoration: BoxDecoration(
       color: AppColors.whiteFFFFFF,
     ),
     child: Column(
       children: [
         _summaryRow('subtotal'.tr(), '\$ $totalCartPrice', theme),
-        const SizedBox(height: 8),
+        const Padding(padding: EdgeInsets.only(top: 8)),
         _summaryRow('vat'.tr(), '\$ $vat', theme),
-        const SizedBox(height: 8),
+        const Padding(padding: EdgeInsets.only(top: 8)),
         _summaryRow('shipping'.tr(), '\$ $shipping', theme),
-        const SizedBox(height: 16),
+        const Padding(padding: EdgeInsets.only(top: 16)),
         const Divider(thickness: 1, color: AppColors.greyFFE6E6E6),
-        const SizedBox(height: 16),
+        const Padding(padding: EdgeInsets.only(top: 16)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

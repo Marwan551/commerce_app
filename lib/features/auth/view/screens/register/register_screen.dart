@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
           } else if (state is RegisterError) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.error,
             );
           }

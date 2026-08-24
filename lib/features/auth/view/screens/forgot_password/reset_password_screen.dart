@@ -37,7 +37,7 @@ class ResetPasswordScreen extends StatelessWidget {
           } else if (state is ResetPasswordError) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.error,
             );
           }

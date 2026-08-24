@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
@@ -11,13 +11,13 @@ class CartEmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsetsDirectional.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Assets.images.imgs.cartEmpty.svg(
-              width: 64,
-              height: 64,
+              width: 120,
+              height: 120,
             ),
             const SizedBox(height: 24),
             Text(

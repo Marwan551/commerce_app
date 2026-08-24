@@ -20,6 +20,9 @@
   "my_cart": "عربتي",
   "go_to_checkout": "الذهاب للدفع",
   "clear_cart": "مسح العربة",
+  "clear_cart_question": "مسح العربة؟",
+  "clear_cart_confirm_msg": "هل أنت متأكد أنك تريد إزالة جميع العناصر من عربتك؟",
+  "yes_clear": "نعم، مسح",
   "filter": "تصفية",
   "sortBy": "فرز حسب",
   "relevance": "الأهمية",
@@ -74,10 +77,16 @@
   "new_password_hint": "أدخل كلمة مرور جديدة",
   "retry": "إعادة المحاولة",
   "noResults": "لم يتم العثور على نتائج",
+  "quantity_at_least_one": "يجب أن تكون الكمية 1 على الأقل",
   "noResultsMsg": "حاول استخدام كلمة مشابهة أو شيء أكثر عمومية.",
   "empty_cart_msg": "عربتك فارغة!",
   "empty_cart_desc": "يبدو أنك لم تضف أي شيء إلى عربتك بعد.",
   "empty_wishlist_msg": "لا توجد عناصر محفوظة!",
   "empty_wishlist_desc": "ليس لديك أي عناصر محفوظة.\nاذهب للرئيسية وأضف بعضها.",
-  "somethingWentWrong": "حدث خطأ ما، يرجى المحاولة مرة أخرى."
+  "somethingWentWrong": "حدث خطأ ما، يرجى المحاولة مرة أخرى.",
+  "connection_timeout": "انتهت مهلة الاتصال. يرجى التحقق من الإنترنت الخاص بك.",
+  "no_internet": "لا يوجد اتصال بالإنترنت.",
+  "request_cancelled": "تم إلغاء الطلب.",
+  "network_error": "حدث خطأ في الشبكة. يرجى المحاولة مرة أخرى.",
+  "unexpected_error": "حدث خطأ غير متوقع."
 }

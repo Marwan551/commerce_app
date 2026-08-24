@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 
@@ -32,10 +31,13 @@ class WishlistItem extends StatelessWidget {
                   height: 185,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: theme.colorScheme.secondary,
-                    highlightColor: theme.colorScheme.secondary.withAlpha(100),
-                    child: Container(color: theme.colorScheme.surface),
+                  placeholder: (context, url) => Container(
+                    height: 185,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.secondary.withAlpha(50),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
                   ),
                   errorWidget: (context, url, error) =>
                       const Center(child: Icon(Icons.error)),

@@ -16,6 +16,11 @@ final class CartError extends CartState {
   CartError(this.message);
 }
 
+final class CartUpdating extends CartState {
+  final CartModel cartModel;
+  CartUpdating(this.cartModel);
+}
+
 final class CartUpdateError extends CartState {
   final String message;
   CartUpdateError(this.message);

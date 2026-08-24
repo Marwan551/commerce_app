@@ -8,28 +8,27 @@ class ApiErrorHandler {
       if (error.response != null && error.response?.data != null) {
         final data = error.response?.data;
         if (data is Map<String, dynamic>) {
-
-          return data['message'] ?? 
-                 data['statusMsg'] ?? 
-                 data['errors']?['msg'] ?? 
-                 'Something went wrong. Please try again.';
+          return data['message'] ??
+              data['statusMsg'] ??
+              data['errors']?['msg'] ??
+              'somethingWentWrong';
         }
       }
-      
+
       switch (error.type) {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
-          return 'Connection timeout. Please check your internet.';
+          return 'connection_timeout';
         case DioExceptionType.connectionError:
-          return 'No internet connection.';
+          return 'no_internet';
         case DioExceptionType.cancel:
-          return 'Request cancelled.';
+          return 'request_cancelled';
         default:
-          return 'Network error occurred. Please try again.';
+          return 'network_error';
       }
     }
-    
-    return error?.toString() ?? 'Unexpected error occurred.';
+
+    return 'unexpected_error';
   }
 }

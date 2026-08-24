@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 
@@ -14,7 +15,7 @@ final class HomeSuccess extends HomeState {
   final int totalPageCount;
   final String? selectedCategoryId;
   final String searchQuery;
-  final String sortBy;
+  final ProductSortType sortBy;
   final double minPrice;
   final double maxPrice;
   final bool isFetching;
@@ -25,11 +26,11 @@ final class HomeSuccess extends HomeState {
     required this.currentPage,
     required this.totalPageCount,
     this.selectedCategoryId,
-    this.searchQuery = '',
-    this.sortBy = 'Relevance',
-    this.minPrice = 0,
-    this.maxPrice = 10000,
-    this.isFetching = false,
+    required this.searchQuery,
+    required this.sortBy,
+    required this.minPrice,
+    required this.maxPrice,
+    required this.isFetching,
   });
 
   HomeSuccess copyWith({
@@ -38,9 +39,8 @@ final class HomeSuccess extends HomeState {
     int? currentPage,
     int? totalPageCount,
     String? selectedCategoryId,
-    bool clearCategoryId = false,
     String? searchQuery,
-    String? sortBy,
+    ProductSortType? sortBy,
     double? minPrice,
     double? maxPrice,
     bool? isFetching,
@@ -50,7 +50,7 @@ final class HomeSuccess extends HomeState {
       products: products ?? this.products,
       currentPage: currentPage ?? this.currentPage,
       totalPageCount: totalPageCount ?? this.totalPageCount,
-      selectedCategoryId: clearCategoryId ? null : (selectedCategoryId ?? this.selectedCategoryId),
+      selectedCategoryId: selectedCategoryId ?? this.selectedCategoryId,
       searchQuery: searchQuery ?? this.searchQuery,
       sortBy: sortBy ?? this.sortBy,
       minPrice: minPrice ?? this.minPrice,

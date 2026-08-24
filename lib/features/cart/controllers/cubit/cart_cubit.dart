@@ -20,10 +20,7 @@ class CartCubit extends Cubit<CartState> {
 
     emit(CartLoading());
     try {
-      final response = await _apiService.getData(
-        endpoint: Endpoints.cart,
-        token: token,
-      );
+      final response = await _apiService.getData(endpoint: Endpoints.cart);
       final cartModel = CartModel.fromJson(response.data);
       emit(CartSuccess(cartModel));
     } catch (e) {
@@ -32,48 +29,59 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> updateProductQuantity(String productId, int count) async {
-    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
-    if (token == null) return;
+    if (count < 1) return;
+
+    final currentState = state;
+    CartModel? currentModel;
+    if (currentState is CartSuccess) {
+      currentModel = currentState.cartModel;
+    } else if (currentState is CartUpdating) {
+      currentModel = currentState.cartModel;
+    }
+
+    if (currentModel != null) {
+      emit(CartUpdating(currentModel));
+    }
 
     try {
       final response = await _apiService.putData(
         endpoint: '${Endpoints.cart}/$productId',
         data: {'count': count.toString()},
-        token: token,
       );
       final cartModel = CartModel.fromJson(response.data);
       emit(CartSuccess(cartModel));
     } catch (e) {
       emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
+      if (currentModel != null) {
+        emit(CartSuccess(currentModel));
+      }
     }
   }
 
   Future<void> removeCartItem(String productId) async {
-    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
-    if (token == null) return;
+    final currentState = state;
+    if (currentState is CartSuccess) {
+      emit(CartUpdating(currentState.cartModel));
+    }
 
     try {
       final response = await _apiService.deleteData(
         endpoint: '${Endpoints.cart}/$productId',
-        token: token,
       );
       final cartModel = CartModel.fromJson(response.data);
       emit(CartSuccess(cartModel));
     } catch (e) {
       emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
+      if (currentState is CartSuccess) {
+        emit(CartSuccess(currentState.cartModel));
+      }
     }
   }
 
   Future<void> clearCart() async {
-    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
-    if (token == null) return;
-
     emit(CartLoading());
     try {
-      final response = await _apiService.deleteData(
-        endpoint: Endpoints.cart,
-        token: token,
-      );
+      final response = await _apiService.deleteData(endpoint: Endpoints.cart);
       if (response.data['status'] == 'success') {
         emit(
           CartSuccess(

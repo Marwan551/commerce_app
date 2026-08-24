@@ -1,19 +1,24 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/cart/models/cart_model.dart';
+import 'package:toastification/toastification.dart';
 
 class CartItemWidget extends StatefulWidget {
   final CartProduct cartProduct;
   final Function(int) onQuantityChanged;
   final VoidCallback onRemove;
+  final bool isUpdating;
 
   const CartItemWidget({
     super.key,
     required this.cartProduct,
     required this.onQuantityChanged,
     required this.onRemove,
+    this.isUpdating = false,
   });
 
   @override
@@ -44,8 +49,15 @@ class _CartItemWidgetState extends State<CartItemWidget> {
   }
 
   void _updateQuantity(int newCount) {
+    if (widget.isUpdating) return;
     if (newCount >= 1) {
       widget.onQuantityChanged(newCount);
+    } else {
+      AppToast.show(
+        context,
+        message: 'quantity_at_least_one'.tr(),
+        type: ToastificationType.warning,
+      );
     }
   }
 
@@ -89,41 +101,46 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                         style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: widget.onRemove,
-                      child: Assets.images.imgs.trash.svg(
-                        width: 12.5,
-                        height: 13.75,
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(bottom: 5),
+                      child: GestureDetector(
+                        onTap: widget.isUpdating ? null : widget.onRemove,
+                        child: Opacity(
+                          opacity: widget.isUpdating ? 0.5 : 1.0,
+                          child: Assets.images.imgs.trash.svg(
+                            width: 22,
+                            height: 22,
+                            colorFilter: const ColorFilter.mode(AppColors.redFFED1010, BlendMode.srcIn),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                Padding(padding: EdgeInsetsDirectional.only(top: 20)),
+                const Padding(padding: EdgeInsets.only(top: 16)),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 60),
-                      child: Text(
-                        '\$ ${widget.cartProduct.price}',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: AppColors.black1A1A1A,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    Text(
+                      '\$ ${widget.cartProduct.price}',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: AppColors.black1A1A1A,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     _quantityButton(
                       svg: Assets.images.imgs.minus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) - 1),
+                      enabled: !widget.isUpdating,
                     ),
-                    Padding(padding: EdgeInsetsDirectional.only(start: 10)),
+                    const Padding(padding: EdgeInsets.only(left: 10)),
                     SizedBox(
                       width: 35,
                       child: TextField(
                         controller: _controller,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
+                        enabled: !widget.isUpdating,
                         style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                         decoration: const InputDecoration(
                           isDense: true,
@@ -137,14 +154,16 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           } else {
                             _controller.text = widget.cartProduct.count.toString();
                           }
+                          FocusManager.instance.primaryFocus?.unfocus();
                         },
                         onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
                       ),
                     ),
-                    Padding(padding: EdgeInsetsDirectional.only(start: 10)),
+                    const Padding(padding: EdgeInsets.only(left: 10)),
                     _quantityButton(
                       svg: Assets.images.imgs.plus,
                       onPressed: () => _updateQuantity((widget.cartProduct.count ?? 1) + 1),
+                      enabled: !widget.isUpdating,
                     ),
                   ],
                 ),
@@ -156,15 +175,22 @@ class _CartItemWidgetState extends State<CartItemWidget> {
     );
   }
 
-  Widget _quantityButton({required SvgGenImage svg, required VoidCallback onPressed}) {
+  Widget _quantityButton({
+    required SvgGenImage svg,
+    required VoidCallback onPressed,
+    bool enabled = true,
+  }) {
     return InkWell(
-      onTap: onPressed,
-      child: Container(
-        padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+      onTap: enabled ? onPressed : null,
+      child: Opacity(
+        opacity: enabled ? 1.0 : 0.5,
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: svg.svg(width: 15, height: 15),
         ),
-        child: svg.svg(),
       ),
     );
   }

@@ -1,7 +1,7 @@
+import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'custom_search_bar.dart';
@@ -16,14 +16,14 @@ class HomeViewBody extends StatelessWidget {
   final int currentPage;
   final int totalPageCount;
   final String? selectedCategoryId;
-  final String sortBy;
+  final ProductSortType sortBy;
   final double minPrice;
   final double maxPrice;
   final bool isFetching;
   final void Function(String) onSearchChanged;
   final void Function(String?) onCategorySelected;
   final void Function(int) onPageChanged;
-  final void Function(String sortBy, double minPrice, double maxPrice) onFiltersApplied;
+  final void Function(ProductSortType sortBy, double minPrice, double maxPrice) onFiltersApplied;
 
   const HomeViewBody({
     super.key,
@@ -80,9 +80,7 @@ class HomeViewBody extends StatelessWidget {
                 const SizedBox(height: 24),
                 Text('recent_products'.tr(), style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
-                if (isFetching)
-                  _buildGridShimmer(context)
-                else if (products.isEmpty)
+                if (products.isEmpty && !isFetching)
                   const NoResultsFound()
                 else ...[
                   GridView.builder(
@@ -100,21 +98,22 @@ class HomeViewBody extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  NumberPaginator(
-                    numberPages: totalPageCount,
-                    initialPage: currentPage - 1,
-                    onPageChange: (index) => onPageChanged(index + 1),
-                    child: const SizedBox(
-                      height: 48,
-                      child: Row(
-                        children: [
-                          PrevButton(),
-                          Flexible(child: ScrollableNumberContent()),
-                          NextButton(),
-                        ],
+                  if (totalPageCount > 1)
+                    NumberPaginator(
+                      numberPages: totalPageCount,
+                      initialPage: currentPage - 1,
+                      onPageChange: (index) => onPageChanged(index + 1),
+                      child: const SizedBox(
+                        height: 48,
+                        child: Row(
+                          children: [
+                            PrevButton(),
+                            Flexible(child: ScrollableNumberContent()),
+                            NextButton(),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
                   const SizedBox(height: 24),
                 ],
               ],
@@ -122,31 +121,6 @@ class HomeViewBody extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildGridShimmer(BuildContext context) {
-    final theme = Theme.of(context);
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-        childAspectRatio: 0.7,
-      ),
-      itemCount: 6,
-      itemBuilder: (_, index) => Shimmer.fromColors(
-        baseColor: theme.colorScheme.secondary,
-        highlightColor: theme.colorScheme.secondary.withAlpha(100),
-        child: Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(24),
-          ),
-        ),
-      ),
     );
   }
 

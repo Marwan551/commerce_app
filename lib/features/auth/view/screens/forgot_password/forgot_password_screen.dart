@@ -21,7 +21,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           if (state is ForgotPasswordSuccess) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.success,
             );
             AuthNavigation.navigateToVerifyCode(
@@ -30,7 +30,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           } else if (state is ForgotPasswordError) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.error,
             );
           }

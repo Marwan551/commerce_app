@@ -3,32 +3,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:commerce_app/features/cart/models/cart_model.dart';
 import 'cart_item_widget.dart';
-import 'cart_empty_state.dart';
 import 'summary_widget.dart';
 import 'checkout_section.dart';
 
 class CartViewBody extends StatelessWidget {
   final CartModel cartModel;
+  final bool isUpdating;
 
-  const CartViewBody({super.key, required this.cartModel});
+  const CartViewBody({
+    super.key,
+    required this.cartModel,
+    this.isUpdating = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cart = cartModel.data;
-    if (cart == null || cart.products == null || cart.products!.isEmpty) {
-      return const CartEmptyState();
-    }
+    final products = cart?.products ?? [];
 
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: cart.products!.length,
+            itemCount: products.length,
             itemBuilder: (context, index) {
-              final cartProduct = cart.products![index];
+              final cartProduct = products[index];
               return CartItemWidget(
                 cartProduct: cartProduct,
+                isUpdating: isUpdating,
                 onQuantityChanged: (count) {
                   context.read<CartCubit>().updateProductQuantity(
                         cartProduct.product?.id ?? '',
@@ -44,7 +47,7 @@ class CartViewBody extends StatelessWidget {
             },
           ),
         ),
-        buildSummarySection(context, cart.totalCartPrice ?? 0),
+        buildSummarySection(context, cart?.totalCartPrice ?? 0),
         buildCheckoutSection(context),
       ],
     );

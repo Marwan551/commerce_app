@@ -46,7 +46,6 @@ dependencies:
   dartz: ^0.10.1
   flutter_local_notifications: ^17.2.1
   pinput: ^5.0.0
-  shimmer: ^3.0.0
   number_paginator: 1.1.2
   cached_network_image: ^3.4.1
   sqflite: ^2.4.3

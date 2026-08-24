@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
 import 'package:commerce_app/core/services/network_service/remote/api_error_handler.dart';
+import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:commerce_app/features/home/models/category_model.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'home_state.dart';
@@ -18,7 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
   
   String? _selectedCategoryId;
   String _searchQuery = '';
-  String _sortBy = 'Relevance';
+  ProductSortType _sortBy = ProductSortType.relevance;
   double _minPrice = 0;
   double _maxPrice = 10000;
   int _currentPage = 1;
@@ -41,8 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
       if (_selectedCategoryId != null) queryParams['category'] = _selectedCategoryId;
       if (_searchQuery.isNotEmpty) queryParams['keyword'] = _searchQuery;
       
-      final sortString = _getSortString(_sortBy);
-      if (sortString.isNotEmpty) queryParams['sort'] = sortString;
+      if (_sortBy.apiValue.isNotEmpty) queryParams['sort'] = _sortBy.apiValue;
       
       queryParams['price[gte]'] = _minPrice;
       queryParams['price[lte]'] = _maxPrice;
@@ -96,7 +96,7 @@ class HomeCubit extends Cubit<HomeState> {
     getHomeData(page: 1);
   }
 
-  void applyFilters({String? sortBy, double? minPrice, double? maxPrice}) {
+  void applyFilters({ProductSortType? sortBy, double? minPrice, double? maxPrice}) {
     if (sortBy != null) _sortBy = sortBy;
     if (minPrice != null) _minPrice = minPrice;
     if (maxPrice != null) _maxPrice = maxPrice;
@@ -105,17 +105,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   void changePage(int page) {
     getHomeData(page: page);
-  }
-
-  String _getSortString(String sortBy) {
-    switch (sortBy) {
-      case 'Price: Low → High':
-        return 'price';
-      case 'Price: High → Low':
-        return '-price';
-      default:
-        return '';
-    }
   }
 
   @override

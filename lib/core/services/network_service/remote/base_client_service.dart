@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
+import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 
 class ApiService {
   final Dio _dio;
@@ -25,18 +26,23 @@ class ApiService {
         maxWidth: 90,
       ),
     );
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          final token = SharedPrefHelper.getData(SharedPrefKeys.token);
+          if (token != null) {
+            options.headers['token'] = token;
+          }
+          return handler.next(options);
+        },
+      ),
+    );
   }
 
   Future<Response> getData({
     required String endpoint,
     Map<String, dynamic>? query,
-    String? token,
   }) async {
-    _dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'token': token,
-    };
     return await _dio.get(endpoint, queryParameters: query);
   }
 
@@ -44,13 +50,7 @@ class ApiService {
     required String endpoint,
     required dynamic data,
     Map<String, dynamic>? query,
-    String? token,
   }) async {
-    _dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'token': token,
-    };
     return await _dio.post(endpoint, data: data, queryParameters: query);
   }
 
@@ -58,13 +58,7 @@ class ApiService {
     required String endpoint,
     required dynamic data,
     Map<String, dynamic>? query,
-    String? token,
   }) async {
-    _dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'token': token,
-    };
     return await _dio.put(endpoint, data: data, queryParameters: query);
   }
 
@@ -72,13 +66,7 @@ class ApiService {
     required String endpoint,
     dynamic data,
     Map<String, dynamic>? query,
-    String? token,
   }) async {
-    _dio.options.headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'token': token,
-    };
     return await _dio.delete(endpoint, data: data, queryParameters: query);
   }
 }

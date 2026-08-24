@@ -22,7 +22,7 @@ class VerifyCodeScreen extends StatelessWidget {
           if (state is VerifyCodeSuccess) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.success,
             );
             AuthNavigation.navigateToResetPassword(
@@ -31,7 +31,7 @@ class VerifyCodeScreen extends StatelessWidget {
           } else if (state is VerifyCodeError) {
             AppToast.show(
               context,
-              message: state.message,
+              message: state.message.tr(),
               type: ToastificationType.error,
             );
           }

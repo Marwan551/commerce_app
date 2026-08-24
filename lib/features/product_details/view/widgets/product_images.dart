@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
@@ -43,10 +41,8 @@ class _ProductImagesSliderState extends State<ProductImagesSlider> {
                   return CachedNetworkImage(
                     imageUrl: images[index],
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: theme.colorScheme.secondary,
-                      highlightColor: theme.colorScheme.secondary.withAlpha(100),
-                      child: Container(color: AppColors.whiteFFFFFF),
+                    placeholder: (context, url) => Container(
+                      color: theme.colorScheme.secondary.withAlpha(50),
                     ),
                   );
                 },

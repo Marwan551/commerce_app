@@ -1,7 +1,9 @@
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
+
 
 class StickyBottomActionBar extends StatelessWidget {
   final num price;
@@ -48,7 +50,7 @@ class StickyBottomActionBar extends StatelessWidget {
               text: 'add_to_cart'.tr(),
               isLoading: isAddingToCart,
               onPressed: onAddToCart,
-              leadingIcon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 20),
+              leadingIcon: Assets.images.imgs.bag.svg(),
             ),
           ),
         ],

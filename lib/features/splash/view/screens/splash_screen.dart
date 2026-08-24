@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            SplashNavigation.navigateToHome();
+            SplashNavigation.navigateToHome(context);
           } else if (state is Unauthenticated) {
             SplashNavigation.navigateToLogin();
           }

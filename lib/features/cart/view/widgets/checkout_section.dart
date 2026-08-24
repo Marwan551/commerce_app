@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
+import 'package:commerce_app/features/cart/view/widgets/clear_cart_dialog.dart';
 
 Widget buildCheckoutSection(BuildContext context) {
   return Container(
@@ -14,19 +15,25 @@ Widget buildCheckoutSection(BuildContext context) {
     child: Row(
       children: [
         GestureDetector(
-          onTap: () => context.read<CartCubit>().clearCart(),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) => ClearCartDialog(
+                onClear: () {
+                  context.read<CartCubit>().clearCart();
+                  Navigator.pop(context);
+                },
+              ),
+            );
+          },
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-          Assets.images.imgs.trash.svg(
-            width: 22,
-            height: 22,
-          ),
+              Assets.images.imgs.trash.svg(
+                width: 22,
+                height: 22,
+              ),
               const SizedBox(height: 4),
-              Text(
-                'clear_cart'.tr(),
-                style: const TextStyle(color: AppColors.redFFED1010, fontSize: 12),
-              )
             ],
           ),
         ),
@@ -36,7 +43,7 @@ Widget buildCheckoutSection(BuildContext context) {
             text: 'go_to_checkout'.tr(),
             trailingIcon: Assets.images.imgs.arrowRight.svg(),
             onPressed: () {
-              ScreenNavigation.navigateToHome();
+              ScreenNavigation.navigateToHome(context);
             },
           ),
         ),

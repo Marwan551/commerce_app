@@ -20,6 +20,9 @@
   "my_cart": "My Cart",
   "go_to_checkout": "Go To Checkout",
   "clear_cart": "Clear Cart",
+  "clear_cart_question": "Clear Cart?",
+  "clear_cart_confirm_msg": "Are you sure you want to remove all items from your cart?",
+  "yes_clear": "Yes, Clear",
   "filter": "Filter",
   "sortBy": "Sort By",
   "relevance": "Relevance",
@@ -74,10 +77,16 @@
   "new_password_hint": "Enter new password",
   "retry": "Retry",
   "noResults": "No Results Found",
+  "quantity_at_least_one": "Quantity must be at least 1",
   "noResultsMsg": "Try a similar word or something more general.",
   "empty_cart_msg": "Your Cart Is Empty!",
   "empty_cart_desc": "Looks like you haven't added anything to your cart yet.",
   "empty_wishlist_msg": "No Saved Items!",
   "empty_wishlist_desc": "You don't have any saved items.\nGo to home and add some.",
-  "somethingWentWrong": "Something went wrong, please try again."
+  "somethingWentWrong": "Something went wrong, please try again.",
+  "connection_timeout": "Connection timeout. Please check your internet.",
+  "no_internet": "No internet connection.",
+  "request_cancelled": "Request cancelled.",
+  "network_error": "Network error occurred. Please try again.",
+  "unexpected_error": "Unexpected error occurred."
 }
