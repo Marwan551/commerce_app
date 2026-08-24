@@ -1,9 +1,8 @@
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
-import 'package:commerce_app/features/cart/view/widgets/quantity_button.dart';
+import 'quantity_widget.dart';
 
 class CartQuantitySelector extends StatefulWidget {
   final int count;
@@ -70,42 +69,13 @@ class _CartQuantitySelectorState extends State<CartQuantitySelector> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Row(
-      children: [
-        QuantityButton(
-          svg: Assets.images.imgs.minus,
-          onPressed: () => _updateQuantity(widget.count - 1),
-          enabled: !widget.isUpdating,
-        ),
-        const Padding(padding: EdgeInsets.only(left: 10)),
-        SizedBox(
-          width: 35,
-          child: TextField(
-            controller: _controller,
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            enabled: !widget.isUpdating,
-            style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-            decoration: const InputDecoration(
-              isDense: true,
-              contentPadding: EdgeInsets.zero,
-              border: InputBorder.none,
-            ),
-            onSubmitted: _handleManualSubmit,
-            onTapOutside: (_) => _handleManualSubmit(_controller.text),
-          ),
-        ),
-        const Padding(padding: EdgeInsets.only(left: 10)),
-        QuantityButton(
-          svg: Assets.images.imgs.plus,
-          onPressed: () => _updateQuantity(widget.count + 1),
-          enabled: !widget.isUpdating,
-        ),
-      ],
+    return QuantitySelect(
+      count: widget.count,
+      isUpdating: widget.isUpdating,
+      controller: _controller,
+      onIncrement: () => _updateQuantity(widget.count + 1),
+      onDecrement: () => _updateQuantity(widget.count - 1),
+      onSubmitted: _handleManualSubmit,
     );
   }
-
-
 }
