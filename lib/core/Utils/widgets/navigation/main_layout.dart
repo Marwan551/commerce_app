@@ -1,4 +1,5 @@
 import 'package:commerce_app/core/controllers/navigation_cubit/navigation_cubit.dart';
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +60,7 @@ class MainLayout extends StatelessWidget {
                   'assets/images/imgs/home_icon.svg',
                   colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
                 ),
-                label: 'home'.tr(),
+                label: AppStrings.home.tr(),
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -70,7 +71,7 @@ class MainLayout extends StatelessWidget {
                   'assets/images/imgs/search_icon.svg',
                   colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
                 ),
-                label: 'search'.tr(),
+                label: AppStrings.search.tr(),
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -81,7 +82,7 @@ class MainLayout extends StatelessWidget {
                   'assets/images/imgs/saved_icon.svg',
                   colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
                 ),
-                label: 'saved_items'.tr(),
+                label: AppStrings.savedItems.tr(),
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -92,7 +93,7 @@ class MainLayout extends StatelessWidget {
                   'assets/images/imgs/cart_icon.svg',
                   colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
                 ),
-                label: 'my_cart'.tr(),
+                label: AppStrings.myCart.tr(),
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -104,7 +105,7 @@ class MainLayout extends StatelessWidget {
                   'assets/images/imgs/account_icon.svg',
                   colorFilter: const ColorFilter.mode(AppColors.black1A1A1A, BlendMode.srcIn),
                 ),
-                label: 'account'.tr(),
+                label: AppStrings.account.tr(),
               ),
             ],
           ),
@@ -118,6 +119,6 @@ class SearchPlaceholder extends StatelessWidget {
   const SearchPlaceholder({super.key});
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('search'.tr()));
+    return Center(child: Text(AppStrings.search.tr()));
   }
 }
