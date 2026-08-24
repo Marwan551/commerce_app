@@ -5,6 +5,7 @@ import 'package:commerce_app/features/cart/models/cart_model.dart';
 import 'cart_item_widget.dart';
 import 'summary_widget.dart';
 import 'checkout_section.dart';
+import 'cart_empty_state.dart';
 
 class CartViewBody extends StatelessWidget {
   final CartModel cartModel;
@@ -18,16 +19,28 @@ class CartViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = cartModel.data;
-    final products = cart?.products ?? [];
+    // final cart = cartModel.data;// ////////////////
+    final products = cartModel.data?.products ?? [];
+    
+    if (products.isEmpty) {
+      return const CartEmptyState();
+    }
 
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: products.length,
+            itemCount: products.length + 1,
             itemBuilder: (context, index) {
+              if (index == products.length) {
+                return buildSummarySection(
+                  context,
+                  totalCartPrice: cartModel.data?.totalCartPrice ?? 0,
+                  itemCount: products.length,
+                );
+              }
+
               final cartProduct = products[index];
               return CartItemWidget(
                 cartProduct: cartProduct,
@@ -47,8 +60,7 @@ class CartViewBody extends StatelessWidget {
             },
           ),
         ),
-        buildSummarySection(context, cart?.totalCartPrice ?? 0),
-        buildCheckoutSection(context),
+        buildCheckoutSection(context, itemCount: products.length),
       ],
     );
   }

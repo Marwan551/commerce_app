@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:dio/dio.dart';
 
 class ApiErrorHandler {
@@ -11,7 +12,7 @@ class ApiErrorHandler {
           return data['message'] ??
               data['statusMsg'] ??
               data['errors']?['msg'] ??
-              'somethingWentWrong';
+              AppStrings.somethingWentWrong;
         }
       }
 
@@ -19,16 +20,16 @@ class ApiErrorHandler {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
-          return 'connection_timeout';
+          return AppStrings.connectionTimeout;
         case DioExceptionType.connectionError:
-          return 'no_internet';
+          return AppStrings.noInternet;
         case DioExceptionType.cancel:
-          return 'request_cancelled';
+          return AppStrings.requestCancelled;
         default:
-          return 'network_error';
+          return AppStrings.networkError;
       }
     }
 
-    return 'unexpected_error';
+    return AppStrings.unexpectedError;
   }
 }

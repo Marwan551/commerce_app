@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -76,12 +77,12 @@ class HomeScreen extends StatelessWidget {
           children: [
             const Icon(Icons.error_outline, size: 80, color: Colors.red),
             const SizedBox(height: 16),
-            Text('somethingWentWrong'.tr()),
+            Text(AppStrings.somethingWentWrong.tr()),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => cubit.getHomeData(),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-              child: Text('retry'.tr(),
+              child: Text(AppStrings.retry.tr(),
                   style: const TextStyle(color: Colors.white)),
             ),
           ],

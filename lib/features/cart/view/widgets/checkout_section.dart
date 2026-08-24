@@ -1,4 +1,5 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,11 @@ import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:commerce_app/features/cart/view/widgets/clear_cart_dialog.dart';
 
-Widget buildCheckoutSection(BuildContext context) {
+Widget buildCheckoutSection(BuildContext context, {required int itemCount}) {
+
+  // visibility
   return Container(
-    padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 12),
+    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 32),
     color: AppColors.whiteFFFFFF,
     child: Row(
       children: [
@@ -40,7 +43,7 @@ Widget buildCheckoutSection(BuildContext context) {
         const SizedBox(width: 16),
         Expanded(
           child: CustomButton(
-            text: 'go_to_checkout'.tr(),
+            text: AppStrings.goToCheckout.tr(),
             trailingIcon: Assets.images.imgs.arrowRight.svg(),
             onPressed: () {
               ScreenNavigation.navigateToHome(context);

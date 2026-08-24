@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
@@ -41,7 +42,7 @@ class ProductInfoSection extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '(${product.ratingsQuantity ?? 0} ${"reviews".tr()})',
+                  '(${product.ratingsQuantity ?? 0} ${AppStrings.reviews.tr()})',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: AppColors.grey707070,
                   ),

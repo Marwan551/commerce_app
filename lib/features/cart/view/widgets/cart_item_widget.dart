@@ -53,12 +53,23 @@ class _CartItemWidgetState extends State<CartItemWidget> {
     if (newCount >= 1) {
       widget.onQuantityChanged(newCount);
     } else {
+      widget.onQuantityChanged(1);
       AppToast.show(
         context,
         message: 'quantity_at_least_one'.tr(),
         type: ToastificationType.warning,
       );
     }
+  }
+
+  void _handleManualSubmit(String value) {
+    final int? newCount = int.tryParse(value);
+    if (newCount != null) {
+      _updateQuantity(newCount);
+    } else {
+      _controller.text = widget.cartProduct.count.toString();
+    }
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override
@@ -102,15 +113,14 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(bottom: 5),
+                      padding: const EdgeInsetsDirectional.only(bottom: 20),
                       child: GestureDetector(
                         onTap: widget.isUpdating ? null : widget.onRemove,
                         child: Opacity(
                           opacity: widget.isUpdating ? 0.5 : 1.0,
                           child: Assets.images.imgs.trash.svg(
-                            width: 22,
-                            height: 22,
-                            colorFilter: const ColorFilter.mode(AppColors.redFFED1010, BlendMode.srcIn),
+                            width: 15,
+                            height: 15,
                           ),
                         ),
                       ),
@@ -147,16 +157,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                           contentPadding: EdgeInsets.zero,
                           border: InputBorder.none,
                         ),
-                        onSubmitted: (value) {
-                          final int? newCount = int.tryParse(value);
-                          if (newCount != null) {
-                            _updateQuantity(newCount);
-                          } else {
-                            _controller.text = widget.cartProduct.count.toString();
-                          }
-                          FocusManager.instance.primaryFocus?.unfocus();
-                        },
-                        onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+                        onSubmitted: _handleManualSubmit,
+                        onTapOutside: (_) => _handleManualSubmit(_controller.text),
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(left: 10)),

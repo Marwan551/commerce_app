@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +16,10 @@ class NoResultsFound extends StatelessWidget {
           children: [
             Icon(Icons.search, size: 80, color: theme.colorScheme.secondary),
             const SizedBox(height: 24),
-            Text('noResults'.tr(), style: theme.textTheme.displayMedium),
+            Text(AppStrings.noResults.tr(), style: theme.textTheme.displayMedium),
             const SizedBox(height: 12),
             Text(
-              'noResultsMsg'.tr(),
+              AppStrings.noResultsMsg.tr(),
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.secondary,

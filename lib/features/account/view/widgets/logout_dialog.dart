@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
@@ -29,7 +30,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
             Assets.images.imgs.warning.svg(width: 80, height: 80),
             const SizedBox(height: 24),
             Text(
-              'logout_question'.tr(),
+              AppStrings.logoutQuestion.tr(),
               style: theme.textTheme.displayMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
@@ -38,7 +39,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
             ),
             const SizedBox(height: 12),
             Text(
-              'logout_confirm_msg'.tr(),
+              AppStrings.logoutConfirmMsg.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: AppColors.grey707070,
                 fontSize: 18,
@@ -47,7 +48,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
             ),
             const SizedBox(height: 32),
             CustomButton(
-              text: 'yes_logout'.tr(),
+              text: AppStrings.yesLogout.tr(),
               isLoading: _isLoading,
               onPressed: () async {
                 setState(() {
@@ -75,7 +76,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                   ),
                 ),
                 child: Text(
-                  'no_cancel'.tr(),
+                  AppStrings.noCancel.tr(),
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.black1A1A1A,

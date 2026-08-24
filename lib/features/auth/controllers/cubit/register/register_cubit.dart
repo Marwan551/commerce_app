@@ -30,7 +30,7 @@ class RegisterCubit extends Cubit<RegisterState> {
             email: emailController.text,
             password: passwordController.text,
             rePassword: rePasswordController.text,
-            phone: phoneController.text,
+            phone: '01111111111',
           ).toJson(),
         );
 

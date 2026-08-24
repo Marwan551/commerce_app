@@ -1,11 +1,9 @@
-import 'package:commerce_app/core/services/database/sqflite_helper.dart';
 import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/widgets/loading/blurry_loading_overlay.dart';
 import 'package:commerce_app/features/account/controllers/cubit/language_cubit.dart';
 import 'package:commerce_app/features/account/controllers/cubit/language_state.dart';
-import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
-import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
@@ -23,11 +21,7 @@ class AccountScreen extends StatelessWidget {
       context: context,
       builder: (context) => LogoutDialog(
         onLogout: () async {
-          await context.read<CartCubit>().clearCart();
-          context.read<CartCubit>().resetState();
-          context.read<WishlistCubit>().resetState();
           await SharedPrefHelper.clearAllData();
-          await SqfliteHelper.clear('wishlist');
           if (context.mounted) {
             Navigator.pop(context);
             ScreenNavigation.navigateToLogin();
@@ -46,7 +40,7 @@ class AccountScreen extends StatelessWidget {
         final isArabic = state.locale.languageCode == 'ar';
         return Scaffold(
           appBar: CustomAppBar(
-            title: 'account'.tr(),
+            title: AppStrings.account.tr(),
             showBackButton: false,
           ),
           body: BlurryLoadingOverlay(
@@ -58,9 +52,9 @@ class AccountScreen extends StatelessWidget {
                   buildOption(
                     context,
                     svg: Assets.images.imgs.language,
-                    title: 'language'.tr(),
+                    title: AppStrings.language.tr(),
                     trailing: Text(
-                      isArabic ? 'arabic'.tr() : 'english'.tr(),
+                      isArabic ? AppStrings.arabic.tr() : AppStrings.english.tr(),
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: AppColors.grey707070,
                       ),
@@ -83,7 +77,7 @@ class AccountScreen extends StatelessWidget {
                   buildOption(
                     context,
                     svg: Assets.images.imgs.logout,
-                    title: 'logout'.tr(),
+                    title: AppStrings.logout.tr(),
                     titleColor: AppColors.redFFED1010,
                     onTap: () => _showLogoutDialog(context),
                   ),

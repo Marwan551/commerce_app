@@ -1,6 +1,6 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
 class OverallRatingSection extends StatelessWidget {
@@ -37,21 +37,16 @@ class OverallRatingSection extends StatelessWidget {
               Row(
                 children: List.generate(5, (index) {
                   final isFilled = index < averageRating.round();
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child: SvgPicture.asset(
-                      isFilled
-                          ? 'assets/images/imgs/star_gold.svg'
-                          : 'assets/images/imgs/star_grey.svg',
-                      width: 28,
-                      height: 28,
-                    ),
+                  return Icon(
+                    isFilled ? Icons.star : Icons.star_border,
+                    color: Colors.amber,
+                    size: 28,
                   );
                 }),
               ),
               const SizedBox(height: 6),
               Text(
-                '$totalReviews ${"ratings".tr()}',
+                '$totalReviews ${AppStrings.ratings.tr()}',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: AppColors.grey707070,
                   fontSize: 20,

@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('filter'.tr(), style: theme.textTheme.headlineLarge),
+              Text(AppStrings.filter.tr(), style: theme.textTheme.headlineLarge),
               IconButton(
                 icon: const Icon(Icons.close),
                 onPressed: () => Navigator.pop(context),
@@ -56,13 +57,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             ],
           ),
           const SizedBox(height: 24),
-          Text('sortBy'.tr(), style: theme.textTheme.headlineSmall),
+          Text(AppStrings.sortBy.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
-          _sortOption('relevance'.tr(), ProductSortType.relevance),
-          _sortOption('priceLowHigh'.tr(), ProductSortType.priceLowToHigh),
-          _sortOption('priceHighLow'.tr(), ProductSortType.priceHighToLow),
+          _sortOption(AppStrings.relevance.tr(), ProductSortType.relevance),
+          _sortOption(AppStrings.priceLowHigh.tr(), ProductSortType.priceLowToHigh),
+          _sortOption(AppStrings.priceHighLow.tr(), ProductSortType.priceHighToLow),
           const SizedBox(height: 24),
-          Text('priceRange'.tr(), style: theme.textTheme.headlineSmall),
+          Text(AppStrings.priceRange.tr(), style: theme.textTheme.headlineSmall),
           const SizedBox(height: 12),
           RangeSlider(
             values: _currentRangeValues,
@@ -83,7 +84,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           ),
           const SizedBox(height: 32),
           CustomButton(
-            text: 'applyFilter'.tr(),
+            text: AppStrings.applyFilter.tr(),
             onPressed: () {
               widget.onApply(
                 _selectedSortBy,

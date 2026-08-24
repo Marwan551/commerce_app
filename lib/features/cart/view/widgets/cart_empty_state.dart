@@ -1,7 +1,7 @@
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:commerce_app/core/utils/constants/styles/app_text_styles.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 
 class CartEmptyState extends StatelessWidget {
@@ -21,14 +21,14 @@ class CartEmptyState extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              'empty_cart_msg'.tr(),
-              style: AppTextStyles.bold24,
+              AppStrings.emptyCartMsg.tr(),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
-              'empty_cart_desc'.tr(),
-              style: AppTextStyles.regular16.copyWith(color: AppColors.grey707070),
+              AppStrings.emptyCartDesc.tr(),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: AppColors.grey707070),
               textAlign: TextAlign.center,
             ),
           ],

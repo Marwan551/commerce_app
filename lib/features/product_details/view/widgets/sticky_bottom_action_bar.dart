@@ -1,9 +1,8 @@
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
-
 
 class StickyBottomActionBar extends StatelessWidget {
   final num price;
@@ -34,7 +33,7 @@ class StickyBottomActionBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'price'.tr(), 
+                  AppStrings.price.tr(), 
                   style: theme.textTheme.bodyLarge?.copyWith(color: AppColors.grey707070),
                 ),
                 Text(
@@ -47,10 +46,10 @@ class StickyBottomActionBar extends StatelessWidget {
           Expanded(
             flex: 2,
             child: CustomButton(
-              text: 'add_to_cart'.tr(),
+              text: AppStrings.addToCart.tr(),
               isLoading: isAddingToCart,
               onPressed: onAddToCart,
-              leadingIcon: Assets.images.imgs.bag.svg(),
+              leadingIcon: const Icon(Icons.shopping_bag_outlined, color: Colors.white, size: 20),
             ),
           ),
         ],

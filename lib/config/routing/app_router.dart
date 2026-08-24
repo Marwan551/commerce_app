@@ -7,8 +7,6 @@ import 'package:commerce_app/features/auth/view/screens/forgot_password/verify_c
 import 'package:commerce_app/features/auth/view/screens/forgot_password/reset_password_screen.dart';
 import 'package:commerce_app/config/routing/routes_enums.dart';
 import 'package:commerce_app/core/utils/widgets/navigation/main_layout.dart';
-
-import 'package:commerce_app/features/cart/view/screens/cart_screen.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/features/product_details/view/screens/product_details_screen.dart';
 import 'package:commerce_app/features/reviews/view/screens/reviews_screen.dart';

@@ -36,9 +36,7 @@ class _CartScreenState extends State<CartScreen> {
       },
       ),
       body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+
         child: BlocConsumer<CartCubit, CartState>(
           listener: (context, state) {
             if (state is CartUpdateError) {
@@ -48,12 +46,13 @@ class _CartScreenState extends State<CartScreen> {
           },
           builder: (context, state) {
             return BlurryLoadingOverlay(
-              isLoading: state is CartLoading || state is CartUpdating ,
+              isLoading: state is CartLoading || state is CartUpdating,
               child: _buildBody(state),
             );
           },
         ),
       ),
+
     );
   }
 

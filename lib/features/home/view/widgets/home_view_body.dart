@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/enums/product_sort_type.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class HomeViewBody extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('discover'.tr(), style: theme.textTheme.displayLarge),
+              Text(AppStrings.discover.tr(), style: theme.textTheme.displayLarge),
             ],
           ),
         ),
@@ -70,7 +71,7 @@ class HomeViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
-                Text('categories'.tr(), style: theme.textTheme.headlineMedium),
+                Text(AppStrings.categories.tr(), style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
                 CategoryListView(
                   categories: categories,
@@ -78,7 +79,7 @@ class HomeViewBody extends StatelessWidget {
                   onCategorySelected: onCategorySelected,
                 ),
                 const SizedBox(height: 24),
-                Text('recent_products'.tr(), style: theme.textTheme.headlineMedium),
+                Text(AppStrings.recentProducts.tr(), style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 16),
                 if (products.isEmpty && !isFetching)
                   const NoResultsFound()
