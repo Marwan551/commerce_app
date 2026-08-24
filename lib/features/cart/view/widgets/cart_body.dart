@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:commerce_app/features/cart/models/cart_model.dart';
-import 'cart_item_widget.dart';
-import 'summary_widget.dart';
+import 'cart_item.dart';
+import 'summary_section.dart';
 import 'checkout_section.dart';
-import 'cart_empty_state.dart';
 
-class CartViewBody extends StatelessWidget {
+class CartBody extends StatelessWidget {
   final CartModel cartModel;
   final bool isUpdating;
 
-  const CartViewBody({
+  const CartBody({
     super.key,
     required this.cartModel,
     this.isUpdating = false,
@@ -19,12 +18,8 @@ class CartViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final cart = cartModel.data;// ////////////////
     final products = cartModel.data?.products ?? [];
-    
-    if (products.isEmpty) {
-      return const CartEmptyState();
-    }
+    final cart = cartModel.data;
 
     return Column(
       children: [
@@ -34,9 +29,8 @@ class CartViewBody extends StatelessWidget {
             itemCount: products.length + 1,
             itemBuilder: (context, index) {
               if (index == products.length) {
-                return buildSummarySection(
-                  context,
-                  totalCartPrice: cartModel.data?.totalCartPrice ?? 0,
+                return SummarySection(
+                  totalCartPrice: cart?.totalCartPrice ?? 0,
                   itemCount: products.length,
                 );
               }
@@ -52,7 +46,7 @@ class CartViewBody extends StatelessWidget {
                       );
                 },
                 onRemove: () {
-                  context.read<CartCubit>().removeCartItem(
+                  context.read<CartCubit>().removeItem(
                         cartProduct.product?.id ?? '',
                       );
                 },
@@ -60,7 +54,7 @@ class CartViewBody extends StatelessWidget {
             },
           ),
         ),
-        buildCheckoutSection(context, itemCount: products.length),
+        CheckoutSection(itemCount: products.length),
       ],
     );
   }

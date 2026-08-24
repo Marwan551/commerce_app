@@ -1,4 +1,4 @@
-class CartModel {
+class  CartModel {
   final String? status;
   final int? numOfCartItems;
   final CartData? data;

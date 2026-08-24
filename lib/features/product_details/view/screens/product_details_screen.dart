@@ -13,6 +13,7 @@ import 'package:commerce_app/features/product_details/view/widgets/product_attri
 import 'package:commerce_app/features/product_details/view/widgets/sticky_bottom_action_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
+import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
 import 'package:toastification/toastification.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -33,7 +34,6 @@ class ProductDetailsScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          final cubit = context.read<ProductDetailsCubit>();
           ProductData currentProduct = product;
           
           if (state is ProductDetailsSuccess) {
@@ -73,15 +73,21 @@ class ProductDetailsScreen extends StatelessWidget {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  child: StickyBottomActionBar(
-                    price: currentProduct.price ?? 0,
-                    isAddingToCart: state is AddToCartLoading,
-                    onAddToCart: () => cubit.addToCart(currentProduct.id!),
+                  child: BlocBuilder<CartCubit, CartState>(
+                    builder: (context, cartState) {
+                      return StickyBottomActionBar(
+                        price: currentProduct.price ?? 0,
+                        isAddingToCart: cartState is CartLoading ||
+                            cartState is CartUpdating,
+                        onAddToCart: () => context
+                            .read<CartCubit>()
+                            .addItem(currentProduct.id!),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
-
           );
         },
       ),

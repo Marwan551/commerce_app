@@ -3,20 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
 import 'package:commerce_app/core/utils/widgets/loading/app_loading_indicator.dart';
-import 'package:commerce_app/core/utils/widgets/toast/app_toast.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/features/home/models/product_model.dart';
 import 'package:commerce_app/features/product_details/controllers/cubit/product_details_cubit.dart';
-import 'package:commerce_app/features/product_details/controllers/cubit/product_details_state.dart';
 import 'package:commerce_app/features/reviews/controllers/cubit/reviews_cubit.dart';
 import 'package:commerce_app/features/reviews/controllers/cubit/reviews_state.dart';
 import 'package:commerce_app/features/reviews/view/widgets/overall_rating_section.dart';
 import 'package:commerce_app/features/reviews/view/widgets/ratings_breakdown_list.dart';
 import 'package:commerce_app/features/reviews/view/widgets/review_item_widget.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
-import 'package:toastification/toastification.dart';
+import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
+import 'package:commerce_app/features/product_details/view/widgets/sticky_bottom_action_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 
 class ReviewsScreen extends StatelessWidget {
   final ProductData product;
@@ -37,22 +35,12 @@ class ReviewsScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
-        appBar: const CustomAppBar(
-          title: AppStrings.reviews,
+        appBar: CustomAppBar(
+          title: AppStrings.reviews.tr(),
           showBackButton: true,
         ),
-        body: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
-          listener: (context, state) {
-            if (state is AddToCartSuccess) {
-              context.read<CartCubit>().getCart();
-              AppToast.show(context,
-                  message: state.message.tr(), type: ToastificationType.success);
-            } else if (state is AddToCartError) {
-              AppToast.show(context,
-                  message: state.message.tr(), type: ToastificationType.error);
-            }
-          },
-          builder: (context, detailsState) {
+        body: BlocBuilder<CartCubit, CartState>(
+          builder: (context, cartState) {
             return Stack(
               children: [
                 Positioned.fill(
@@ -83,7 +71,7 @@ class ReviewsScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        '${state.totalReviews} ${AppStrings.reviews}',
+                                        '${state.totalReviews} ${AppStrings.reviews.tr()}',
                                         style: theme.textTheme.headlineMedium
                                             ?.copyWith(
                                           fontWeight: FontWeight.bold,
@@ -108,7 +96,8 @@ class ReviewsScreen extends StatelessWidget {
                               const Icon(Icons.error_outline,
                                   size: 80, color: Colors.red),
                               const SizedBox(height: 16),
-                              Text(state.message, textAlign: TextAlign.center),
+                              Text(state.message.tr(),
+                                  textAlign: TextAlign.center),
                               const SizedBox(height: 24),
                               ElevatedButton(
                                 onPressed: () => context
@@ -116,8 +105,9 @@ class ReviewsScreen extends StatelessWidget {
                                     .getProductReviews(product.id!),
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black),
-                                child: const Text(AppStrings.retry,
-                                    style: TextStyle(color: Colors.white)),
+                                child: Text(AppStrings.retry.tr(),
+                                    style:
+                                        const TextStyle(color: Colors.white)),
                               ),
                             ],
                           ),
@@ -125,6 +115,19 @@ class ReviewsScreen extends StatelessWidget {
                       }
                       return const SizedBox.shrink();
                     },
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: StickyBottomActionBar(
+                    price: product.price ?? 0,
+                    isAddingToCart: cartState is CartLoading ||
+                        cartState is CartUpdating,
+                    onAddToCart: () => context
+                        .read<CartCubit>()
+                        .addItem(product.id!),
                   ),
                 ),
               ],

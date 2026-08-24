@@ -6,9 +6,10 @@ final class CartInitial extends CartState {}
 
 final class CartLoading extends CartState {}
 
-final class CartSuccess extends CartState {
+final class CartUpdated extends CartState {
+  final List<CartProduct> items;
   final CartModel cartModel;
-  CartSuccess(this.cartModel);
+  CartUpdated(this.items, this.cartModel);
 }
 
 final class CartError extends CartState {

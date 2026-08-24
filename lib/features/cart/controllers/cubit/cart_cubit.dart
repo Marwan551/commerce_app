@@ -22,9 +22,52 @@ class CartCubit extends Cubit<CartState> {
     try {
       final response = await _apiService.getData(endpoint: Endpoints.cart);
       final cartModel = CartModel.fromJson(response.data);
-      emit(CartSuccess(cartModel));
+      emit(CartUpdated(cartModel.data?.products ?? [], cartModel));
     } catch (e) {
       emit(CartError(ApiErrorHandler.getMessage(e)));
+    }
+  }
+
+  Future<void> addItem(String productId) async {
+    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
+    if (token == null) return;
+
+    try {
+      final response = await _apiService.postData(
+        endpoint: Endpoints.cart,
+        data: {'productId': productId},
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final cartModel = CartModel.fromJson(response.data);
+        emit(CartUpdated(cartModel.data?.products ?? [], cartModel));
+      }
+    } catch (e) {
+      emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
+    }
+  }
+
+  Future<void> removeItem(String productId) async {
+    final token = SharedPrefHelper.getData(SharedPrefKeys.token);
+    if (token == null) return;
+
+    final currentState = state;
+    CartModel? currentModel;
+    if (currentState is CartUpdated) {
+      currentModel = currentState.cartModel;
+      emit(CartUpdating(currentModel));
+    }
+
+    try {
+      final response = await _apiService.deleteData(
+        endpoint: '${Endpoints.cart}/$productId',
+      );
+      final cartModel = CartModel.fromJson(response.data);
+      emit(CartUpdated(cartModel.data?.products ?? [], cartModel));
+    } catch (e) {
+      emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
+      if (currentModel != null) {
+        emit(CartUpdated(currentModel.data?.products ?? [], currentModel));
+      }
     }
   }
 
@@ -33,13 +76,8 @@ class CartCubit extends Cubit<CartState> {
 
     final currentState = state;
     CartModel? currentModel;
-    if (currentState is CartSuccess) {
+    if (currentState is CartUpdated) {
       currentModel = currentState.cartModel;
-    } else if (currentState is CartUpdating) {
-      currentModel = currentState.cartModel;
-    }
-
-    if (currentModel != null) {
       emit(CartUpdating(currentModel));
     }
 
@@ -49,31 +87,11 @@ class CartCubit extends Cubit<CartState> {
         data: {'count': count.toString()},
       );
       final cartModel = CartModel.fromJson(response.data);
-      emit(CartSuccess(cartModel));
+      emit(CartUpdated(cartModel.data?.products ?? [], cartModel));
     } catch (e) {
       emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
       if (currentModel != null) {
-        emit(CartSuccess(currentModel));
-      }
-    }
-  }
-
-  Future<void> removeCartItem(String productId) async {
-    final currentState = state;
-    if (currentState is CartSuccess) {
-      emit(CartUpdating(currentState.cartModel));
-    }
-
-    try {
-      final response = await _apiService.deleteData(
-        endpoint: '${Endpoints.cart}/$productId',
-      );
-      final cartModel = CartModel.fromJson(response.data);
-      emit(CartSuccess(cartModel));
-    } catch (e) {
-      emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
-      if (currentState is CartSuccess) {
-        emit(CartSuccess(currentState.cartModel));
+        emit(CartUpdated(currentModel.data?.products ?? [], currentModel));
       }
     }
   }
@@ -83,14 +101,11 @@ class CartCubit extends Cubit<CartState> {
     try {
       final response = await _apiService.deleteData(endpoint: Endpoints.cart);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        emit(
-          CartSuccess(
-            CartModel(
-              numOfCartItems: 0,
-              data: CartData(products: [], totalCartPrice: 0),
-            ),
-          ),
+        final emptyModel = CartModel(
+          numOfCartItems: 0,
+          data: CartData(products: [], totalCartPrice: 0),
         );
+        emit(CartUpdated([], emptyModel));
       } else {
         getCart();
       }

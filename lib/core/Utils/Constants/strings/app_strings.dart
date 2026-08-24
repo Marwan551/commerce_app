@@ -25,7 +25,6 @@ class AppStrings {
   static const String savedItems = 'saved_items';
   static const String myCart = 'my_cart';
   static const String goToCheckout = 'go_to_checkout';
-  static const String clearCart = 'clear_cart';
   static const String clearCartQuestion = 'clear_cart_question';
   static const String clearCartConfirmMsg = 'clear_cart_confirm_msg';
   static const String yesClear = 'yes_clear';
@@ -90,4 +89,6 @@ class AppStrings {
   static const String requestCancelled = 'request_cancelled';
   static const String networkError = 'network_error';
   static const String unexpectedError = 'unexpected_error';
+  static const String en_trans = 'en';
+  static const String ar_trans = 'ar';
 }

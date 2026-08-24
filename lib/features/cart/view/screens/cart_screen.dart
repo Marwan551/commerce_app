@@ -1,6 +1,6 @@
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
+import 'package:commerce_app/features/cart/view/widgets/cart_body.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_empty_state.dart';
-import 'package:commerce_app/features/cart/view/widgets/cart_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
@@ -28,15 +28,18 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
         title: context.tr('my_cart'),
         showBackButton: true,
         onBackTap: () {
-        ScreenNavigation.navigateToHome(context);
-      },
+          ScreenNavigation.navigateToHome(context);
+        },
       ),
       body: GestureDetector(
-
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         child: BlocConsumer<CartCubit, CartState>(
           listener: (context, state) {
             if (state is CartUpdateError) {
@@ -52,15 +55,14 @@ class _CartScreenState extends State<CartScreen> {
           },
         ),
       ),
-
     );
   }
 
   Widget _buildBody(CartState state) {
-    if (state is CartSuccess) {
-      return CartViewBody(cartModel: state.cartModel);
+    if (state is CartUpdated) {
+      return CartBody(cartModel: state.cartModel);
     } else if (state is CartUpdating) {
-      return CartViewBody(cartModel: state.cartModel, isUpdating: true);
+      return CartBody(cartModel: state.cartModel, isUpdating: true);
     } else if (state is CartError) {
       return Center(child: Text(state.message));
     } else if (state is CartLoading) {

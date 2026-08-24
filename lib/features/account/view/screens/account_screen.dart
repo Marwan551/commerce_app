@@ -10,7 +10,7 @@ import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/widgets/app_bar/custom_app_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/account/view/widgets/logout_dialog.dart';
-import 'package:commerce_app/features/account/view/widgets/build_option.dart';
+import 'package:commerce_app/features/account/view/widgets/build_account_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -37,7 +37,7 @@ class AccountScreen extends StatelessWidget {
 
     return BlocBuilder<LanguageCubit, LanguageState>(
       builder: (context, state) {
-        final isArabic = state.locale.languageCode == 'ar';
+        final isArabic = state.locale.languageCode == AppStrings.ar_trans;
         return Scaffold(
           appBar: CustomAppBar(
             title: AppStrings.account.tr(),
@@ -49,7 +49,7 @@ class AccountScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 24),
-                  buildOption(
+                  buildAccountOption(
                     context,
                     svg: Assets.images.imgs.language,
                     title: AppStrings.language.tr(),
@@ -61,7 +61,7 @@ class AccountScreen extends StatelessWidget {
                     ),
                     onTap: () {
                       final newLocale =
-                          isArabic ? const Locale('en') : const Locale('ar');
+                          isArabic ? const Locale(AppStrings.en_trans) : const Locale(AppStrings.ar_trans);
                       context.read<LanguageCubit>().changeLanguage(
                             newLocale,
                             context.setLocale,
@@ -74,7 +74,7 @@ class AccountScreen extends StatelessWidget {
                     indent: 30,
                     endIndent: 30,
                   ),
-                  buildOption(
+                  buildAccountOption(
                     context,
                     svg: Assets.images.imgs.logout,
                     title: AppStrings.logout.tr(),
