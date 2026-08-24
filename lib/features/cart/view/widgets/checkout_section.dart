@@ -48,11 +48,7 @@ class CheckoutSection extends StatelessWidget {
           Expanded(
             child: CustomButton(
               text: AppStrings.goToCheckout.tr(),
-              trailingIcon: const Icon(
-                Icons.arrow_forward,
-                color: AppColors.whiteFFFFFF,
-                size: 20,
-              ),
+              trailingIcon: Assets.images.imgs.arrowRight.svg(),
               onPressed: () {
                 ScreenNavigation.navigateToHome(context);
               },

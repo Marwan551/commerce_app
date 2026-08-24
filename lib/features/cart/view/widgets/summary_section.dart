@@ -20,11 +20,9 @@ class SummarySection extends StatelessWidget {
     const double vat = 0;
     const double shipping = 0;
 
-    // Reactive padding based on item count
-    final verticalPadding = itemCount < 3 ? 32.0 : 16.0;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       decoration: const BoxDecoration(
         color: AppColors.whiteFFFFFF,
       ),
