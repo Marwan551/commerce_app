@@ -84,6 +84,7 @@
   "empty_wishlist_msg": "No Saved Items!",
   "empty_wishlist_desc": "You don't have any saved items.\nGo to home and add some.",
   "somethingWentWrong": "Something went wrong, please try again.",
+  "please_login": "Please login first to view your cart.",
   "connection_timeout": "Connection timeout. Please check your internet.",
   "no_internet": "No internet connection.",
   "request_cancelled": "Request cancelled.",
