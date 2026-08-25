@@ -57,23 +57,25 @@ class CartItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(padding: EdgeInsets.only(top: 16)),
-                Row(
-                  children: [
-                    Text(
-                      '\$ ${cartProduct.price}',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: AppColors.black1A1A1A,
-                        fontWeight: FontWeight.w600,
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        '\$ ${cartProduct.price}',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: AppColors.black1A1A1A,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    const Spacer(),
-                    CartQuantitySelector(
-                      count: cartProduct.count ?? 1,
-                      onQuantityChanged: onQuantityChanged,
-                      isUpdating: isUpdating,
-                    ),
-                  ],
+                      const Spacer(),
+                      CartQuantitySelector(
+                        count: cartProduct.count ?? 1,
+                        onQuantityChanged: onQuantityChanged,
+                        isUpdating: isUpdating,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -24,7 +24,7 @@ class QuantityButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
           ),
-          child: svg.svg(width: 15, height: 15),
+          child: svg.svg(width: 20, height: 20),
         ),
       ),
     );

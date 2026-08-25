@@ -20,26 +20,23 @@ class SummarySection extends StatelessWidget {
     const double vat = 0;
     const double shipping = 0;
 
-    // Reactive padding based on item count
-    final double verticalPadding = itemCount < 3 ? 32.0 : 16.0;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: verticalPadding),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       decoration: const BoxDecoration(
         color: AppColors.whiteFFFFFF,
       ),
-      child: Column(
-        children: [
-          SummaryRow(label: AppStrings.subtotal.tr(), value: '\$ $totalCartPrice'),
-          const Padding(padding: EdgeInsets.only(top: 8)),
-          SummaryRow(label: AppStrings.vat.tr(), value: '\$ $vat'),
-          const Padding(padding: EdgeInsets.only(top: 8)),
-          SummaryRow(label: AppStrings.shipping.tr(), value: '\$ $shipping'),
-          const Padding(padding: EdgeInsets.only(top: 16)),
-          const Divider(thickness: 1, color: AppColors.greyFFE6E6E6),
-          const Padding(padding: EdgeInsets.only(top: 16)),
-          SummaryTotalRow(totalPrice: totalCartPrice + vat + shipping),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Column(
+          children: [
+            SummaryRow(label: AppStrings.subtotal.tr(), value: '\$ $totalCartPrice'),
+            SummaryRow(label: AppStrings.vat.tr(), value: '\$ $vat'),
+            SummaryRow(label: AppStrings.shipping.tr(), value: '\$ $shipping'),
+            const Divider(thickness: 1, color: AppColors.greyFFE6E6E6),
+            SummaryTotalRow(totalPrice: totalCartPrice + vat + shipping),
+          ],
+        ),
       ),
     );
   }
