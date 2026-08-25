@@ -1,5 +1,4 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
-import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';

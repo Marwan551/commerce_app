@@ -27,7 +27,7 @@ class SummarySection extends StatelessWidget {
         color: AppColors.whiteFFFFFF,
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+        padding: const EdgeInsets.symmetric(vertical:  16.0),
         child: Column(
           children: [
             SummaryRow(label: AppStrings.subtotal.tr(), value: '\$ $totalCartPrice'),
