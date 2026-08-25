@@ -10,7 +10,6 @@ import 'package:commerce_app/core/utils/widgets/loading/blurry_loading_overlay.d
 import 'package:toastification/toastification.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
-import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

@@ -85,11 +85,15 @@ class AppStrings {
   static const String emptyWishlistDesc = 'empty_wishlist_desc';
   static const String somethingWentWrong = 'somethingWentWrong';
   static const String pleaseLogin = 'please_login';
+  static const String addToCartSuccess = 'add_to_cart_success';
+  static const String addToCartError = 'add_to_cart_error';
+  static const String registrationSuccess = 'registration_success';
+  static const String loginSuccess = 'login_success';
   static const String connectionTimeout = 'connection_timeout';
   static const String noInternet = 'no_internet';
   static const String requestCancelled = 'request_cancelled';
   static const String networkError = 'network_error';
   static const String unexpectedError = 'unexpected_error';
-  static const String en_trans = 'en';
-  static const String ar_trans = 'ar';
+  static const String enTrans = 'en';
+  static const String arTrans = 'ar';
 }

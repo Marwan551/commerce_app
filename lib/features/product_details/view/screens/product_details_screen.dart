@@ -13,7 +13,6 @@ import 'package:commerce_app/features/product_details/view/widgets/product_attri
 import 'package:commerce_app/features/product_details/view/widgets/sticky_bottom_action_bar.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
-import 'package:commerce_app/features/cart/controllers/cubit/cart_state.dart';
 import 'package:toastification/toastification.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -23,73 +22,82 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductDetailsCubit(ApiService())..getProductDetails(product.id!),
-      child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
-        listener: (context, state) {
-          if (state is AddToCartSuccess) {
-            context.read<CartCubit>().getCart();
-            AppToast.show(context, message: state.message.tr(), type: ToastificationType.success);
-          } else if (state is AddToCartError) {
-            AppToast.show(context, message: state.message.tr(), type: ToastificationType.error);
-          }
-        },
-        builder: (context, state) {
-          ProductData currentProduct = product;
-          
-          if (state is ProductDetailsSuccess) {
-            currentProduct = state.product;
-          }
+      create: (context) =>
+          ProductDetailsCubit(ApiService())..getProductDetails(product.id!),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<CartCubit, CartState>(
+            listener: (context, state) {
+              if (state is CartActionSuccess) {
+                AppToast.show(context,
+                    message: state.message.tr(),
+                    type: ToastificationType.success);
+              } else if (state is CartUpdateError) {
+                AppToast.show(context,
+                    message: state.message.tr(), type: ToastificationType.error);
+              }
+            },
+          ),
+        ],
+        child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+          builder: (context, state) {
+            ProductData currentProduct = product;
 
-          return Scaffold(
-            appBar: CustomAppBar(
-              title: 'details'.tr(),
-              showBackButton: true,
-            ),
-            body: Stack(
-              children: [
-                Positioned.fill(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(bottom: 100),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ProductImagesSlider(product: currentProduct),
-                        const SizedBox(height: 24),
-                        ProductInfoSection(
-                          product: currentProduct,
-                          onReviewsTap: () {
-                            ScreenNavigation.navigateToReviews(currentProduct);
+            if (state is ProductDetailsSuccess) {
+              currentProduct = state.product;
+            }
 
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        ProductAttributesSection(product: currentProduct),
-                        const SizedBox(height: 24),
-                      ],
+            return Scaffold(
+              appBar: CustomAppBar(
+                title: 'details'.tr(),
+                showBackButton: true,
+              ),
+              body: Stack(
+                children: [
+                  Positioned.fill(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.only(bottom: 100),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ProductImagesSlider(product: currentProduct),
+                          const SizedBox(height: 24),
+                          ProductInfoSection(
+                            product: currentProduct,
+                            onReviewsTap: () {
+                              ScreenNavigation.navigateToReviews(
+                                  currentProduct);
+                            },
+                          ),
+                          const SizedBox(height: 24),
+                          ProductAttributesSection(product: currentProduct),
+                          const SizedBox(height: 24),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: BlocBuilder<CartCubit, CartState>(
-                    builder: (context, cartState) {
-                      return StickyBottomActionBar(
-                        price: currentProduct.price ?? 0,
-                        isAddingToCart: cartState is CartLoading ||
-                            cartState is CartUpdating,
-                        onAddToCart: () => context
-                            .read<CartCubit>()
-                            .addItem(currentProduct.id!),
-                      );
-                    },
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: BlocBuilder<CartCubit, CartState>(
+                      builder: (context, cartState) {
+                        return StickyBottomActionBar(
+                          price: currentProduct.price ?? 0,
+                          isAddingToCart: cartState is CartLoading ||
+                              cartState is CartUpdating,
+                          onAddToCart: () => context
+                              .read<CartCubit>()
+                              .addItem(currentProduct.id!),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

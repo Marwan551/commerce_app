@@ -37,7 +37,7 @@ class AccountScreen extends StatelessWidget {
 
     return BlocBuilder<LanguageCubit, LanguageState>(
       builder: (context, state) {
-        final isArabic = state.locale.languageCode == AppStrings.ar_trans;
+        final isArabic = state.locale.languageCode == AppStrings.arTrans;
         return Scaffold(
           appBar: CustomAppBar(
             title: AppStrings.account.tr(),
@@ -61,7 +61,7 @@ class AccountScreen extends StatelessWidget {
                     ),
                     onTap: () {
                       final newLocale =
-                          isArabic ? const Locale(AppStrings.en_trans) : const Locale(AppStrings.ar_trans);
+                          isArabic ? const Locale(AppStrings.enTrans) : const Locale(AppStrings.arTrans);
                       context.read<LanguageCubit>().changeLanguage(
                             newLocale,
                             context.setLocale,

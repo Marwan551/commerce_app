@@ -15,13 +15,3 @@ final class ProductDetailsError extends ProductDetailsState {
   final String message;
   ProductDetailsError(this.message);
 }
-
-final class AddToCartLoading extends ProductDetailsState {}
-final class AddToCartSuccess extends ProductDetailsState {
-  final String message;
-  AddToCartSuccess(this.message);
-}
-final class AddToCartError extends ProductDetailsState {
-  final String message;
-  AddToCartError(this.message);
-}

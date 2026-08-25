@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/auth/models/request/login_request_model.dart';
@@ -41,7 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
           }
           emit(LoginSuccess(loginResponse));
         } else {
-          emit(LoginError(loginResponse.message ?? 'Login failed'));
+          emit(LoginError(loginResponse.message ?? AppStrings.somethingWentWrong));
         }
       } catch (e) {
         emit(LoginError(ApiErrorHandler.getMessage(e)));

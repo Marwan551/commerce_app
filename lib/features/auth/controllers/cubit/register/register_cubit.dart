@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/auth/models/request/register_request_model.dart';
@@ -39,7 +40,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         if (response.statusCode == 200 || response.statusCode == 201) {
           emit(RegisterSuccess(registerResponse));
         } else {
-          emit(RegisterError(registerResponse.message ?? 'Registration failed'));
+          emit(RegisterError(registerResponse.message ?? AppStrings.somethingWentWrong));
         }
       } catch (e) {
         emit(RegisterError(ApiErrorHandler.getMessage(e)));

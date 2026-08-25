@@ -1,5 +1,4 @@
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
@@ -7,6 +6,7 @@ import 'package:commerce_app/core/services/network_service/local/shared_pref_ser
 import 'package:commerce_app/core/services/network_service/remote/api_error_handler.dart';
 import 'package:commerce_app/features/cart/models/cart_model.dart';
 import 'cart_state.dart';
+export 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   final ApiService _apiService;
@@ -17,7 +17,7 @@ class CartCubit extends Cubit<CartState> {
   Future<void> getCart() async {
     final token = SharedPrefHelper.getData(SharedPrefKeys.token);
     if (token == null) {
-      emit(CartError(AppStrings.pleaseLogin.tr()));
+      emit(CartError(AppStrings.pleaseLogin));
       return;
     }
 
@@ -26,7 +26,7 @@ class CartCubit extends Cubit<CartState> {
       final response = await _apiService.getData(endpoint: Endpoints.cart);
       _handleCartResponse(response.data);
     } catch (e) {
-      emit(CartError(ApiErrorHandler.getMessage(e).tr()));
+      emit(CartError(ApiErrorHandler.getMessage(e)));
     }
   }
 
@@ -37,7 +37,10 @@ class CartCubit extends Cubit<CartState> {
         endpoint: Endpoints.cart,
         data: {'productId': productId},
       );
-      _handleCartResponse(response.data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await getCart();
+        emit(CartActionSuccess(AppStrings.addToCartSuccess));
+      }
     } catch (e) {
       _handleUpdateError(e);
     }
@@ -49,7 +52,9 @@ class CartCubit extends Cubit<CartState> {
       final response = await _apiService.deleteData(
         endpoint: '${Endpoints.cart}/$productId',
       );
-      _handleCartResponse(response.data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await getCart();
+      }
     } catch (e) {
       _handleUpdateError(e);
     }
@@ -64,7 +69,9 @@ class CartCubit extends Cubit<CartState> {
         endpoint: '${Endpoints.cart}/$productId',
         data: {'count': count.toString()},
       );
-      _handleCartResponse(response.data);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await getCart();
+      }
     } catch (e) {
       _handleUpdateError(e);
     }
@@ -84,7 +91,7 @@ class CartCubit extends Cubit<CartState> {
         await getCart();
       }
     } catch (e) {
-      emit(CartError(ApiErrorHandler.getMessage(e).tr()));
+      emit(CartError(ApiErrorHandler.getMessage(e)));
     }
   }
 
@@ -100,7 +107,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void _handleUpdateError(dynamic e) {
-    emit(CartUpdateError(ApiErrorHandler.getMessage(e).tr()));
+    emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
     if (_cartModel != null) {
       emit(CartUpdated(_cartModel?.data?.products ?? [], _cartModel!));
     }
