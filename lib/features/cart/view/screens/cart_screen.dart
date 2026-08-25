@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
 import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_body.dart';
 import 'package:commerce_app/features/cart/view/widgets/cart_empty_state.dart';
@@ -30,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(
-        title: context.tr('my_cart'),
+        title: AppStrings.myCart.tr(),
         showBackButton: true,
         onBackTap: () {
           ScreenNavigation.navigateToHome(context);

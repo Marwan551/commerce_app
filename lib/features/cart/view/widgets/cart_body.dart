@@ -36,7 +36,7 @@ class CartBody extends StatelessWidget {
               }
 
               final cartProduct = products[index];
-              return CartItemWidget(
+              return CartItem(
                 cartProduct: cartProduct,
                 isUpdating: isUpdating,
                 onQuantityChanged: (count) {

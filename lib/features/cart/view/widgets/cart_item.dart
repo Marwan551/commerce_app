@@ -1,17 +1,17 @@
-import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:commerce_app/core/utils/constants/colors/app_colors.dart';
 import 'package:commerce_app/features/cart/models/cart_model.dart';
 import 'cart_quantity_selector.dart';
+import 'cart_item_image.dart';
+import 'cart_item_trash_button.dart';
 
-class CartItemWidget extends StatelessWidget {
+class CartItem extends StatelessWidget {
   final CartProduct cartProduct;
   final Function(int) onQuantityChanged;
   final VoidCallback onRemove;
   final bool isUpdating;
 
-  const CartItemWidget({
+  const CartItem({
     super.key,
     required this.cartProduct,
     required this.onQuantityChanged,
@@ -34,15 +34,7 @@ class CartItemWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-              imageUrl: product?.imageCover ?? '',
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-          ),
+          CartItemImage(imageUrl: product?.imageCover),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -59,18 +51,9 @@ class CartItemWidget extends StatelessWidget {
                         style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(bottom: 20),
-                      child: GestureDetector(
-                        onTap: isUpdating ? null : onRemove,
-                        child: Opacity(
-                          opacity: isUpdating ? 0.5 : 1.0,
-                          child: Assets.images.imgs.trash.svg(
-                            width: 15,
-                            height: 15,
-                          ),
-                        ),
-                      ),
+                    CartItemTrashButton(
+                      onTap: onRemove,
+                      isUpdating: isUpdating,
                     ),
                   ],
                 ),
