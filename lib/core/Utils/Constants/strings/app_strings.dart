@@ -84,6 +84,7 @@ class AppStrings {
   static const String emptyWishlistMsg = 'empty_wishlist_msg';
   static const String emptyWishlistDesc = 'empty_wishlist_desc';
   static const String somethingWentWrong = 'somethingWentWrong';
+  static const String pleaseLogin = 'please_login';
   static const String connectionTimeout = 'connection_timeout';
   static const String noInternet = 'no_internet';
   static const String requestCancelled = 'request_cancelled';
