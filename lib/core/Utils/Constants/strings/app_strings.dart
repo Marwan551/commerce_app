@@ -85,6 +85,10 @@ class AppStrings {
   static const String emptyWishlistDesc = 'empty_wishlist_desc';
   static const String somethingWentWrong = 'somethingWentWrong';
   static const String pleaseLogin = 'please_login';
+  static const String removeItemQuestion = 'remove_item_question';
+  static const String removeItemConfirmMsg = 'remove_item_confirm_msg';
+  static const String yesRemove = 'yes_remove';
+  static const String checkoutSuccessful = 'checkout_successful';
   static const String addToCartSuccess = 'add_to_cart_success';
   static const String addToCartError = 'add_to_cart_error';
   static const String registrationSuccess = 'registration_success';

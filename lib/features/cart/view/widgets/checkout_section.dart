@@ -10,10 +10,11 @@ class CheckoutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    // Reactive bottom padding
+    final double bottomPadding = itemCount < 3 ? 32.0 : 24.0;
 
     return Container(
-      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 24),
+      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, bottomPadding),
       color: AppColors.whiteFFFFFF,
       child: const Row(
         children: [

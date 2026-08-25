@@ -1,3 +1,4 @@
+import 'package:commerce_app/core/utils/widgets/loading/blurry_loading_overlay.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,80 +25,82 @@ class ProductDetailsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           ProductDetailsCubit(ApiService())..getProductDetails(product.id!),
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<CartCubit, CartState>(
-            listener: (context, state) {
-              if (state is CartActionSuccess) {
-                AppToast.show(context,
-                    message: state.message.tr(),
-                    type: ToastificationType.success);
-              } else if (state is CartUpdateError) {
-                AppToast.show(context,
-                    message: state.message.tr(), type: ToastificationType.error);
-              }
-            },
-          ),
-        ],
-        child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
-          builder: (context, state) {
-            ProductData currentProduct = product;
+      child: BlocBuilder<CartCubit, CartState>(
+        builder: (context, cartState) {
+          return BlurryLoadingOverlay(
+            isLoading: cartState is CartLoading || cartState is CartUpdating,
+            child: MultiBlocListener(
+              listeners: [
+                BlocListener<CartCubit, CartState>(
+                  listener: (context, state) {
+                    if (state is CartActionSuccess) {
+                      AppToast.show(context,
+                          message: state.message.tr(),
+                          type: ToastificationType.success);
+                    } else if (state is CartUpdateError) {
+                      AppToast.show(context,
+                          message: state.message.tr(), type: ToastificationType.error);
+                    }
+                  },
+                ),
+              ],
+              child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+                builder: (context, state) {
+                  ProductData currentProduct = product;
 
-            if (state is ProductDetailsSuccess) {
-              currentProduct = state.product;
-            }
+                  if (state is ProductDetailsSuccess) {
+                    currentProduct = state.product;
+                  }
 
-            return Scaffold(
-              appBar: CustomAppBar(
-                title: 'details'.tr(),
-                showBackButton: true,
-              ),
-              body: Stack(
-                children: [
-                  Positioned.fill(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(bottom: 100),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ProductImagesSlider(product: currentProduct),
-                          const SizedBox(height: 24),
-                          ProductInfoSection(
-                            product: currentProduct,
-                            onReviewsTap: () {
-                              ScreenNavigation.navigateToReviews(
-                                  currentProduct);
-                            },
+                  return Scaffold(
+                    appBar: CustomAppBar(
+                      title: 'details'.tr(),
+                      showBackButton: true,
+                    ),
+                    body: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.only(bottom: 100),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ProductImagesSlider(product: currentProduct),
+                                const SizedBox(height: 24),
+                                ProductInfoSection(
+                                  product: currentProduct,
+                                  onReviewsTap: () {
+                                    ScreenNavigation.navigateToReviews(
+                                        currentProduct);
+                                  },
+                                ),
+                                const SizedBox(height: 24),
+                                ProductAttributesSection(product: currentProduct),
+                                const SizedBox(height: 24),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 24),
-                          ProductAttributesSection(product: currentProduct),
-                          const SizedBox(height: 24),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: StickyBottomActionBar(
+                            price: currentProduct.price ?? 0,
+                            onAddToCart: () => context
+                                .read<CartCubit>()
+                                .addItem(currentProduct.id!),
+                            isAddingToCart: cartState is CartLoading || cartState is CartUpdating,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: BlocBuilder<CartCubit, CartState>(
-                      builder: (context, cartState) {
-                        return StickyBottomActionBar(
-                          price: currentProduct.price ?? 0,
-                          isAddingToCart: cartState is CartLoading ||
-                              cartState is CartUpdating,
-                          onAddToCart: () => context
-                              .read<CartCubit>()
-                              .addItem(currentProduct.id!),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

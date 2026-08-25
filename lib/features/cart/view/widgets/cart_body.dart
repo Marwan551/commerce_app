@@ -1,3 +1,4 @@
+import 'package:commerce_app/features/cart/view/widgets/delete_cart_item_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
@@ -40,15 +41,22 @@ class CartBody extends StatelessWidget {
                 cartProduct: cartProduct,
                 isUpdating: isUpdating,
                 onQuantityChanged: (count) {
-                  context.read<CartCubit>().updateProductQuantity(
-                        cartProduct.product?.id ?? '',
+                  context.read<CartCubit>().updateQuantity(
+                        cartProduct.product!.id!,
                         count,
                       );
                 },
                 onRemove: () {
-                  context.read<CartCubit>().removeItem(
-                        cartProduct.product?.id ?? '',
-                      );
+                  showDialog(
+                    context: context,
+                    builder: (context) => DeleteCartItemDialog(
+                      onConfirm: () {
+                        context.read<CartCubit>().removeItem(
+                              cartProduct.product!.id!,
+                            );
+                      },
+                    ),
+                  );
                 },
               );
             },

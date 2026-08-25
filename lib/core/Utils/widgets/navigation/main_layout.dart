@@ -41,7 +41,7 @@ class MainLayout extends StatelessWidget {
               if (index == 2) {
                 context.read<WishlistCubit>().getWishlist();
               } else if (index == 3) {
-                context.read<CartCubit>().getCart();
+                context.read<CartCubit>().fetchCart();
               }
               context.read<NavigationCubit>().changeIndex(index);
             },

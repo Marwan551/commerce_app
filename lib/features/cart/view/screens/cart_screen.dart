@@ -22,7 +22,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CartCubit>().getCart();
+    context.read<CartCubit>().fetchCart();
   }
 
   @override
@@ -37,9 +37,6 @@ class _CartScreenState extends State<CartScreen> {
         },
       ),
       body: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
         child: BlocConsumer<CartCubit, CartState>(
           listener: (context, state) {
             if (state is CartUpdateError) {
@@ -60,11 +57,17 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget _buildBody(CartState state) {
     if (state is CartUpdated) {
+      if (state.items.isEmpty) {
+        return const CartEmptyState();
+      }
       return CartBody(cartModel: state.cartModel);
     } else if (state is CartUpdating) {
+      if (state.cartModel.data?.products?.isEmpty ?? true) {
+        return const CartEmptyState();
+      }
       return CartBody(cartModel: state.cartModel, isUpdating: true);
     } else if (state is CartError) {
-      return Center(child: Text(state.message));
+      return Center(child: Text(state.message.tr()));
     } else if (state is CartLoading) {
       return const SizedBox.shrink();
     }

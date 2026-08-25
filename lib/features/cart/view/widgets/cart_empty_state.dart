@@ -16,8 +16,8 @@ class CartEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Assets.images.imgs.cartEmpty.svg(
-              width: 120,
-              height: 120,
+              width: 64,
+              height: 64,
             ),
             const SizedBox(height: 24),
             Text(
