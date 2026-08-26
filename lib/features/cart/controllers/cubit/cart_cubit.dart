@@ -75,11 +75,7 @@ class CartCubit extends Cubit<CartState> {
     try {
       final response = await _apiService.deleteData(endpoint: Endpoints.cart);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        _cartModel = CartModel(
-          numOfCartItems: 0,
-          data: CartData(products: [], totalCartPrice: 0),
-        );
-        _emitUpdated();
+        resetState();
       }
     } catch (e) {
       _emitError(e);
