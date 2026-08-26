@@ -29,5 +29,6 @@ final class CartUpdateError extends CartState {
 
 final class CartActionSuccess extends CartState {
   final String message;
-  CartActionSuccess(this.message);
+  final CartModel cartModel;
+  CartActionSuccess(this.message, this.cartModel);
 }

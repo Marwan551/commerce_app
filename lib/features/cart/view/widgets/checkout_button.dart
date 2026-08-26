@@ -14,12 +14,9 @@ class CheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomButton(
       text: AppStrings.goToCheckout.tr(),
-      trailingIcon: Assets.images.imgs.arrowRight.svg(
-        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-      ),
+      trailingIcon: Assets.images.imgs.arrowRight.svg(),
       onPressed: () {
         context.read<CartCubit>().checkout();
-        ScreenNavigation.navigateToHome(context);
       },
     );
   }

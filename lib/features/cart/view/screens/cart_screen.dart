@@ -28,7 +28,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         title: AppStrings.myCart.tr(),
         showBackButton: true,
@@ -61,10 +61,11 @@ class _CartScreenState extends State<CartScreen> {
         return const CartEmptyState();
       }
       return CartBody(cartModel: state.cartModel);
+    } else if (state is CartActionSuccess) {
+
+      return CartBody(cartModel: state.cartModel);
+
     } else if (state is CartUpdating) {
-      if (state.cartModel.data?.products?.isEmpty ?? true) {
-        return const CartEmptyState();
-      }
       return CartBody(cartModel: state.cartModel, isUpdating: true);
     } else if (state is CartError) {
       return Center(child: Text(state.message.tr()));

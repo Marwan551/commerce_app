@@ -13,6 +13,7 @@ class CartCubit extends Cubit<CartState> {
 
   CartCubit(this._apiService) : super(CartInitial());
 
+  // Public Methods
   Future<void> fetchCart() async {
     _emitLoading();
     try {
@@ -75,7 +76,8 @@ class CartCubit extends Cubit<CartState> {
     try {
       final response = await _apiService.deleteData(endpoint: Endpoints.cart);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        resetState();
+        _cartModel = null;
+        _emitUpdated();
       }
     } catch (e) {
       _emitError(e);
@@ -83,8 +85,14 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> checkout() async {
-    _emitUpdating();
+    if (_cartModel != null) {
+      emit(CartUpdating(_cartModel!));
+    } else {
+      _emitLoading();
+    }
+    
     await Future.delayed(const Duration(seconds: 1));
+    
     _emitActionSuccess(AppStrings.checkoutSuccessful);
     await clearCart();
   }
@@ -122,7 +130,9 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void _emitActionSuccess(String message) {
-    emit(CartActionSuccess(message));
+    if (_cartModel != null) {
+      emit(CartActionSuccess(message, _cartModel!));
+    }
   }
 
   void _handleUpdateError(dynamic e) {
