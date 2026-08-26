@@ -1,6 +1,7 @@
 import 'package:commerce_app/core/services/network_service/local/shared_pref_service.dart';
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
+import 'package:commerce_app/core/utils/widgets/dividers/custom_divider.dart';
 import 'package:commerce_app/core/utils/widgets/loading/blurry_loading_overlay.dart';
 import 'package:commerce_app/features/account/controllers/cubit/language_cubit.dart';
 import 'package:commerce_app/features/account/controllers/cubit/language_state.dart';
@@ -68,9 +69,8 @@ class AccountScreen extends StatelessWidget {
                           );
                     },
                   ),
-                  const Divider(
+                  const CustomDivider(
                     height: 0,
-                    color: AppColors.greyFFE6E6E6,
                     indent: 30,
                     endIndent: 30,
                   ),

@@ -1,5 +1,4 @@
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
-import 'package:commerce_app/features/cart/view/widgets/cart_empty_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:commerce_app/core/services/network_service/remote/base_client_service.dart';
 import 'package:commerce_app/core/services/network_service/remote/endpoints.dart';
@@ -18,7 +17,7 @@ class CartCubit extends Cubit<CartState> {
     _emitLoading();
     try {
       final response = await _apiService.getData(endpoint: Endpoints.cart);
-      _handleCartResponse(response.data);
+      _handleSuccessResponse(response.data);
     } catch (e) {
       _emitError(e);
     }
@@ -94,7 +93,12 @@ class CartCubit extends Cubit<CartState> {
     await clearCart();
   }
 
-  void _handleCartResponse(Map<String, dynamic> data) {
+  void resetState() {
+    _cartModel = null;
+    emit(CartInitial());
+  }
+
+  void _handleSuccessResponse(Map<String, dynamic> data) {
     _cartModel = CartModel.fromJson(data);
     _emitUpdated();
   }
@@ -104,12 +108,16 @@ class CartCubit extends Cubit<CartState> {
   void _emitUpdated() {
     if (_cartModel != null) {
       emit(CartUpdated(_cartModel!.data?.products ?? [], _cartModel!));
+    } else {
+      emit(CartInitial());
     }
   }
 
   void _emitUpdating() {
     if (_cartModel != null) {
       emit(CartUpdating(_cartModel!));
+    } else {
+      _emitLoading();
     }
   }
 
@@ -125,5 +133,4 @@ class CartCubit extends Cubit<CartState> {
     emit(CartUpdateError(ApiErrorHandler.getMessage(e)));
     _emitUpdated();
   }
-
 }
