@@ -1,6 +1,5 @@
 import 'package:commerce_app/core/utils/constants/assets/assets.gen.dart';
 import 'package:commerce_app/core/utils/constants/strings/app_strings.dart';
-import 'package:commerce_app/core/utils/navigation/screen_navigation.dart';
 import 'package:commerce_app/core/utils/widgets/buttons/custom_button.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';

@@ -9,14 +9,32 @@ import 'package:commerce_app/core/services/network_service/remote/base_client_se
 import 'package:commerce_app/features/account/controllers/cubit/language_cubit.dart';
 import 'package:commerce_app/features/cart/controllers/cubit/cart_cubit.dart';
 import 'package:commerce_app/features/wishlist/controllers/cubit/wishlist_cubit.dart';
+import 'package:commerce_app/core/services/notifications/fcm_service.dart';
+import 'package:commerce_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FcmService.firebaseMessagingBackgroundHandler(message);
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   await EasyLocalization.ensureInitialized();
   await SharedPrefHelper.init();
   await SqfliteHelper.init();
+  
+
+  await FcmService.init();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('ar')],

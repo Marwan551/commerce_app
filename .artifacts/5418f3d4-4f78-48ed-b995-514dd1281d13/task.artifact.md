@@ -1,0 +1,11 @@
+- [x] Add Firebase and FCM dependencies to `pubspec.yaml`.
+- [x] Configure Google Services in `android/settings.gradle.kts` and `android/app/build.gradle.kts`.
+- [x] Add `POST_NOTIFICATIONS` permission to `AndroidManifest.xml`.
+- [x] Implement `FcmService` in `lib/core/services/notifications/fcm_service.dart`.
+    - [x] Permission handling (Authorized, Provisional, Denied).
+    - [x] Token generation and printing.
+    - [x] Firestore persistence (`user_tokens` collection).
+    - [x] Foreground notification handling with `BigTextStyleInformation`.
+    - [x] Background and Terminated state handling.
+- [x] Initialize Firebase and `FcmService` in `main.dart` using `DefaultFirebaseOptions`.
+- [x] Register background message handler in `main.dart`.
